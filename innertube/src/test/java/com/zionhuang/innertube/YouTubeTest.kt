@@ -1,13 +1,13 @@
-package com.zionhuang.innertube
+package com.kannantech.innertube
 
-import com.zionhuang.innertube.YouTube.SearchFilter.Companion.FILTER_ALBUM
-import com.zionhuang.innertube.YouTube.SearchFilter.Companion.FILTER_ARTIST
-import com.zionhuang.innertube.YouTube.SearchFilter.Companion.FILTER_COMMUNITY_PLAYLIST
-import com.zionhuang.innertube.YouTube.SearchFilter.Companion.FILTER_FEATURED_PLAYLIST
-import com.zionhuang.innertube.YouTube.SearchFilter.Companion.FILTER_SONG
-import com.zionhuang.innertube.YouTube.SearchFilter.Companion.FILTER_VIDEO
-import com.zionhuang.innertube.models.WatchEndpoint
-import com.zionhuang.innertube.models.YouTubeClient
+import com.kannantech.innertube.YouTube.SearchFilter.Companion.FILTER_ALBUM
+import com.kannantech.innertube.YouTube.SearchFilter.Companion.FILTER_ARTIST
+import com.kannantech.innertube.YouTube.SearchFilter.Companion.FILTER_COMMUNITY_PLAYLIST
+import com.kannantech.innertube.YouTube.SearchFilter.Companion.FILTER_FEATURED_PLAYLIST
+import com.kannantech.innertube.YouTube.SearchFilter.Companion.FILTER_SONG
+import com.kannantech.innertube.YouTube.SearchFilter.Companion.FILTER_VIDEO
+import com.kannantech.innertube.models.WatchEndpoint
+import com.kannantech.innertube.models.YouTubeClient
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.request.get

@@ -121,7 +121,7 @@ object LrcUtils {
         }
     }
 
-// begin OuterTune
+// begin MUZI
     fun loadLyricsFile(musicFile: File?): String? {
         return loadTextFile(
             musicFile?.let { File(it.parentFile, it.nameWithoutExtension + ".lrc") },
@@ -134,10 +134,10 @@ object LrcUtils {
             ""
         )
     }
-// end OuterTune
+// end MUZI
 }
 
-// begin OuterTune
+// begin MUZI
 data class Lyric(
     val timeStamp: Long? = null,
     val content: String = "",
@@ -145,4 +145,4 @@ data class Lyric(
 ) : Comparable<Lyric> {
     override fun compareTo(other: Lyric): Int = ((timeStamp ?: 0L) - (other.timeStamp ?: 0L)).toInt()
 }
-// end OuterTune
+// end MUZI
