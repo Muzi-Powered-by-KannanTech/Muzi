@@ -176,7 +176,7 @@ public final class Score {
     }
   }
 
-// Begin OuterTune
+// Begin MUZI
   /**
    * Given a map with keys of colors and values of how often the color appears, rank the colors
    * based on it and discard colors too close to each other.
@@ -262,5 +262,5 @@ public final class Score {
       return -entry1.getValue().compareTo(entry2.getValue());
     }
   }
-// End OuterTune
+// End MUZI
 }

@@ -30,23 +30,23 @@ full
 | full    | arm64-v8a, armeabi-v7a, x86, x86_64 | ✅                      | ✅                             | ✅                     |
 
 **Extra setup is required for the `full` variant.** Please
-see https://github.com/OuterTune/ffMetadataEx/blob/main/README.md#building
+see https://github.com/MUZI/ffMetadataEx/blob/main/README.md#building
 
 <br/><br/>
 
-# Contributing to OuterTune
+# Contributing to MUZI
 
 ## Translations
 
-We use Weblate to translate OuterTune. For more details or to get started,
-visit [our Weblate page](https://hosted.weblate.org/projects/outertune/).
+We use Weblate to translate MUZI. For more details or to get started,
+visit [our Weblate page](https://hosted.weblate.org/projects/MUZI/).
 Thank you for the libre tier!
 
 ### Important
 
 - Translators should submit strings through Weblate, however if there are changes that cannot be accomplished via
   Weblate, you may submit a pull request manually
-- Make sure new strings are in the right place, which is `strings-ot.xml` for OuterTune strings
+- Make sure new strings are in the right place, which is `strings-ot.xml` for MUZI strings
 - If they are ported from upstream InnerTune (ex. when syncing upstream), they go into `strings.xml`
 
 ## Submitting a pull request
@@ -62,14 +62,14 @@ To make everyone's life easier, there are a set of guidelines that are to be fol
 ## Commiting guidelines
 
 - Prefix commits with tags, and provide descriptions if necessary. These are generally done in format:
-  `tag: commit_name`. [Example](https://github.com/OuterTune/OuterTune/commit/798e8366227dd2cc38355224c733dbf7e8ffcee0)
+  `tag: commit_name`. [Example](https://github.com/MUZI/MUZI/commit/798e8366227dd2cc38355224c733dbf7e8ffcee0)
     - A list of tags commonly used is provided below
 - Commit descriptions are not required, but highly recommended
 - When porting/cherry-picking/stealing from other repositories or sources:
     - Maintain
-      authorship. [Example](https://github.com/OuterTune/OuterTune/commit/b0dc59682190b41f0200e9df5174322acaa3d40d)
+      authorship. [Example](https://github.com/MUZI/MUZI/commit/b0dc59682190b41f0200e9df5174322acaa3d40d)
     - If this is not possible please provide the source in the commit
-      description. [Example](https://github.com/OuterTune/OuterTune/pull/59/commits/e40325dd86ac2c30347cfd4f9e92bbf15a0d0c82)
+      description. [Example](https://github.com/MUZI/MUZI/pull/59/commits/e40325dd86ac2c30347cfd4f9e92bbf15a0d0c82)
 - IMPORTANT: When merging `dev` into your branch
     - Best: Please rebase over dev
     - Less good: Merging dev into your branch via merge commit. We do not like this as it clobbers the commit history.
@@ -81,7 +81,7 @@ To make everyone's life easier, there are a set of guidelines that are to be fol
 - If database schema changes are required, please state clearly if a version increment is required. Additional details
   are in the `Database schema changes` section
 - For multi-part commits where all parts are required for functionality, use
-  `[1/2], [2/2], etc`. [See example](https://github.com/OuterTune/OuterTune/pull/59/commits)
+  `[1/2], [2/2], etc`. [See example](https://github.com/MUZI/MUZI/pull/59/commits)
 - Do not mess with translation files directly, this is managed with Weblate.
 
 ### Tags
@@ -122,7 +122,7 @@ To make everyone's life easier, there are a set of guidelines that are to be fol
 |---------------|-------------------------------------------------------------------------------------------------|
 | `<file name>` | Changes for one single file, that to not fit into any other tags                                |
 | app           | General changes, or anything that does not fit any other tags. (For within the app module only) |
-| outertune     | General changes that span across multiple modules                                               |
+| MUZI     | General changes that span across multiple modules                                               |
 | fastlane      | Fastlane components                                                                             |
 | translations  | General changes to translation components                                                       |
 

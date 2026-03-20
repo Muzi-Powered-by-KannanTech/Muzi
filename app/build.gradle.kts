@@ -22,11 +22,11 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.dd3boh.outertune"
+    namespace = "com.kannantech.muzi"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.dd3boh.outertune"
+        applicationId = "com.kannantech.muzi"
         minSdk = 24
         targetSdk = 36
         versionCode = 71
@@ -87,8 +87,8 @@ android {
             isEnable = true
             reset()
 
-            include("x86_64", "x86", "armeabi-v7a", "arm64-v8a")
-            isUniversalApk = true
+            include("arm64-v8a")
+            isUniversalApk = false
         }
     }
 
@@ -112,7 +112,7 @@ android {
         variant.outputs
             .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
             .forEach { output ->
-                var outputFileName = "OuterTune-${variant.versionName}-${output.baseName}-${output.versionCode}.apk"
+                var outputFileName = "MUZI-${variant.versionName}-${output.baseName}-${output.versionCode}.apk"
                 output.outputFileName = outputFileName
             }
     }
