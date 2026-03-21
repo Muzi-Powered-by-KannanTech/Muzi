@@ -95,6 +95,7 @@ class MediaLibrarySessionCallback @Inject constructor(
         return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
     }
 
+    @Suppress("DEPRECATION")
     override fun onPlaybackResumption(
         mediaSession: MediaSession,
         controller: MediaSession.ControllerInfo,

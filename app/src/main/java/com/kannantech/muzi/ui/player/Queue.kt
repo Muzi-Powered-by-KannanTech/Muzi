@@ -703,6 +703,7 @@ fun BoxScope.QueueContent(
                     state = reorderableState,
                     key = window.hashCode()
                 ) {
+                    @Suppress("DEPRECATION")
                     val dismissState = rememberSwipeToDismissBoxState(
                         positionalThreshold = { totalDistance ->
                             totalDistance

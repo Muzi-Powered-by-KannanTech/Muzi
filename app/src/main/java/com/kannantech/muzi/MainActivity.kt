@@ -106,6 +106,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.kannantech.muzi.constants.AppBarHeight
 import com.kannantech.muzi.constants.DEFAULT_ENABLED_TABS
@@ -269,6 +270,7 @@ class MainActivity : ComponentActivity() {
             val tabMode = this@MainActivity.tabMode()
             val useNavRail by remember {
                 derivedStateOf {
+                    @Suppress("DEPRECATION")
                     windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED && !tabMode
                 }
             }
@@ -1038,6 +1040,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun setSystemBarAppearance(isDark: Boolean) {
         WindowCompat.getInsetsController(window, window.decorView.rootView).apply {
             isAppearanceLightStatusBars = !isDark

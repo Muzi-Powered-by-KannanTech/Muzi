@@ -8,7 +8,6 @@ import java.util.Properties
 
 plugins {
     id("com.android.application")
-    kotlin("android")
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.compose.compiler)
@@ -102,16 +101,6 @@ android {
                 abiFilters += "arm64-v8a"
             }
         }
-    }
-
-    applicationVariants.all {
-        val variant = this
-        variant.outputs
-            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
-            .forEach { output ->
-                var outputFileName = "MUZI-${variant.versionName}-${output.baseName}-${output.versionCode}.apk"
-                output.outputFileName = outputFileName
-            }
     }
 
     compileOptions {
