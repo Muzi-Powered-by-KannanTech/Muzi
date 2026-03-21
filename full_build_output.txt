@@ -1,0 +1,142 @@
+Reusing configuration cache.
+> Task :taglib:preBuild UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :kugou:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateCoreReleaseAssets UP-TO-DATE
+> Task :taglib:generateReleaseAssets UP-TO-DATE
+> Task :innertube:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :innertube:processResources NO-SOURCE
+> Task :taglib:preReleaseBuild UP-TO-DATE
+> Task :lrclib:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :kugou:processResources NO-SOURCE
+> Task :material-color-utilities:processResources NO-SOURCE
+> Task :lrclib:processResources NO-SOURCE
+> Task :taglib:prepareLintJarForPublish UP-TO-DATE
+> Task :taglib:extractProguardFiles UP-TO-DATE
+> Task :app:preCoreReleaseBuild UP-TO-DATE
+> Task :taglib:generateReleaseResources UP-TO-DATE
+> Task :taglib:processReleaseNavigationResources UP-TO-DATE
+> Task :taglib:javaPreCompileRelease UP-TO-DATE
+> Task :app:mergeCoreReleaseJniLibFolders UP-TO-DATE
+> Task :taglib:prepareReleaseArtProfile UP-TO-DATE
+> Task :taglib:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :app:generateCoreReleaseBuildConfig UP-TO-DATE
+> Task :taglib:packageReleaseResources UP-TO-DATE
+> Task :app:extractCoreReleaseSupportedLocales UP-TO-DATE
+> Task :taglib:extractReleaseSupportedLocales UP-TO-DATE
+> Task :app:mapCoreReleaseSourceSetPaths UP-TO-DATE
+> Task :app:javaPreCompileCoreRelease UP-TO-DATE
+> Task :taglib:parseReleaseLocalResources UP-TO-DATE
+> Task :innertube:compileKotlin UP-TO-DATE
+> Task :app:generateCoreReleaseResources UP-TO-DATE
+> Task :lrclib:compileKotlin UP-TO-DATE
+> Task :kugou:compileKotlin UP-TO-DATE
+> Task :app:processCoreReleaseNavigationResources UP-TO-DATE
+> Task :kugou:compileJava NO-SOURCE
+> Task :taglib:writeReleaseAarMetadata UP-TO-DATE
+> Task :taglib:generateReleaseRFile UP-TO-DATE
+> Task :kugou:classes UP-TO-DATE
+> Task :kugou:jar UP-TO-DATE
+> Task :lrclib:compileJava NO-SOURCE
+> Task :innertube:compileJava NO-SOURCE
+> Task :app:createCoreReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :innertube:classes UP-TO-DATE
+> Task :lrclib:classes UP-TO-DATE
+> Task :innertube:jar UP-TO-DATE
+> Task :app:extractDeepLinksCoreRelease UP-TO-DATE
+> Task :lrclib:jar UP-TO-DATE
+> Task :taglib:extractDeepLinksRelease UP-TO-DATE
+> Task :app:compileCoreReleaseNavigationResources UP-TO-DATE
+> Task :taglib:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :taglib:processReleaseManifest UP-TO-DATE
+> Task :material-color-utilities:compileJava UP-TO-DATE
+> Task :material-color-utilities:classes UP-TO-DATE
+> Task :app:mergeCoreReleaseStartupProfile UP-TO-DATE
+> Task :taglib:compileReleaseLibraryResources UP-TO-DATE
+> Task :taglib:mergeReleaseAssets UP-TO-DATE
+> Task :app:extractCoreReleaseVersionControlInfo UP-TO-DATE
+> Task :material-color-utilities:jar UP-TO-DATE
+> Task :taglib:checkReleaseAarMetadata UP-TO-DATE
+> Task :taglib:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :taglib:compileReleaseKotlin UP-TO-DATE
+> Task :taglib:writeReleaseLintModelMetadata UP-TO-DATE
+> Task :taglib:compileReleaseJavaWithJavac NO-SOURCE
+> Task :taglib:processReleaseJavaRes UP-TO-DATE
+> Task :taglib:extractReleaseAnnotations UP-TO-DATE
+> Task :taglib:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :taglib:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :taglib:exportReleaseConsumerProguardFiles UP-TO-DATE
+> Task :taglib:mergeReleaseJavaResource UP-TO-DATE
+> Task :taglib:syncReleaseLibJars UP-TO-DATE
+> Task :taglib:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :taglib:generateReleaseLintModel UP-TO-DATE
+> Task :taglib:lintVitalAnalyzeRelease UP-TO-DATE
+> Task :taglib:generateReleaseLintVitalModel UP-TO-DATE
+> Task :app:validateSigningCoreRelease UP-TO-DATE
+> Task :taglib:createFullJarRelease UP-TO-DATE
+> Task :app:writeCoreReleaseSigningConfigVersions UP-TO-DATE
+> Task :taglib:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :app:writeCoreReleaseAppMetadata UP-TO-DATE
+> Task :app:kspCoreReleaseKotlin UP-TO-DATE
+> Task :app:mergeCoreReleaseAssets UP-TO-DATE
+> Task :app:compressCoreReleaseAssets UP-TO-DATE
+> Task :app:mergeCoreReleaseArtProfile UP-TO-DATE
+> Task :app:checkCoreReleaseAarMetadata UP-TO-DATE
+> Task :app:checkCoreReleaseDuplicateClasses UP-TO-DATE
+> Task :app:expandCoreReleaseL8ArtProfileWildcards UP-TO-DATE
+> Task :app:processCoreReleaseMainManifest UP-TO-DATE
+> Task :app:processCoreReleaseManifest UP-TO-DATE
+> Task :app:processCoreReleaseManifestForPackage UP-TO-DATE
+> Task :taglib:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :taglib:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :taglib:mergeReleaseNativeLibs UP-TO-DATE
+> Task :taglib:copyReleaseJniLibsProjectOnly UP-TO-DATE
+> Task :taglib:stripReleaseDebugSymbols UP-TO-DATE
+> Task :taglib:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :taglib:bundleReleaseLocalLintAar UP-TO-DATE
+> Task :app:mergeCoreReleaseNativeLibs UP-TO-DATE
+> Task :app:stripCoreReleaseDebugSymbols UP-TO-DATE
+> Task :app:extractCoreReleaseNativeSymbolTables UP-TO-DATE
+> Task :app:mergeCoreReleaseNativeDebugMetadata NO-SOURCE
+
+> Task :app:generateCoreReleaseLocaleConfig UP-TO-DATE
+[=========                              ] 25%                                   
+
+> Task :app:packageCoreReleaseResources UP-TO-DATE
+> Task :app:parseCoreReleaseLocalResources UP-TO-DATE
+> Task :app:generateCoreReleaseRFile UP-TO-DATE
+> Task :app:mergeCoreReleaseResources UP-TO-DATE
+> Task :app:processCoreReleaseResources UP-TO-DATE
+> Task :app:compileCoreReleaseKotlin UP-TO-DATE
+> Task :app:processCoreReleaseJavaRes UP-TO-DATE
+> Task :app:mergeCoreReleaseJavaResource UP-TO-DATE
+> Task :app:compileCoreReleaseJavaWithJavac
+> Task :app:hiltSyncCoreRelease
+> Task :app:generateCoreReleaseLintVitalReportModel
+> Task :app:hiltAggregateDepsCoreRelease UP-TO-DATE
+> Task :app:hiltJavaCompileCoreRelease
+> Task :app:transformCoreReleaseClassesWithAsm
+> Task :app:mergeCoreReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :app:lintVitalAnalyzeCoreRelease
+> Task :app:expandCoreReleaseArtProfileWildcards
+> Task :app:produceCoreReleaseComposeMapping
+
+> Task :app:reportCoreReleaseComposeMappingErrors
+warning: Failed to collect Compose stack trace mapping (Failed to tokenize com.mikepenz.aboutlibraries.ui.compose.LibrariesScaffoldKt.LibrariesScaffold$lambda$5$lambda$4(Lkotlin/jvm/functions/Function1;Lkotlinx/collections/immutable/ImmutableList;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/platform/UriHandler;Lcom/mikepenz/aboutlibraries/ui/compose/LibraryPadding;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Landroidx/compose/foundation/lazy/LazyListScope;)Lkotlin/Unit;). Please report to Google through https://goo.gle/compose-feedback
+
+> Task :app:minifyCoreReleaseWithR8
+> Task :app:lintVitalReportCoreRelease UP-TO-DATE
+> Task :app:lintVitalCoreRelease
+> Task :app:convertShrunkResourcesToBinaryCoreRelease UP-TO-DATE
+> Task :app:optimizeCoreReleaseResources UP-TO-DATE
+> Task :app:mergeCoreReleaseComposeMapping
+> Task :app:l8DexDesugarLibCoreRelease
+> Task :app:compileCoreReleaseArtProfile
+> Task :app:packageCoreRelease
+> Task :app:assembleCoreRelease
+> Task :app:createCoreReleaseApkListingFileRedirect UP-TO-DATE
+
+BUILD SUCCESSFUL in 4m 9s
+107 actionable tasks: 16 executed, 91 up-to-date
+Configuration cache entry reused.

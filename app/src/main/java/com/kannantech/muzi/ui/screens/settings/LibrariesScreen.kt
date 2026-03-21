@@ -36,7 +36,7 @@ fun LibrariesScreen(
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    val libraries by rememberLibraries(R.raw.aboutlibraries)
+    val libraries by rememberLibraries()
 
     Box(Modifier.windowInsetsPadding(LocalPlayerAwareWindowInsets.current)) {
         LibrariesContainer(libraries, Modifier.fillMaxSize())

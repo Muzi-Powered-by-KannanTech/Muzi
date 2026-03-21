@@ -769,6 +769,7 @@ class MusicService : MediaLibraryService(),
     private fun createRenderersFactory(gaplessOffloadAllowed: Boolean): DefaultRenderersFactory {
         if (ENABLE_FFMETADATAEX) {
             return object : NextRenderersFactory(this@MusicService) {
+                @Suppress("DEPRECATION")
                 override fun buildAudioSink(
                     context: Context,
                     enableFloatOutput: Boolean,
@@ -796,6 +797,7 @@ class MusicService : MediaLibraryService(),
                 .setExtensionRendererMode(audioDecoder)
         } else {
             return object : DefaultRenderersFactory(this) {
+                @Suppress("DEPRECATION")
                 override fun buildAudioSink(
                     context: Context,
                     enableFloatOutput: Boolean,
