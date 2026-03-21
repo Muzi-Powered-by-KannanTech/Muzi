@@ -21,6 +21,8 @@ error-prone-core = { module = "com.google.errorprone:error_prone_core", version 
 guava = { group = "com.google.guava", name = "guava", version = "33.5.0-android" }
 coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-guava", version = "1.10.2" }
 concurrent-futures = { group = "androidx.concurrent", name = "concurrent-futures-ktx", version = "1.3.0" }
+androidx-rules = { module = "androidx.test:rules", version = "1.7.0" }
+androidx-runner = { module = "androidx.test:runner", version = "1.7.0" }
 
 gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 activity = { group = "androidx.activity", name = "activity-compose", version = "1.12.3" }
@@ -84,6 +86,9 @@ newpipe-extractor = { group = "com.github.TeamNewPipe", name = "NewPipeExtractor
 
 [plugins]
 aboutlibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

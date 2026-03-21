@@ -28,7 +28,7 @@ android {
     defaultConfig {
         applicationId = "com.kannantech.muzi"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 71
         versionName = "0.10.2-b1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -82,28 +82,25 @@ android {
     }
 
 // build variants and stuff
-    splits {
-        abi {
-            isEnable = true
-            reset()
-
-            include("arm64-v8a")
-            isUniversalApk = false
-        }
-    }
+//    splits {
+//        abi {
+//            isEnable = true
+//            reset()
+//
+//            include("arm64-v8a")
+//            isUniversalApk = false
+//        }
+//    }
 
     flavorDimensions.add("abi")
 
     productFlavors {
-        // main version
         create("core") {
             isDefault = true
             dimension = "abi"
-        }
-
-        // fully featured version, large file size
-        create("full") {
-            dimension = "abi"
+            ndk {
+                abiFilters += "arm64-v8a"
+            }
         }
     }
 
@@ -266,8 +263,4 @@ dependencies {
     implementation("androidx.webkit:webkit:1.14.0")
 }
 
-afterEvaluate {
-    dependencies {
-        add("fullImplementation", project(":ffMetadataEx"))
-    }
-}
+// afterEvaluate removed to stop 'full' flavor logic
