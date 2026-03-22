@@ -152,6 +152,7 @@ import com.kannantech.muzi.ui.screens.MoodAndGenresScreen
 import com.kannantech.muzi.ui.screens.PlayerScreen
 import com.kannantech.muzi.ui.screens.Screens
 import com.kannantech.muzi.ui.screens.SetupWizard
+import com.kannantech.muzi.ui.screens.WelcomeScreen
 import com.kannantech.muzi.ui.screens.StatsScreen
 import com.kannantech.muzi.ui.screens.YouTubeBrowseScreen
 import com.kannantech.muzi.ui.screens.artist.ArtistAlbumsScreen
@@ -771,6 +772,9 @@ class MainActivity : ComponentActivity() {
                                     composable("setup_wizard") {
                                         SetupWizard(navController)
                                     }
+                                    composable("welcome") {
+                                        WelcomeScreen(navController)
+                                    }
                                 }
                             }
 
@@ -1037,7 +1041,7 @@ class MainActivity : ComponentActivity() {
                             // Setup wizard
                             LaunchedEffect(Unit) {
                                 if (oobeStatus < OOBE_VERSION) {
-                                    navController.navigate("setup_wizard")
+                                    navController.navigate("welcome")
                                 }
                             }
 
