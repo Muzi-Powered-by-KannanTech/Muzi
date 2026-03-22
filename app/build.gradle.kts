@@ -190,6 +190,7 @@ dependencies {
     implementation(libs.concurrent.futures)
 
     implementation(libs.activity)
+    implementation(libs.splashscreen)
     implementation(libs.hilt.navigation)
     implementation(libs.datastore)
 

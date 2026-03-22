@@ -94,7 +94,7 @@ fun AboutScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(R.drawable.launcher_monochrome),
+            painter = painterResource(R.drawable.ic_muzi_logo_raster),
             contentDescription = null,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground, BlendMode.SrcIn),
             modifier = Modifier

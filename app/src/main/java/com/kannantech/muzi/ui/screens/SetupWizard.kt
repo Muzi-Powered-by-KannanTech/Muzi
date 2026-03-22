@@ -302,7 +302,7 @@ fun SetupWizard(
                 when (oobeStatus) {
                     0 -> { // landing page
                         Image(
-                            painter = painterResource(R.drawable.launcher_monochrome),
+                            painter = painterResource(R.drawable.ic_muzi_logo_raster),
                             contentDescription = null,
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary, BlendMode.SrcIn),
                             modifier = Modifier
