@@ -24,15 +24,14 @@ import com.kannantech.innertube.models.YouTubeClient.Companion.ANDROID_VR_NO_AUT
 import com.kannantech.innertube.models.YouTubeClient.Companion.IOS
 import com.kannantech.innertube.models.YouTubeClient.Companion.WEB_REMIX
 import com.kannantech.innertube.models.response.PlayerResponse
-import okhttp3.OkHttpClient
+import com.kannantech.muzi.App
+import com.kannantech.muzi.utils.NetworkBoost
 
 object YTPlayerUtils {
 
     private const val TAG = "YTPlayerUtils"
 
-    private val httpClient = OkHttpClient.Builder()
-        .proxy(YouTube.proxy)
-        .build()
+    private val httpClient get() = NetworkBoost.getClient(App.instance)
 
     private val poTokenGenerator = PoTokenGenerator()
 
@@ -252,8 +251,9 @@ object YTPlayerUtils {
             val requestBuilder = okhttp3.Request.Builder()
                 .head()
                 .url(url)
-            val response = httpClient.newCall(requestBuilder.build()).execute()
-            return response.isSuccessful
+            httpClient.newCall(requestBuilder.build()).execute().use { response ->
+                return response.isSuccessful
+            }
         } catch (e: Exception) {
             reportException(e)
         }

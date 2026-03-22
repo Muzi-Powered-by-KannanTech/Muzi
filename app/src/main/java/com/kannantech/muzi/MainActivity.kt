@@ -251,7 +251,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         var isAppReady = false
-        window.decorView.postDelayed({ isAppReady = true }, 600)
+        window.decorView.postDelayed({ isAppReady = true }, 400)
         splashScreen.setKeepOnScreenCondition { !isAppReady }
 
         splashScreen.setOnExitAnimationListener { splashScreenView ->

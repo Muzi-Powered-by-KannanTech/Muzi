@@ -24,6 +24,7 @@ import coil3.memory.MemoryCache
 import coil3.request.CachePolicy
 import coil3.request.allowHardware
 import coil3.request.crossfade
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import com.kannantech.muzi.constants.AccountChannelHandleKey
 import com.kannantech.muzi.constants.AccountEmailKey
 import com.kannantech.muzi.constants.AccountNameKey
@@ -50,6 +51,7 @@ import com.kannantech.muzi.utils.reportException
 import com.kannantech.innertube.YouTube
 import com.kannantech.innertube.models.YouTubeLocale
 import com.kannantech.kugou.KuGou
+import com.kannantech.muzi.utils.NetworkBoost
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -74,10 +76,13 @@ class App : Application(), SingletonImageLoader.Factory {
             System.setProperty("kotlinx.coroutines.debug", "on")
         }
 
-        instance = this;
+        instance = this
+
+        // Pre-warm NetworkBoost Ultra Engine
+        NetworkBoost.getClient(this)
 
         val locale = Locale.getDefault()
-        val languageTag = locale.toLanguageTag().replace("-Hant", "") // replace zh-Hant-* to zh-*
+        val languageTag = locale.toLanguageTag().replace("-Hant", "")
         YouTube.locale = YouTubeLocale(
             gl = dataStore[ContentCountryKey]?.takeIf { it != SYSTEM_DEFAULT }
                 ?: locale.country.takeIf { it in CountryCodeToName }
@@ -113,7 +118,7 @@ class App : Application(), SingletonImageLoader.Factory {
                 .distinctUntilChanged()
                 .collect { visitorData ->
                     YouTube.visitorData = visitorData
-                        ?.takeIf { it != "null" } // Previously visitorData was sometimes saved as "null" due to a bug
+                        ?.takeIf { it != "null" }
                         ?: YouTube.visitorData().onFailure {
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(this@App, "Failed to get visitorData.", LENGTH_SHORT).show()
@@ -132,15 +137,6 @@ class App : Application(), SingletonImageLoader.Factory {
                 .distinctUntilChanged()
                 .collect { dataSyncId ->
                     YouTube.dataSyncId = dataSyncId?.let {
-                        /*
-                         * Workaround to avoid breaking older installations that have a dataSyncId
-                         * that contains "||" in it.
-                         * If the dataSyncId ends with "||" and contains only one id, then keep the
-                         * id before the "||".
-                         * If the dataSyncId contains "||" and is not at the end, then keep the
-                         * second id.
-                         * This is needed to keep using the same account as before.
-                         */
                         it.takeIf { !it.contains("||") }
                             ?: it.takeIf { it.endsWith("||") }?.substringBefore("||")
                             ?: it.substringAfter("||")
@@ -155,7 +151,6 @@ class App : Application(), SingletonImageLoader.Factory {
                     try {
                         YouTube.cookie = cookie
                     } catch (e: Exception) {
-                        // we now allow user input now, here be the demons. This serves as a last ditch effort to avoid a crash loop
                         Log.e(TAG, "Could not parse cookie. Clearing existing cookie. ${e.message}")
                         forgetAccount(this@App)
                     }
@@ -166,28 +161,11 @@ class App : Application(), SingletonImageLoader.Factory {
     override fun newImageLoader(context: PlatformContext): ImageLoader {
         val cacheSize = dataStore[MaxImageCacheSizeKey]
 
-        // will crash app if you set to 0 after cache starts being used
-        if (cacheSize == 0) {
-            return ImageLoader.Builder(this)
-                .components {
-                    add(CoilBitmapLoader.Factory(this@App))
-                    add(LocalArtworkPathKeyer())
-                }
-                .crossfade(true)
-                .allowHardware(false)
-                .memoryCache {
-                    MemoryCache.Builder()
-                        .maxSizePercent(context, 0.3)
-                        .build()
-                }
-                .diskCachePolicy(CachePolicy.DISABLED)
-                .build()
-        }
-
-        return ImageLoader.Builder(this)
+        val builder = ImageLoader.Builder(context)
             .components {
-                add(CoilBitmapLoader.Factory(this@App))
+                add(CoilBitmapLoader.Factory(context))
                 add(LocalArtworkPathKeyer())
+                add(OkHttpNetworkFetcherFactory(NetworkBoost.getClient(context)))
             }
             .crossfade(true)
             .allowHardware(false)
@@ -196,14 +174,19 @@ class App : Application(), SingletonImageLoader.Factory {
                     .maxSizePercent(context, 0.3)
                     .build()
             }
-            .diskCache(
-                // Local images should bypass with DataSource.DISK
+
+        if (cacheSize != 0) {
+            builder.diskCache {
                 DiskCache.Builder()
                     .directory(cacheDir.resolve("coil"))
                     .maxSizeBytes((cacheSize ?: 512) * 1024 * 1024L)
                     .build()
-            )
-            .build()
+            }
+        } else {
+            builder.diskCachePolicy(CachePolicy.DISABLED)
+        }
+
+        return builder.build()
     }
 
     companion object {

@@ -144,6 +144,23 @@ fun AboutScreen(
             }
         }
 
+        Spacer(Modifier.height(8.dp))
+
+        // NetworkBoost Ultra Engine Badge
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer, CircleShape)
+                .padding(horizontal = 12.dp, vertical = 4.dp)
+        ) {
+            Text(
+                text = "NetworkBoost Ultra: Active",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
         Spacer(Modifier.height(4.dp))
 
         Row(
