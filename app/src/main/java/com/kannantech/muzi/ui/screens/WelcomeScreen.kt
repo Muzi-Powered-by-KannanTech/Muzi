@@ -81,7 +81,11 @@ fun WelcomeScreen(navController: NavController) {
             modifier = Modifier
                 .size(400.dp)
                 .align(Alignment.TopEnd)
-                .graphicsLayer(translationX = 100f, translationY = -100f, alpha = alpha)
+                .graphicsLayer { 
+                    translationX = 100f
+                    translationY = -100f
+                    this.alpha = alpha 
+                }
                 .blur(80.dp)
                 .background(Brush.radialGradient(listOf(Color(0xFFE91E63).copy(alpha = 0.3f), Color.Transparent)))
         )
@@ -90,7 +94,11 @@ fun WelcomeScreen(navController: NavController) {
             modifier = Modifier
                 .size(400.dp)
                 .align(Alignment.BottomStart)
-                .graphicsLayer(translationX = -100f, translationY = 100f, alpha = alpha)
+                .graphicsLayer { 
+                    translationX = -100f
+                    translationY = 100f
+                    this.alpha = alpha 
+                }
                 .blur(80.dp)
                 .background(Brush.radialGradient(listOf(Color(0xFF2196F3).copy(alpha = 0.3f), Color.Transparent)))
         )
@@ -108,7 +116,7 @@ fun WelcomeScreen(navController: NavController) {
                 contentDescription = "MUZI Logo",
                 modifier = Modifier
                     .size(180.dp)
-                    .graphicsLayer(translationY = floatingOffset),
+                    .graphicsLayer { translationY = floatingOffset },
                 contentScale = ContentScale.Fit
             )
 

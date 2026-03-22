@@ -56,6 +56,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import com.kannantech.muzi.App
+import com.kannantech.muzi.utils.NetworkBoost
 import okhttp3.OkHttpClient
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -85,11 +87,7 @@ class DownloadUtil @Inject constructor(
         CacheDataSource.Factory()
             .setCache(playerCache)
             .setUpstreamDataSourceFactory(
-                OkHttpDataSource.Factory(
-                    OkHttpClient.Builder()
-                        .proxy(YouTube.proxy)
-                        .build()
-                )
+                OkHttpDataSource.Factory(NetworkBoost.getClient(App.instance))
             )
     ) { dataSpec ->
         val mediaId = dataSpec.key ?: error("No media id")
@@ -260,11 +258,7 @@ class DownloadUtil @Inject constructor(
                 CacheDataSource.Factory()
                     .setCache(playerCache)
                     .setUpstreamDataSourceFactory(
-                        OkHttpDataSource.Factory(
-                            OkHttpClient.Builder()
-                                .proxy(YouTube.proxy)
-                                .build()
-                        )
+                        OkHttpDataSource.Factory(NetworkBoost.getClient(App.instance))
                     )
             ) { dataSpec ->
                 return@Factory dataSpec

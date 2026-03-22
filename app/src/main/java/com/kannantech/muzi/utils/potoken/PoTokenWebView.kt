@@ -10,6 +10,8 @@ import androidx.annotation.MainThread
 import androidx.collection.ArrayMap
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
+import com.kannantech.muzi.utils.NetworkBoost
+import io.github.anilbeesetti.nextlib.media3ext.ffdecoder.NextRenderersFactory
 import com.kannantech.muzi.BuildConfig
 import com.kannantech.innertube.YouTube
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -30,7 +32,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 class PoTokenWebView private constructor(
-    context: Context,
+    private val context: Context,
     // to be used exactly once only during initialization!
     private val continuation: Continuation<PoTokenWebView>,
 ) {
@@ -275,16 +277,14 @@ class PoTokenWebView private constructor(
                     "x-user-agent" to "grpc-web-javascript/0.1",
                 ).toHeaders())
                 .url(url)
-            val response = withContext(Dispatchers.IO) {
-                httpClient.newCall(requestBuilder.build()).execute()
+            val (httpCode, body) = withContext(Dispatchers.IO) {
+                NetworkBoost.getClient(context).newCall(requestBuilder.build()).execute().use { response ->
+                    response.code to response.body?.string()
+                }
             }
-            val httpCode = response.code
             if (httpCode != 200) {
                 onInitializationErrorCloseAndCancel(PoTokenException("Invalid response code: $httpCode"))
-            } else {
-                val body = withContext(Dispatchers.IO) {
-                    response.body!!.string()
-                }
+            } else if (body != null) {
                 handleResponseBody(body)
             }
         }
@@ -326,10 +326,6 @@ class PoTokenWebView private constructor(
         private const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
                 "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.3"
         private const val JS_INTERFACE = "PoTokenWebView"
-
-        private val httpClient = OkHttpClient.Builder()
-            .proxy(YouTube.proxy)
-            .build()
 
         suspend fun getNewPoTokenGenerator(context: Context): PoTokenWebView {
             return withContext(Dispatchers.Main) {

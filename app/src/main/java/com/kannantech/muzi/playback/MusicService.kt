@@ -112,6 +112,7 @@ import com.kannantech.muzi.playback.queues.ListQueue
 import com.kannantech.muzi.playback.queues.Queue
 import com.kannantech.muzi.playback.queues.YouTubeQueue
 import com.kannantech.muzi.utils.CoilBitmapLoader
+import com.kannantech.muzi.utils.NetworkBoost
 import com.kannantech.muzi.utils.NetworkConnectivityObserver
 import com.kannantech.muzi.utils.SyncUtils
 import com.kannantech.muzi.utils.YTPlayerUtils
@@ -635,11 +636,7 @@ class MusicService : MediaLibraryService(),
                     .setUpstreamDataSourceFactory(
                         DefaultDataSource.Factory(
                             this,
-                            OkHttpDataSource.Factory(
-                                OkHttpClient.Builder()
-                                    .proxy(YouTube.proxy)
-                                    .build()
-                            )
+                        OkHttpDataSource.Factory(NetworkBoost.getClient(this@MusicService))
                         )
                     )
                     .setCacheWriteDataSinkFactory(

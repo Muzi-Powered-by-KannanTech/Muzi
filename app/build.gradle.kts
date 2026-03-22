@@ -101,6 +101,12 @@ android {
                 abiFilters += "arm64-v8a"
             }
         }
+        create("full") {
+            dimension = "abi"
+            ndk {
+                abiFilters += "arm64-v8a"
+            }
+        }
     }
 
     compileOptions {
@@ -244,6 +250,7 @@ dependencies {
     implementation(project(":lrclib"))
     implementation(project(":material-color-utilities"))
     implementation(project(":taglib"))
+    "fullImplementation"(project(":ffMetadataEx"))
 
     // misc
     implementation(libs.aboutlibraries.compose.m3)
