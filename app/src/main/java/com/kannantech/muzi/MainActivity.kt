@@ -249,6 +249,10 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
+        var isAppReady = false
+        window.decorView.postDelayed({ isAppReady = true }, 600)
+        splashScreen.setKeepOnScreenCondition { !isAppReady }
+
         splashScreen.setOnExitAnimationListener { splashScreenView ->
             val iconView = try {
                 splashScreenView.iconView
@@ -256,14 +260,16 @@ class MainActivity : ComponentActivity() {
                 null
             }
             if (iconView != null) {
-                val scaleX = ObjectAnimator.ofFloat(iconView, View.SCALE_X, 1f, 1.3f)
-                val scaleY = ObjectAnimator.ofFloat(iconView, View.SCALE_Y, 1f, 1.3f)
-                val alpha = ObjectAnimator.ofFloat(splashScreenView.view, View.ALPHA, 1f, 0f)
+                // Modern Zoom-through Reveal
+                val scaleX = ObjectAnimator.ofFloat(iconView, View.SCALE_X, 1f, 10f)
+                val scaleY = ObjectAnimator.ofFloat(iconView, View.SCALE_Y, 1f, 10f)
+                val alphaIcon = ObjectAnimator.ofFloat(iconView, View.ALPHA, 1f, 0f)
+                val alphaView = ObjectAnimator.ofFloat(splashScreenView.view, View.ALPHA, 1f, 0f)
 
                 AnimatorSet().apply {
-                    interpolator = AnticipateInterpolator()
-                    duration = 400L
-                    playTogether(scaleX, scaleY, alpha)
+                    interpolator = android.view.animation.AccelerateInterpolator()
+                    duration = 500L
+                    playTogether(scaleX, scaleY, alphaIcon, alphaView)
                     doOnEnd { splashScreenView.remove() }
                     start()
                 }
