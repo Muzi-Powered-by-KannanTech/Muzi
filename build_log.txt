@@ -1,0 +1,866 @@
+Initialized native services in: C:\Users\KANNAN-V\.gradle\native
+Initialized jansi services in: C:\Users\KANNAN-V\.gradle\native
+The client will now receive all logging from the daemon (pid: 10920). The daemon log file: C:\Users\KANNAN-V\.gradle\daemon\9.3.1\daemon-10920.out.log
+Starting 12th build in daemon [uptime: 43 mins 52.858 secs, performance: 99%, GC rate: 0.01/s, heap usage: 7% of 2.6 GiB]
+Using 12 worker leases.
+Operational build model parameters: {requiresToolingModels=false, parallelProjectExecution=true, configureOnDemand=false, configurationCache=true, configurationCacheParallelStore=false, configurationCacheParallelLoad=true, isolatedProjects=false, parallelProjectConfiguration=false, intermediateModelCache=false, parallelToolingApiActions=true, invalidateCoupledProjects=false, modelAsProjectDependency=false, resilientModelBuilding=false}
+Encryption key source: default Gradle keystore (pkcs12)
+Now considering [D:\Projects\MUZI] as hierarchies to watch
+Reusing configuration cache.
+Now considering [D:\Projects\MUZI] as hierarchies to watch
+Watching the file system is configured to be enabled
+File system watching is active
+Using local directory build cache for the root build (location = C:\Users\KANNAN-V\.gradle\caches\build-cache-1, remove unused entries = after 7 days).
+Tasks to be executed: [task ':app:preBuild', task ':app:preCoreDebugBuild', task ':app:mergeCoreDebugNativeDebugMetadata', task ':innertube:checkKotlinGradlePluginConfigurationErrors', task ':innertube:compileKotlin', task ':innertube:compileJava', task ':innertube:processResources', task ':innertube:classes', task ':innertube:jar', task ':kugou:checkKotlinGradlePluginConfigurationErrors', task ':kugou:compileKotlin', task ':kugou:compileJava', task ':kugou:processResources', task ':kugou:classes', task ':kugou:jar', task ':lrclib:checkKotlinGradlePluginConfigurationErrors', task ':lrclib:compileKotlin', task ':lrclib:compileJava', task ':lrclib:processResources', task ':lrclib:classes', task ':lrclib:jar', task ':material-color-utilities:compileJava', task ':material-color-utilities:processResources', task ':material-color-utilities:classes', task ':material-color-utilities:jar', task ':app:generateCoreDebugBuildConfig', task ':app:extractCoreDebugSupportedLocales', task ':app:mapCoreDebugSourceSetPaths', task ':taglib:preBuild', task ':taglib:preDebugBuild', task ':taglib:extractDebugSupportedLocales', task ':app:generateCoreDebugLocaleConfig', task ':app:generateCoreDebugResources', task ':app:packageCoreDebugResources', task ':taglib:processDebugNavigationResources', task ':app:processCoreDebugNavigationResources', task ':app:parseCoreDebugLocalResources', task ':app:generateCoreDebugRFile', task ':taglib:generateDebugResources', task ':taglib:packageDebugResources', task ':taglib:parseDebugLocalResources', task ':taglib:generateDebugRFile', task ':taglib:compileDebugKotlin', task ':taglib:javaPreCompileDebug', task ':taglib:compileDebugJavaWithJavac', task ':taglib:bundleLibCompileToJarDebug', task ':app:kspCoreDebugKotlin', task ':app:compileCoreDebugKotlin', task ':app:javaPreCompileCoreDebug', task ':app:compileCoreDebugJavaWithJavac', task ':app:generateCoreDebugAssets', task ':taglib:generateDebugAssets', task ':taglib:mergeDebugAssets', task ':app:mergeCoreDebugAssets', task ':app:compressCoreDebugAssets', task ':app:l8DexDesugarLibCoreDebug', task ':taglib:bundleLibRuntimeToJarDebug', task ':app:desugarCoreDebugFileDependencies', task ':app:hiltSyncCoreDebug', task ':app:hiltAggregateDepsCoreDebug', task ':app:hiltJavaCompileCoreDebug', task ':taglib:writeDebugAarMetadata', task ':app:checkCoreDebugAarMetadata', task ':app:compileCoreDebugNavigationResources', task ':app:mergeCoreDebugResources', task ':app:createCoreDebugCompatibleScreenManifests', task ':app:extractDeepLinksCoreDebug', task ':taglib:extractDeepLinksDebug', task ':taglib:processDebugManifest', task ':app:processCoreDebugMainManifest', task ':app:processCoreDebugManifest', task ':app:processCoreDebugManifestForPackage', task ':taglib:mapDebugSourceSetPaths', task ':taglib:compileDebugLibraryResources', task ':app:processCoreDebugResources', task ':app:transformCoreDebugClassesWithAsm', task ':app:dexBuilderCoreDebug', task ':app:mergeCoreDebugGlobalSynthetics', task ':app:processCoreDebugJavaRes', task ':taglib:processDebugJavaRes', task ':app:mergeCoreDebugJavaResource', task ':app:checkCoreDebugDuplicateClasses', task ':app:mergeExtDexCoreDebug', task ':taglib:bundleLibRuntimeToDirDebug', task ':app:mergeLibDexCoreDebug', task ':app:mergeProjectDexCoreDebug', task ':app:mergeCoreDebugJniLibFolders', task ':taglib:configureCMakeDebug[arm64-v8a]', task ':taglib:buildCMakeDebug[arm64-v8a]', task ':taglib:mergeDebugJniLibFolders', task ':taglib:mergeDebugNativeLibs', task ':taglib:copyDebugJniLibsProjectOnly', task ':app:mergeCoreDebugNativeLibs', task ':app:stripCoreDebugDebugSymbols', task ':app:validateSigningCoreDebug', task ':app:writeCoreDebugAppMetadata', task ':app:writeCoreDebugSigningConfigVersions', task ':app:packageCoreDebug', task ':app:createCoreDebugApkListingFileRedirect', task ':app:assembleCoreDebug', task ':app:assembleDebug']
+Tasks that were excluded: []
+Resolve mutations for :app:preBuild (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :innertube:processResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+Resolve mutations for :innertube:checkKotlinGradlePluginConfigurationErrors (Thread[#1015,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :kugou:checkKotlinGradlePluginConfigurationErrors (Thread[#1020,Execution worker Thread 8,5,main]) started.
+work action Unknown value (Thread[#1017,Execution worker Thread 5,5,main]) started.
+Resolve mutations for :kugou:processResources (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:app:preBuild (Thread[#1018,Execution worker Thread 6,5,main]) started.
+:innertube:processResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:kugou:checkKotlinGradlePluginConfigurationErrors (Thread[#1020,Execution worker Thread 8,5,main]) started.
+:innertube:checkKotlinGradlePluginConfigurationErrors (Thread[#1015,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :lrclib:processResources (Thread[#1014,Execution worker Thread 2,5,main]) started.
+Resolve mutations for :material-color-utilities:processResources (Thread[#1023,Execution worker Thread 11,5,main]) started.
+:kugou:processResources (Thread[#1017,Execution worker Thread 5,5,main]) started.
+Resolve mutations for :lrclib:checkKotlinGradlePluginConfigurationErrors (Thread[#1022,Execution worker Thread 10,5,main]) started.
+:material-color-utilities:processResources (Thread[#1023,Execution worker Thread 11,5,main]) started.
+:lrclib:checkKotlinGradlePluginConfigurationErrors (Thread[#1022,Execution worker Thread 10,5,main]) started.
+Resolve mutations for :taglib:generateDebugAssets (Thread[#1019,Execution worker Thread 7,5,main]) started.
+Resolve mutations for :app:generateCoreDebugAssets (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :taglib:preBuild (Thread[#1013,Execution worker,5,main]) started.
+:taglib:generateDebugAssets (Thread[#1019,Execution worker Thread 7,5,main]) started.
+:taglib:preBuild (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :material-color-utilities:compileJava (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:app:generateCoreDebugAssets (Thread[#1012,included builds,5,main]) started.
+:lrclib:processResources (Thread[#1014,Execution worker Thread 2,5,main]) started.
+:material-color-utilities:compileJava (Thread[#1021,Execution worker Thread 9,5,main]) started.
+
+> Task :taglib:preBuild UP-TO-DATE
+Skipping task ':taglib:preBuild' as it has no actions.
+
+> Task :lrclib:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':lrclib:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+
+> Task :innertube:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':innertube:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :taglib:preDebugBuild (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:generateCoreDebugAssets UP-TO-DATE
+Skipping task ':app:generateCoreDebugAssets' as it has no actions.
+work action Unknown value (Thread[#1012,included builds,5,main]) started.
+
+> Task :kugou:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':kugou:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+
+> Task :taglib:generateDebugAssets UP-TO-DATE
+Skipping task ':taglib:generateDebugAssets' as it has no actions.
+Resolve mutations for :kugou:compileKotlin (Thread[#1020,Execution worker Thread 8,5,main]) started.
+:taglib:preDebugBuild (Thread[#1013,Execution worker,5,main]) started.
+work action Unknown value (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :innertube:compileKotlin (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:kugou:compileKotlin (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :lrclib:compileKotlin (Thread[#1022,Execution worker Thread 10,5,main]) started.
+Build 3add8df0-7af7-4960-8030-6e23110ce8fd is started
+:lrclib:compileKotlin (Thread[#1022,Execution worker Thread 10,5,main]) started.
+
+> Task :kugou:processResources NO-SOURCE
+Skipping task ':kugou:processResources' as it has no source files and no previous output files.
+:innertube:compileKotlin (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Task :material-color-utilities:processResources NO-SOURCE
+Skipping task ':material-color-utilities:processResources' as it has no source files and no previous output files.
+
+> Task :innertube:processResources NO-SOURCE
+Skipping task ':innertube:processResources' as it has no source files and no previous output files.
+
+> Task :app:preBuild UP-TO-DATE
+Skipping task ':app:preBuild' as it has no actions.
+work action Unknown value (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :lrclib:processResources NO-SOURCE
+Skipping task ':lrclib:processResources' as it has no source files and no previous output files.
+Resolve mutations for :app:preCoreDebugBuild (Thread[#1018,Execution worker Thread 6,5,main]) started.
+work action Unknown value (Thread[#1014,Execution worker Thread 2,5,main]) started.
+work action Unknown value (Thread[#1016,Execution worker Thread 4,5,main]) started.
+work action Unknown value (Thread[#1023,Execution worker Thread 11,5,main]) started.
+work action Unknown value (Thread[#1017,Execution worker Thread 5,5,main]) started.
+work action Unknown value (Thread[#1012,included builds,5,main]) started.
+work action Unknown value (Thread[#1019,Execution worker Thread 7,5,main]) started.
+:app:preCoreDebugBuild (Thread[#1018,Execution worker Thread 6,5,main]) started.
+
+> Task :app:preCoreDebugBuild UP-TO-DATE
+Skipping task ':app:preCoreDebugBuild' as it has no actions.
+Resolve mutations for :app:mergeCoreDebugNativeDebugMetadata (Thread[#1018,Execution worker Thread 6,5,main]) started.
+Resolve mutations for :app:generateCoreDebugBuildConfig (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :app:mapCoreDebugSourceSetPaths (Thread[#1019,Execution worker Thread 7,5,main]) started.
+Resolve mutations for :app:javaPreCompileCoreDebug (Thread[#1023,Execution worker Thread 11,5,main]) started.
+Resolve mutations for :app:l8DexDesugarLibCoreDebug (Thread[#1017,Execution worker Thread 5,5,main]) started.
+
+> Task :taglib:preDebugBuild UP-TO-DATE
+Skipping task ':taglib:preDebugBuild' as it has no actions.
+:app:mergeCoreDebugNativeDebugMetadata (Thread[#1018,Execution worker Thread 6,5,main]) started.
+Resolve mutations for :taglib:extractDebugSupportedLocales (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :taglib:processDebugNavigationResources (Thread[#1017,Execution worker Thread 5,5,main]) started.
+:app:generateCoreDebugBuildConfig (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :app:generateCoreDebugResources (Thread[#1014,Execution worker Thread 2,5,main]) started.
+Resolve mutations for :app:extractCoreDebugSupportedLocales (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:taglib:processDebugNavigationResources (Thread[#1017,Execution worker Thread 5,5,main]) started.
+:app:extractCoreDebugSupportedLocales (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:taglib:extractDebugSupportedLocales (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :taglib:generateDebugResources (Thread[#1023,Execution worker Thread 11,5,main]) started.
+:app:mapCoreDebugSourceSetPaths (Thread[#1019,Execution worker Thread 7,5,main]) started.
+:taglib:generateDebugResources (Thread[#1023,Execution worker Thread 11,5,main]) started.
+
+> Task :app:extractCoreDebugSupportedLocales UP-TO-DATE
+Build cache key for task ':app:extractCoreDebugSupportedLocales' is 4d71e0bf06e62b222ead5ca0db6d8288
+Skipping task ':app:extractCoreDebugSupportedLocales' as it is up-to-date.
+:app:generateCoreDebugResources (Thread[#1014,Execution worker Thread 2,5,main]) started.
+Resolve mutations for :taglib:javaPreCompileDebug (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :app:mergeCoreDebugNativeDebugMetadata NO-SOURCE
+Skipping task ':app:mergeCoreDebugNativeDebugMetadata' as it has no source files and no previous output files.
+:taglib:javaPreCompileDebug (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :app:generateCoreDebugBuildConfig UP-TO-DATE
+Build cache key for task ':app:generateCoreDebugBuildConfig' is 36e2e36f0fed91c2a11de134fb44545a
+Skipping task ':app:generateCoreDebugBuildConfig' as it is up-to-date.
+:app:javaPreCompileCoreDebug (Thread[#1018,Execution worker Thread 6,5,main]) started.
+Resolve mutations for :taglib:mergeDebugAssets (Thread[#1012,included builds,5,main]) started.
+
+> Task :taglib:processDebugNavigationResources UP-TO-DATE
+Build cache key for task ':taglib:processDebugNavigationResources' is 03aa74507c5512c5da490449d2558e4e
+Skipping task ':taglib:processDebugNavigationResources' as it is up-to-date.
+:taglib:mergeDebugAssets (Thread[#1012,included builds,5,main]) started.
+
+> Task :taglib:generateDebugResources UP-TO-DATE
+Build cache key for task ':taglib:generateDebugResources' is 6773f8d3301c9be23e4d90716dee07e5
+Skipping task ':taglib:generateDebugResources' as it is up-to-date.
+work action resolve debug (project :taglib) (Thread[#1017,Execution worker Thread 5,5,main]) started.
+
+> Task :taglib:extractDebugSupportedLocales UP-TO-DATE
+Build cache key for task ':taglib:extractDebugSupportedLocales' is 044c245cbc8b567c9993063b900dedcf
+Skipping task ':taglib:extractDebugSupportedLocales' as it is up-to-date.
+Resolve mutations for :app:processCoreDebugNavigationResources (Thread[#1017,Execution worker Thread 5,5,main]) started.
+Resolve mutations for :taglib:packageDebugResources (Thread[#1023,Execution worker Thread 11,5,main]) started.
+
+> Task :taglib:javaPreCompileDebug UP-TO-DATE
+Build cache key for task ':taglib:javaPreCompileDebug' is 7a75d40d8419dbb0a3fa7e86f993bafe
+Skipping task ':taglib:javaPreCompileDebug' as it is up-to-date.
+:app:l8DexDesugarLibCoreDebug (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :taglib:mergeDebugAssets UP-TO-DATE
+Caching disabled for task ':taglib:mergeDebugAssets' because:
+  Simple merging task
+Skipping task ':taglib:mergeDebugAssets' as it is up-to-date.
+:taglib:packageDebugResources (Thread[#1023,Execution worker Thread 11,5,main]) started.
+
+> Task :app:generateCoreDebugResources UP-TO-DATE
+Build cache key for task ':app:generateCoreDebugResources' is 843d18037aedd7aa06e7aa2dafa745df
+Skipping task ':app:generateCoreDebugResources' as it is up-to-date.
+:app:processCoreDebugNavigationResources (Thread[#1017,Execution worker Thread 5,5,main]) started.
+work action resolve supported_locales.txt (project :taglib) (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :app:desugarCoreDebugFileDependencies (Thread[#1014,Execution worker Thread 2,5,main]) started.
+
+> Task :material-color-utilities:compileJava UP-TO-DATE
+Build cache key for task ':material-color-utilities:compileJava' is 9fb79e4bc48adff6bf94558367fb6e5a
+Skipping task ':material-color-utilities:compileJava' as it is up-to-date.
+No compile result for :material-color-utilities:compileJava
+No compile result for :material-color-utilities:compileJava
+No compile result for :material-color-utilities:compileJava
+No compile result for :material-color-utilities:compileJava
+work action resolve mergeDebugAssets (project :taglib) (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :app:mergeCoreDebugAssets (Thread[#1012,included builds,5,main]) started.
+
+> Task :app:javaPreCompileCoreDebug UP-TO-DATE
+Build cache key for task ':app:javaPreCompileCoreDebug' is f854fbbfce0e8c8c8cc375d7d3af362d
+Skipping task ':app:javaPreCompileCoreDebug' as it is up-to-date.
+
+> Task :app:mapCoreDebugSourceSetPaths UP-TO-DATE
+Caching disabled for task ':app:mapCoreDebugSourceSetPaths' because:
+  Caching has been disabled for the task
+Skipping task ':app:mapCoreDebugSourceSetPaths' as it is up-to-date.
+work action resolve main (project :material-color-utilities) (Thread[#1018,Execution worker Thread 6,5,main]) started.
+Resolve mutations for :app:generateCoreDebugLocaleConfig (Thread[#1019,Execution worker Thread 7,5,main]) started.
+:app:mergeCoreDebugAssets (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :material-color-utilities:classes (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:app:desugarCoreDebugFileDependencies (Thread[#1014,Execution worker Thread 2,5,main]) started.
+Resolve mutations for :taglib:writeDebugAarMetadata (Thread[#1013,Execution worker,5,main]) started.
+:material-color-utilities:classes (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:app:generateCoreDebugLocaleConfig (Thread[#1019,Execution worker Thread 7,5,main]) started.
+IdentityTransform (Thread[#1018,Execution worker Thread 6,5,main]) started.
+
+> Task :lrclib:compileKotlin UP-TO-DATE
+Build cache key for task ':lrclib:compileKotlin' is 41a813aec1a6d1323b37d06436b95822
+Skipping task ':lrclib:compileKotlin' as it is up-to-date.
+
+> Task :taglib:packageDebugResources UP-TO-DATE
+Build cache key for task ':taglib:packageDebugResources' is e755c4ec3ec702596ec4a86776d3e9ff
+Skipping task ':taglib:packageDebugResources' as it is up-to-date.
+
+> Task :innertube:compileKotlin UP-TO-DATE
+Build cache key for task ':innertube:compileKotlin' is 1f7002559542a27ae95038e1ed6c258a
+Skipping task ':innertube:compileKotlin' as it is up-to-date.
+Resolve mutations for :lrclib:compileJava (Thread[#1023,Execution worker Thread 11,5,main]) started.
+
+> Task :material-color-utilities:classes UP-TO-DATE
+Skipping task ':material-color-utilities:classes' as it has no actions.
+Resolve mutations for :material-color-utilities:jar (Thread[#1021,Execution worker Thread 9,5,main]) started.
+DexingNoClasspathTransform (Thread[#1018,Execution worker Thread 6,5,main]) started.
+:material-color-utilities:jar (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:taglib:writeDebugAarMetadata (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:desugarCoreDebugFileDependencies UP-TO-DATE
+Build cache key for task ':app:desugarCoreDebugFileDependencies' is f6092a4f3f9792e8ae430ff77a9b6b7a
+Skipping task ':app:desugarCoreDebugFileDependencies' as it is up-to-date.
+
+> Task :kugou:compileKotlin UP-TO-DATE
+Build cache key for task ':kugou:compileKotlin' is d0a3f6178e7aabdc62e8be8dfa49bf41
+Skipping task ':kugou:compileKotlin' as it is up-to-date.
+work action resolve packageDebugResources (project :taglib) (Thread[#1014,Execution worker Thread 2,5,main]) started.
+:lrclib:compileJava (Thread[#1023,Execution worker Thread 11,5,main]) started.
+Resolve mutations for :kugou:compileJava (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :taglib:parseDebugLocalResources (Thread[#1022,Execution worker Thread 10,5,main]) started.
+Resolve mutations for :innertube:compileJava (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:taglib:parseDebugLocalResources (Thread[#1022,Execution worker Thread 10,5,main]) started.
+:innertube:compileJava (Thread[#1015,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :app:createCoreDebugCompatibleScreenManifests (Thread[#1014,Execution worker Thread 2,5,main]) started.
+
+> Transform main (project :material-color-utilities) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: D:\Projects\MUZI\material-color-utilities\build\classes\java\main is 37ba312603bb197f98787efc21073995
+Skipping DexingNoClasspathTransform: D:\Projects\MUZI\material-color-utilities\build\classes\java\main as it is up-to-date.
+
+> Task :app:l8DexDesugarLibCoreDebug UP-TO-DATE
+Build cache key for task ':app:l8DexDesugarLibCoreDebug' is 6bdede09bc4ab14921333d4d2f255d3b
+Skipping task ':app:l8DexDesugarLibCoreDebug' as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1018,Execution worker Thread 6,5,main]) started.
+Resolve mutations for :app:extractDeepLinksCoreDebug (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:app:createCoreDebugCompatibleScreenManifests (Thread[#1014,Execution worker Thread 2,5,main]) started.
+:app:extractDeepLinksCoreDebug (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :app:mergeCoreDebugAssets UP-TO-DATE
+Caching disabled for task ':app:mergeCoreDebugAssets' because:
+  Simple merging task
+Skipping task ':app:mergeCoreDebugAssets' as it is up-to-date.
+
+> Task :lrclib:compileJava NO-SOURCE
+Skipping task ':lrclib:compileJava' as it has no source files and no previous output files.
+:kugou:compileJava (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :lrclib:classes (Thread[#1023,Execution worker Thread 11,5,main]) started.
+Resolve mutations for :app:compressCoreDebugAssets (Thread[#1012,included builds,5,main]) started.
+:lrclib:classes (Thread[#1023,Execution worker Thread 11,5,main]) started.
+
+> Task :app:processCoreDebugNavigationResources UP-TO-DATE
+Build cache key for task ':app:processCoreDebugNavigationResources' is a16e33eaf660677ecb486eaaab94e442
+Skipping task ':app:processCoreDebugNavigationResources' as it is up-to-date.
+:app:compressCoreDebugAssets (Thread[#1012,included builds,5,main]) started.
+
+> Task :innertube:compileJava NO-SOURCE
+Skipping task ':innertube:compileJava' as it has no source files and no previous output files.
+
+> Task :taglib:writeDebugAarMetadata UP-TO-DATE
+Caching disabled for task ':taglib:writeDebugAarMetadata' because:
+  Caching has been disabled for the task
+Skipping task ':taglib:writeDebugAarMetadata' as it is up-to-date.
+
+> Task :material-color-utilities:jar UP-TO-DATE
+Caching disabled for task ':material-color-utilities:jar' because:
+  Not worth caching
+Skipping task ':material-color-utilities:jar' as it is up-to-date.
+work action resolve main (project :innertube) (Thread[#1018,Execution worker Thread 6,5,main]) started.
+
+> Task :kugou:compileJava NO-SOURCE
+Skipping task ':kugou:compileJava' as it has no source files and no previous output files.
+work action resolve material-color-utilities.jar (project :material-color-utilities) (Thread[#1021,Execution worker Thread 9,5,main]) started.
+Resolve mutations for :kugou:classes (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :innertube:classes (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:innertube:classes (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Task :innertube:classes UP-TO-DATE
+Skipping task ':innertube:classes' as it has no actions.
+Resolve mutations for :innertube:jar (Thread[#1015,Execution worker Thread 3,5,main]) started.
+work action resolve main (project :lrclib) (Thread[#1017,Execution worker Thread 5,5,main]) started.
+:innertube:jar (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Task :lrclib:classes UP-TO-DATE
+Skipping task ':lrclib:classes' as it has no actions.
+
+> Task :app:createCoreDebugCompatibleScreenManifests UP-TO-DATE
+Caching disabled for task ':app:createCoreDebugCompatibleScreenManifests' because:
+  Caching has been disabled for the task
+Skipping task ':app:createCoreDebugCompatibleScreenManifests' as it is up-to-date.
+Resolve mutations for :lrclib:jar (Thread[#1023,Execution worker Thread 11,5,main]) started.
+work action resolve main (project :kugou) (Thread[#1014,Execution worker Thread 2,5,main]) started.
+:lrclib:jar (Thread[#1023,Execution worker Thread 11,5,main]) started.
+IdentityTransform (Thread[#1014,Execution worker Thread 2,5,main]) started.
+work action resolve main (project :kugou) (Thread[#1017,Execution worker Thread 5,5,main]) started.
+DexingNoClasspathTransform (Thread[#1014,Execution worker Thread 2,5,main]) started.
+IdentityTransform (Thread[#1017,Execution worker Thread 5,5,main]) started.
+
+> Task :app:extractDeepLinksCoreDebug UP-TO-DATE
+Build cache key for task ':app:extractDeepLinksCoreDebug' is 9d281596e6fb8294ab5ed5576521d746
+Skipping task ':app:extractDeepLinksCoreDebug' as it is up-to-date.
+
+> Task :app:compressCoreDebugAssets UP-TO-DATE
+Build cache key for task ':app:compressCoreDebugAssets' is 050b23aa2de1bd5f0616aca479ffd993
+Skipping task ':app:compressCoreDebugAssets' as it is up-to-date.
+IdentityTransform (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :taglib:parseDebugLocalResources UP-TO-DATE
+Build cache key for task ':taglib:parseDebugLocalResources' is 5519c2dcf9bdca6cbd6194e11343d965
+Skipping task ':taglib:parseDebugLocalResources' as it is up-to-date.
+DexingNoClasspathTransform (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:kugou:classes (Thread[#1020,Execution worker Thread 8,5,main]) started.
+IdentityTransform (Thread[#1021,Execution worker Thread 9,5,main]) started.
+IdentityTransform (Thread[#1018,Execution worker Thread 6,5,main]) started.
+work action resolve main (project :innertube) (Thread[#1013,Execution worker,5,main]) started.
+IdentityTransform (Thread[#1013,Execution worker,5,main]) started.
+IdentityTransform (Thread[#1021,Execution worker Thread 9,5,main]) started.
+DexingNoClasspathTransform (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :kugou:classes UP-TO-DATE
+Skipping task ':kugou:classes' as it has no actions.
+
+> Task :innertube:jar UP-TO-DATE
+Caching disabled for task ':innertube:jar' because:
+  Not worth caching
+Skipping task ':innertube:jar' as it is up-to-date.
+Resolve mutations for :kugou:jar (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :taglib:generateDebugRFile (Thread[#1022,Execution worker Thread 10,5,main]) started.
+:taglib:generateDebugRFile (Thread[#1022,Execution worker Thread 10,5,main]) started.
+
+> Task :lrclib:jar UP-TO-DATE
+Caching disabled for task ':lrclib:jar' because:
+  Not worth caching
+Skipping task ':lrclib:jar' as it is up-to-date.
+work action resolve main (project :lrclib) (Thread[#1012,included builds,5,main]) started.
+work action resolve lrclib.jar (project :lrclib) (Thread[#1023,Execution worker Thread 11,5,main]) started.
+IdentityTransform (Thread[#1023,Execution worker Thread 11,5,main]) started.
+DexingNoClasspathTransform (Thread[#1017,Execution worker Thread 5,5,main]) started.
+IdentityTransform (Thread[#1012,included builds,5,main]) started.
+:kugou:jar (Thread[#1020,Execution worker Thread 8,5,main]) started.
+work action resolve innertube.jar (project :innertube) (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Transform main (project :lrclib) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: C:\Users\KANNAN-V\.gradle\caches\9.3.1\transforms\bcb6fd1a0ae975aef7631372cd2aead7\workspace\transformed\empty is 3f9aa01a368dc784a60fe7648bb865b2
+Skipping DexingNoClasspathTransform: C:\Users\KANNAN-V\.gradle\caches\9.3.1\transforms\bcb6fd1a0ae975aef7631372cd2aead7\workspace\transformed\empty as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1016,Execution worker Thread 4,5,main]) started.
+DexingNoClasspathTransform (Thread[#1018,Execution worker Thread 6,5,main]) started.
+IdentityTransform (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Transform main (project :kugou) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: D:\Projects\MUZI\kugou\build\classes\kotlin\main is 5ae3f45ba07dc827eed14b6c1742f803
+Skipping DexingNoClasspathTransform: D:\Projects\MUZI\kugou\build\classes\kotlin\main as it is up-to-date.
+IdentityTransform (Thread[#1023,Execution worker Thread 11,5,main]) started.
+
+> Transform main (project :innertube) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: C:\Users\KANNAN-V\.gradle\caches\9.3.1\transforms\ca18c896bb4f8ff1e6e3ad2b77bdd6ca\workspace\transformed\empty is 3f9aa01a368dc784a60fe7648bb865b2
+Skipping DexingNoClasspathTransform: C:\Users\KANNAN-V\.gradle\caches\9.3.1\transforms\ca18c896bb4f8ff1e6e3ad2b77bdd6ca\workspace\transformed\empty as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1013,Execution worker,5,main]) started.
+
+> Transform main (project :kugou) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: C:\Users\KANNAN-V\.gradle\caches\9.3.1\transforms\e2d1fb68efe31ee1acd9a9740bd5d911\workspace\transformed\empty is 3f9aa01a368dc784a60fe7648bb865b2
+Skipping DexingNoClasspathTransform: C:\Users\KANNAN-V\.gradle\caches\9.3.1\transforms\e2d1fb68efe31ee1acd9a9740bd5d911\workspace\transformed\empty as it is up-to-date.
+DexingNoClasspathTransform (Thread[#1012,included builds,5,main]) started.
+DexingOutputSplitTransform (Thread[#1014,Execution worker Thread 2,5,main]) started.
+AggregatedPackagesTransform (Thread[#1014,Execution worker Thread 2,5,main]) started.
+AggregatedPackagesTransform (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Task :kugou:jar UP-TO-DATE
+Caching disabled for task ':kugou:jar' because:
+  Not worth caching
+Skipping task ':kugou:jar' as it is up-to-date.
+work action resolve kugou.jar (project :kugou) (Thread[#1020,Execution worker Thread 8,5,main]) started.
+DexingOutputSplitTransform (Thread[#1017,Execution worker Thread 5,5,main]) started.
+IdentityTransform (Thread[#1013,Execution worker,5,main]) started.
+
+> Transform main (project :lrclib) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: D:\Projects\MUZI\lrclib\build\classes\kotlin\main is 42f21fe2430e26630779c3f3af8a21ec
+Skipping DexingNoClasspathTransform: D:\Projects\MUZI\lrclib\build\classes\kotlin\main as it is up-to-date.
+IdentityTransform (Thread[#1017,Execution worker Thread 5,5,main]) started.
+AggregatedPackagesTransform (Thread[#1023,Execution worker Thread 11,5,main]) started.
+AggregatedPackagesTransform (Thread[#1013,Execution worker,5,main]) started.
+work action resolve aar-metadata.properties (project :taglib) (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :app:checkCoreDebugAarMetadata (Thread[#1013,Execution worker,5,main]) started.
+IdentityTransform (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :app:compileCoreDebugNavigationResources (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:app:checkCoreDebugAarMetadata (Thread[#1013,Execution worker,5,main]) started.
+AggregatedPackagesTransform (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:app:compileCoreDebugNavigationResources (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Transform main (project :innertube) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: D:\Projects\MUZI\innertube\build\classes\kotlin\main is 7b475b3734fe3ecb76b005fc429df772
+Skipping DexingNoClasspathTransform: D:\Projects\MUZI\innertube\build\classes\kotlin\main as it is up-to-date.
+
+> Task :taglib:generateDebugRFile UP-TO-DATE
+Build cache key for task ':taglib:generateDebugRFile' is 8158cb18bc2e311a93cb7bc16bc8352a
+Skipping task ':taglib:generateDebugRFile' as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1018,Execution worker Thread 6,5,main]) started.
+Resolve mutations for :taglib:compileDebugKotlin (Thread[#1022,Execution worker Thread 10,5,main]) started.
+AggregatedPackagesTransform (Thread[#1021,Execution worker Thread 9,5,main]) started.
+
+> Task :app:compileCoreDebugNavigationResources UP-TO-DATE
+Build cache key for task ':app:compileCoreDebugNavigationResources' is 3b492ff6bd451f5aaf9703f5e95150e1
+Skipping task ':app:compileCoreDebugNavigationResources' as it is up-to-date.
+AggregatedPackagesTransform (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :taglib:mapDebugSourceSetPaths (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:taglib:compileDebugKotlin (Thread[#1022,Execution worker Thread 10,5,main]) started.
+:taglib:mapDebugSourceSetPaths (Thread[#1016,Execution worker Thread 4,5,main]) started.
+DexingOutputSplitTransform (Thread[#1012,included builds,5,main]) started.
+IdentityTransform (Thread[#1023,Execution worker Thread 11,5,main]) started.
+work action resolve package-aware-r.txt (project :taglib) (Thread[#1014,Execution worker Thread 2,5,main]) started.
+IdentityTransform (Thread[#1014,Execution worker Thread 2,5,main]) started.
+Resolve mutations for :taglib:processDebugManifest (Thread[#1015,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :taglib:extractDeepLinksDebug (Thread[#1021,Execution worker Thread 9,5,main]) started.
+IdentityTransform (Thread[#1023,Execution worker Thread 11,5,main]) started.
+Resolve mutations for :app:checkCoreDebugDuplicateClasses (Thread[#1018,Execution worker Thread 6,5,main]) started.
+DexingOutputSplitTransform (Thread[#1020,Execution worker Thread 8,5,main]) started.
+IdentityTransform (Thread[#1012,included builds,5,main]) started.
+AggregatedPackagesTransform (Thread[#1017,Execution worker Thread 5,5,main]) started.
+DexingOutputSplitTransform (Thread[#1012,included builds,5,main]) started.
+
+> Task :taglib:mapDebugSourceSetPaths UP-TO-DATE
+Caching disabled for task ':taglib:mapDebugSourceSetPaths' because:
+  Caching has been disabled for the task
+Skipping task ':taglib:mapDebugSourceSetPaths' as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1014,Execution worker Thread 2,5,main]) started.
+:app:checkCoreDebugDuplicateClasses (Thread[#1018,Execution worker Thread 6,5,main]) started.
+:taglib:extractDeepLinksDebug (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:taglib:processDebugManifest (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Task :taglib:extractDeepLinksDebug UP-TO-DATE
+Build cache key for task ':taglib:extractDeepLinksDebug' is a86a1307867cbfe1a26ba096cbf79027
+Skipping task ':taglib:extractDeepLinksDebug' as it is up-to-date.
+work action resolve navigation.json (project :taglib) (Thread[#1021,Execution worker Thread 9,5,main]) started.
+
+> Task :taglib:processDebugManifest UP-TO-DATE
+Build cache key for task ':taglib:processDebugManifest' is 025cf0b5b7d9d02ccecec1eb941a10af
+Skipping task ':taglib:processDebugManifest' as it is up-to-date.
+work action resolve AndroidManifest.xml (project :taglib) (Thread[#1015,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :app:processCoreDebugMainManifest (Thread[#1015,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :taglib:compileDebugLibraryResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+work action resolve file-map.txt (project :taglib) (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:app:processCoreDebugMainManifest (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:taglib:compileDebugLibraryResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :app:checkCoreDebugAarMetadata UP-TO-DATE
+Caching disabled for task ':app:checkCoreDebugAarMetadata' because:
+  Caching has been disabled for the task
+Skipping task ':app:checkCoreDebugAarMetadata' as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1023,Execution worker Thread 11,5,main]) started.
+DexingOutputSplitTransform (Thread[#1012,included builds,5,main]) started.
+DexingOutputSplitTransform (Thread[#1021,Execution worker Thread 9,5,main]) started.
+DexingOutputSplitTransform (Thread[#1020,Execution worker Thread 8,5,main]) started.
+ExtractJniTransform (Thread[#1021,Execution worker Thread 9,5,main]) started.
+ExtractJniTransform (Thread[#1017,Execution worker Thread 5,5,main]) started.
+
+> Task :taglib:compileDebugLibraryResources UP-TO-DATE
+Build cache key for task ':taglib:compileDebugLibraryResources' is 938389231fdfa4c96e13e04933e534dd
+Skipping task ':taglib:compileDebugLibraryResources' as it is up-to-date.
+work action resolve out (project :taglib) (Thread[#1016,Execution worker Thread 4,5,main]) started.
+ExtractJniTransform (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :app:mergeCoreDebugJniLibFolders (Thread[#1012,included builds,5,main]) started.
+ExtractJniTransform (Thread[#1016,Execution worker Thread 4,5,main]) started.
+Resolve mutations for :taglib:mergeDebugJniLibFolders (Thread[#1016,Execution worker Thread 4,5,main]) started.
+Resolve mutations for :app:validateSigningCoreDebug (Thread[#1017,Execution worker Thread 5,5,main]) started.
+:taglib:mergeDebugJniLibFolders (Thread[#1016,Execution worker Thread 4,5,main]) started.
+Resolve mutations for :app:writeCoreDebugSigningConfigVersions (Thread[#1023,Execution worker Thread 11,5,main]) started.
+:app:validateSigningCoreDebug (Thread[#1017,Execution worker Thread 5,5,main]) started.
+:app:writeCoreDebugSigningConfigVersions (Thread[#1023,Execution worker Thread 11,5,main]) started.
+
+> Task :taglib:mergeDebugJniLibFolders UP-TO-DATE
+Caching disabled for task ':taglib:mergeDebugJniLibFolders' because:
+  Simple merging task
+Skipping task ':taglib:mergeDebugJniLibFolders' as it is up-to-date.
+Resolve mutations for :app:writeCoreDebugAppMetadata (Thread[#1014,Execution worker Thread 2,5,main]) started.
+:app:mergeCoreDebugJniLibFolders (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :taglib:configureCMakeDebug[arm64-v8a] (Thread[#1013,Execution worker,5,main]) started.
+:app:writeCoreDebugAppMetadata (Thread[#1014,Execution worker Thread 2,5,main]) started.
+:taglib:configureCMakeDebug[arm64-v8a] (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:validateSigningCoreDebug UP-TO-DATE
+Caching disabled for task ':app:validateSigningCoreDebug' because:
+  Caching has been disabled for the task
+Skipping task ':app:validateSigningCoreDebug' as it is up-to-date.
+
+> Task :app:writeCoreDebugSigningConfigVersions UP-TO-DATE
+Caching disabled for task ':app:writeCoreDebugSigningConfigVersions' because:
+  Caching has been disabled for the task
+Skipping task ':app:writeCoreDebugSigningConfigVersions' as it is up-to-date.
+
+> Task :app:checkCoreDebugDuplicateClasses UP-TO-DATE
+Caching disabled for task ':app:checkCoreDebugDuplicateClasses' because:
+  Caching has been disabled for the task
+Skipping task ':app:checkCoreDebugDuplicateClasses' as it is up-to-date.
+
+> Task :app:mergeCoreDebugJniLibFolders UP-TO-DATE
+Caching disabled for task ':app:mergeCoreDebugJniLibFolders' because:
+  Simple merging task
+Skipping task ':app:mergeCoreDebugJniLibFolders' as it is up-to-date.
+Resolve mutations for :app:mergeExtDexCoreDebug (Thread[#1018,Execution worker Thread 6,5,main]) started.
+:app:mergeExtDexCoreDebug (Thread[#1018,Execution worker Thread 6,5,main]) started.
+
+> Task :app:writeCoreDebugAppMetadata UP-TO-DATE
+Caching disabled for task ':app:writeCoreDebugAppMetadata' because:
+  Caching has been disabled for the task
+Skipping task ':app:writeCoreDebugAppMetadata' as it is up-to-date.
+
+> Task :app:processCoreDebugMainManifest UP-TO-DATE
+Build cache key for task ':app:processCoreDebugMainManifest' is 7edb8c79f91c4cf9dfa78c7b79d5bfc4
+Skipping task ':app:processCoreDebugMainManifest' as it is up-to-date.
+Resolve mutations for :app:processCoreDebugManifest (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:app:processCoreDebugManifest (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Task :app:processCoreDebugManifest UP-TO-DATE
+Build cache key for task ':app:processCoreDebugManifest' is a173b9d8c81692ed4948ab76f782243f
+Skipping task ':app:processCoreDebugManifest' as it is up-to-date.
+Resolve mutations for :app:processCoreDebugManifestForPackage (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:app:processCoreDebugManifestForPackage (Thread[#1021,Execution worker Thread 9,5,main]) started.
+
+> Task :app:processCoreDebugManifestForPackage UP-TO-DATE
+Build cache key for task ':app:processCoreDebugManifestForPackage' is 4fbc1ceb20ad4fc961774e28096ba68d
+Skipping task ':app:processCoreDebugManifestForPackage' as it is up-to-date.
+
+> Task :app:mergeExtDexCoreDebug UP-TO-DATE
+Build cache key for task ':app:mergeExtDexCoreDebug' is 081a4d1e17e4b1cdadb2482930500784
+Skipping task ':app:mergeExtDexCoreDebug' as it is up-to-date.
+
+> Task :taglib:compileDebugKotlin UP-TO-DATE
+file or directory 'D:\Projects\MUZI\taglib\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\taglib\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\taglib\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\java', not found
+Build cache key for task ':taglib:compileDebugKotlin' is cd790aa3ff3573d70503a177585f4c11
+Skipping task ':taglib:compileDebugKotlin' as it is up-to-date.
+Resolve mutations for :taglib:compileDebugJavaWithJavac (Thread[#1022,Execution worker Thread 10,5,main]) started.
+Resolve mutations for :taglib:processDebugJavaRes (Thread[#1018,Execution worker Thread 6,5,main]) started.
+:taglib:processDebugJavaRes (Thread[#1018,Execution worker Thread 6,5,main]) started.
+:taglib:compileDebugJavaWithJavac (Thread[#1022,Execution worker Thread 10,5,main]) started.
+
+> Task :taglib:compileDebugJavaWithJavac NO-SOURCE
+Skipping task ':taglib:compileDebugJavaWithJavac' as it has no source files and no previous output files.
+Resolve mutations for :taglib:bundleLibCompileToJarDebug (Thread[#1022,Execution worker Thread 10,5,main]) started.
+Resolve mutations for :taglib:bundleLibRuntimeToDirDebug (Thread[#1021,Execution worker Thread 9,5,main]) started.
+Resolve mutations for :taglib:bundleLibRuntimeToJarDebug (Thread[#1015,Execution worker Thread 3,5,main]) started.
+:taglib:bundleLibCompileToJarDebug (Thread[#1022,Execution worker Thread 10,5,main]) started.
+:taglib:bundleLibRuntimeToDirDebug (Thread[#1021,Execution worker Thread 9,5,main]) started.
+:taglib:bundleLibRuntimeToJarDebug (Thread[#1015,Execution worker Thread 3,5,main]) started.
+
+> Task :taglib:processDebugJavaRes UP-TO-DATE
+file or directory 'D:\Projects\MUZI\taglib\src\main\resources', not found
+file or directory 'D:\Projects\MUZI\taglib\src\debug\resources', not found
+Caching disabled for task ':taglib:processDebugJavaRes' because:
+  Caching has been disabled for the task
+Skipping task ':taglib:processDebugJavaRes' as it is up-to-date.
+work action resolve out (project :taglib) (Thread[#1018,Execution worker Thread 6,5,main]) started.
+
+> Task :taglib:bundleLibRuntimeToDirDebug UP-TO-DATE
+Caching disabled for task ':taglib:bundleLibRuntimeToDirDebug' because:
+  Simple merging task
+Skipping task ':taglib:bundleLibRuntimeToDirDebug' as it is up-to-date.
+
+> Task :taglib:bundleLibRuntimeToJarDebug UP-TO-DATE
+Caching disabled for task ':taglib:bundleLibRuntimeToJarDebug' because:
+  Simple merging task
+Skipping task ':taglib:bundleLibRuntimeToJarDebug' as it is up-to-date.
+
+> Task :taglib:bundleLibCompileToJarDebug UP-TO-DATE
+Caching disabled for task ':taglib:bundleLibCompileToJarDebug' because:
+  Simple merging task
+Skipping task ':taglib:bundleLibCompileToJarDebug' as it is up-to-date.
+work action resolve bundleLibRuntimeToDirDebug (project :taglib) (Thread[#1021,Execution worker Thread 9,5,main]) started.
+work action resolve classes.jar (project :taglib) (Thread[#1022,Execution worker Thread 10,5,main]) started.
+ClassesDirToClassesTransform (Thread[#1012,included builds,5,main]) started.
+Resolve mutations for :app:kspCoreDebugKotlin (Thread[#1022,Execution worker Thread 10,5,main]) started.
+AggregatedPackagesTransform (Thread[#1023,Execution worker Thread 11,5,main]) started.
+work action resolve classes.jar (project :taglib) (Thread[#1020,Execution worker Thread 8,5,main]) started.
+IdentityTransform (Thread[#1020,Execution worker Thread 8,5,main]) started.
+AggregatedPackagesTransform (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:app:kspCoreDebugKotlin (Thread[#1022,Execution worker Thread 10,5,main]) started.
+DexingNoClasspathTransform (Thread[#1012,included builds,5,main]) started.
+DexingNoClasspathTransform (Thread[#1020,Execution worker Thread 8,5,main]) started.
+
+> Transform bundleLibRuntimeToDirDebug (project :taglib) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: D:\Projects\MUZI\taglib\build\intermediates\runtime_library_classes_dir\debug\bundleLibRuntimeToDirDebug is d3f4258d11bb018c6b0d1f7c9a25472a
+Skipping DexingNoClasspathTransform: D:\Projects\MUZI\taglib\build\intermediates\runtime_library_classes_dir\debug\bundleLibRuntimeToDirDebug as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1012,included builds,5,main]) started.
+
+> Transform classes.jar (project :taglib) with DexingNoClasspathTransform
+Build cache key for DexingNoClasspathTransform: D:\Projects\MUZI\taglib\build\intermediates\runtime_library_classes_jar\debug\bundleLibRuntimeToJarDebug\classes.jar is c00175e022aae44dd40c28317bcc8eaa
+Skipping DexingNoClasspathTransform: D:\Projects\MUZI\taglib\build\intermediates\runtime_library_classes_jar\debug\bundleLibRuntimeToJarDebug\classes.jar as it is up-to-date.
+DexingOutputSplitTransform (Thread[#1020,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :app:mergeLibDexCoreDebug (Thread[#1012,included builds,5,main]) started.
+:app:mergeLibDexCoreDebug (Thread[#1012,included builds,5,main]) started.
+
+> Task :app:mergeLibDexCoreDebug UP-TO-DATE
+Build cache key for task ':app:mergeLibDexCoreDebug' is b3ce4e8d04f3c573a3b491e825f00c55
+Skipping task ':app:mergeLibDexCoreDebug' as it is up-to-date.
+
+> Task :app:kspCoreDebugKotlin UP-TO-DATE
+Build cache key for task ':app:kspCoreDebugKotlin' is 2f5cf5822b76c5702945a3bb1f804f88
+Skipping task ':app:kspCoreDebugKotlin' as it is up-to-date.
+
+> Task :taglib:configureCMakeDebug[arm64-v8a]
+Caching disabled for task ':taglib:configureCMakeDebug[arm64-v8a]' because:
+  Caching has been disabled for the task
+Task ':taglib:configureCMakeDebug[arm64-v8a]' is not up-to-date because:
+  Task.upToDateWhen is false.
+C/C++: D:\Projects\MUZI\taglib\src\main\cpp\CMakeLists.txt debug|arm64-v8a : Start JSON generation. Platform version: 23 min SDK version: arm64-v8a
+C/C++: D:\Projects\MUZI\taglib\src\main\cpp\CMakeLists.txt debug|arm64-v8a : JSON 'D:\Projects\MUZI\taglib\.cxx\Debug\6z67462p\arm64-v8a\android_gradle_build.json' was up-to-date
+C/C++: D:\Projects\MUZI\taglib\src\main\cpp\CMakeLists.txt debug|arm64-v8a : JSON generation completed without problems
+C/C++: D:\Projects\MUZI\taglib\src\main\cpp\CMakeLists.txt debug|arm64-v8a : Writing build model to D:\Projects\MUZI\taglib\build\intermediates\cxx\Debug\6z67462p\logs\arm64-v8a\build_model.json
+Resolve mutations for :taglib:buildCMakeDebug[arm64-v8a] (Thread[#1013,Execution worker,5,main]) started.
+:taglib:buildCMakeDebug[arm64-v8a] (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :taglib:buildCMakeDebug[arm64-v8a]
+Caching disabled for task ':taglib:buildCMakeDebug[arm64-v8a]' because:
+  Caching has been disabled for the task
+Task ':taglib:buildCMakeDebug[arm64-v8a]' is not up-to-date because:
+  Task.upToDateWhen is false.
+C/C++: starting build
+C/C++: reading expected JSONs
+C/C++: done reading expected JSONs
+C/C++: executing build commands for targets that produce .so files or executables
+C/C++: evaluate miniconfig
+C/C++: evaluate library docs (arm64-v8a)
+C/C++: not building target docs because no targets are specified and library build output file is null
+C/C++: evaluate library uninstall (arm64-v8a)
+C/C++: not building target uninstall because no targets are specified and library build output file is null
+C/C++: evaluate library tag (arm64-v8a)
+C/C++: not building target library tag because static libraries are not build by default.
+C/C++: evaluate library taglib (arm64-v8a)
+C/C++: building target library taglib because no targets are specified.
+C/C++: about to build targets taglib
+C/C++: Build taglib
+C/C++: @echo off
+"D:\\Apps\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe" ^
+  -C ^
+  "D:\\Projects\\MUZI\\taglib\\.cxx\\Debug\\6z67462p\\arm64-v8a" ^
+  taglib
+
+Starting process 'command 'D:\Apps\Android\Sdk\cmake\3.22.1\bin\ninja.exe''. Working directory: D:\Projects\MUZI\taglib Command: D:\Apps\Android\Sdk\cmake\3.22.1\bin\ninja.exe -C D:\Projects\MUZI\taglib\.cxx\Debug\6z67462p\arm64-v8a taglib
+Successfully started process 'command 'D:\Apps\Android\Sdk\cmake\3.22.1\bin\ninja.exe''
+C/C++: Received process result: 0
+C/C++: check expected build outputs
+C/C++: build complete
+Resolve mutations for :taglib:mergeDebugNativeLibs (Thread[#1013,Execution worker,5,main]) started.
+:taglib:mergeDebugNativeLibs (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :taglib:mergeDebugNativeLibs UP-TO-DATE
+Caching disabled for task ':taglib:mergeDebugNativeLibs' because:
+  Caching has been disabled for the task
+Skipping task ':taglib:mergeDebugNativeLibs' as it is up-to-date.
+Resolve mutations for :taglib:copyDebugJniLibsProjectOnly (Thread[#1013,Execution worker,5,main]) started.
+:taglib:copyDebugJniLibsProjectOnly (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :taglib:copyDebugJniLibsProjectOnly UP-TO-DATE
+Caching disabled for task ':taglib:copyDebugJniLibsProjectOnly' because:
+  Caching has been disabled for the task
+Skipping task ':taglib:copyDebugJniLibsProjectOnly' as it is up-to-date.
+work action resolve jni (project :taglib) (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :app:mergeCoreDebugNativeLibs (Thread[#1013,Execution worker,5,main]) started.
+:app:mergeCoreDebugNativeLibs (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:mergeCoreDebugNativeLibs UP-TO-DATE
+Caching disabled for task ':app:mergeCoreDebugNativeLibs' because:
+  Caching has been disabled for the task
+Skipping task ':app:mergeCoreDebugNativeLibs' as it is up-to-date.
+Resolve mutations for :app:stripCoreDebugDebugSymbols (Thread[#1013,Execution worker,5,main]) started.
+:app:stripCoreDebugDebugSymbols (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:stripCoreDebugDebugSymbols UP-TO-DATE
+Caching disabled for task ':app:stripCoreDebugDebugSymbols' because:
+  Caching has been disabled for the task
+Skipping task ':app:stripCoreDebugDebugSymbols' as it is up-to-date.
+
+> Task :app:generateCoreDebugLocaleConfig UP-TO-DATE
+SDK initialized in 12104 ms
+[=========                              ] 25%                                   
+Build cache key for task ':app:generateCoreDebugLocaleConfig' is ddf70408330dd63449da7ac15cbc5830
+Skipping task ':app:generateCoreDebugLocaleConfig' as it is up-to-date.
+Resolve mutations for :app:packageCoreDebugResources (Thread[#1013,Execution worker,5,main]) started.
+Resolve mutations for :app:mergeCoreDebugResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:app:packageCoreDebugResources (Thread[#1013,Execution worker,5,main]) started.
+:app:mergeCoreDebugResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :app:packageCoreDebugResources UP-TO-DATE
+Build cache key for task ':app:packageCoreDebugResources' is 9bcc385e4463c0dde64dfa1e8e0ab1ec
+Skipping task ':app:packageCoreDebugResources' as it is up-to-date.
+Resolve mutations for :app:parseCoreDebugLocalResources (Thread[#1013,Execution worker,5,main]) started.
+:app:parseCoreDebugLocalResources (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:parseCoreDebugLocalResources UP-TO-DATE
+Build cache key for task ':app:parseCoreDebugLocalResources' is 5493cb01ee4efab03644ac3b5b14a164
+Skipping task ':app:parseCoreDebugLocalResources' as it is up-to-date.
+Resolve mutations for :app:generateCoreDebugRFile (Thread[#1013,Execution worker,5,main]) started.
+:app:generateCoreDebugRFile (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:mergeCoreDebugResources UP-TO-DATE
+Build cache key for task ':app:mergeCoreDebugResources' is a72482af38671bbe562504b4eece42c1
+Skipping task ':app:mergeCoreDebugResources' as it is up-to-date.
+Resolve mutations for :app:processCoreDebugResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+:app:processCoreDebugResources (Thread[#1016,Execution worker Thread 4,5,main]) started.
+
+> Task :app:generateCoreDebugRFile UP-TO-DATE
+Build cache key for task ':app:generateCoreDebugRFile' is 1a6c8e0028553d83825c56b1a5a62285
+Skipping task ':app:generateCoreDebugRFile' as it is up-to-date.
+Resolve mutations for :app:compileCoreDebugKotlin (Thread[#1013,Execution worker,5,main]) started.
+:app:compileCoreDebugKotlin (Thread[#1013,Execution worker,5,main]) started.
+
+> Task :app:processCoreDebugResources UP-TO-DATE
+Build cache key for task ':app:processCoreDebugResources' is e2eaae8d4178a75e359ced25cc81411e
+Skipping task ':app:processCoreDebugResources' as it is up-to-date.
+
+> Task :app:compileCoreDebugKotlin FAILED
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+Build cache key for task ':app:compileCoreDebugKotlin' is da255d0e92b12e35b048ddb438857cec
+Task ':app:compileCoreDebugKotlin' is not up-to-date because:
+  Input property 'sources' file D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\LoginScreen.kt has changed.
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\main\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\kotlin', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\core\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\debug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+file or directory 'D:\Projects\MUZI\app\src\coreDebug\java', not found
+Kotlin source files: D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\App.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\constants\Dimensions.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\constants\HistorySource.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\constants\MediaSessionConstants.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\constants\PreferenceKeys.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\constants\Settings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\constants\StatPeriod.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\constants\Vars.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\Converters.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\daos\AlbumsDao.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\daos\ArtistsDao.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\daos\PlaylistsDao.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\daos\QueueDao.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\daos\SongsDao.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\DatabaseDao.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\Album.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\AlbumArtistMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\AlbumEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\AlbumWithSongs.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\Artist.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\ArtistEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\Event.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\EventWithSong.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\FormatEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\GenreEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\LocalItem.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\LyricsEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\PlayCountEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\Playlist.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\PlaylistEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\PlaylistSong.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\PlaylistSongMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\PlaylistSongMapPreview.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\QueueEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\QueueSongMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\RecentActivityEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\RelatedSongMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\SearchHistory.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\Song.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\SongAlbumMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\SongArtistMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\SongEntity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\SongGenreMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\SortedSongAlbumMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\entities\SortedSongArtistMap.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\db\MusicDatabase.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\di\AppModule.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\ContextExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\CoroutineExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\FileExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\ListExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\MediaItemExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\PlayerExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\StringExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\extensions\UtilExt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\lyrics\KuGouLyricsProvider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\lyrics\LocalLyricsProvider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\lyrics\LrcLibLyricsProvider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\lyrics\LyricsHelper.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\lyrics\LyricsProvider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\lyrics\YouTubeLyricsProvider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\lyrics\YouTubeSubtitleLyricsProvider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\MainActivity.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\MainActivityUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\models\DirectoryTree.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\models\HybridCacheDataSinkFactory.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\models\ItemsPage.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\models\MediaMetadata.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\models\MultiQueueObject.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\models\SimilarRecommendation.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\models\SongTempData.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\downloadManager\DirectoryMangerOt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\downloadManager\DownloadManagerOt.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\DownloadUtil.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\ExoDownloadService.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\LifecycleCallbackList.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\MediaControllerViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\MediaLibrarySessionCallback.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\MusicService.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\PlayerConnection.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\QueueBoard.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\queues\EmptyQueue.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\queues\ListQueue.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\queues\Queue.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\queues\YouTubeAlbumRadio.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\queues\YouTubeQueue.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\playback\SleepTimer.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\AnchorDraggable.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\AsyncImageLocal.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\AutoResizeText.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\BigSeekBar.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\BottomSheet.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\button\IconButton.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\button\TextButton.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\ChipsRow.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\ColumnWithContentPadding.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\ContributorCard.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\EmptyPlaceholder.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\FloatingFooter.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\HideOnScrollFAB.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\items\AlbumItems.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\items\ArtistItems.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\items\Items.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\items\PlaylistItems.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\items\SongItems.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\Library.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\Lyrics.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\NavigationTile.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\NavigationTitle.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\PlayerSlider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\PlayingIndicator.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\Preference.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\ScrollBar.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\ScrollToTopManager.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\SearchBar.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\SelectHeader.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\SettingsClickToReveal.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\shimmer\ArtistPagePlaceholder.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\shimmer\ButtonPlaceholder.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\shimmer\GridItemPlaceholder.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\shimmer\ListItemPlaceholder.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\shimmer\ShimmerHost.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\shimmer\TextPlaceholder.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\component\SortHeader.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\dialog\AddToPlaylistDialog.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\dialog\ArtistDialog.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\dialog\CreatePlaylistDialog.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\dialog\Dialog.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\dialog\ImportM3uDialog.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\dialog\QueueDialogs.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\AlbumMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\ArtistMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\BottomSheetMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\Dropdown.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\FolderMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\GridMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\LyricsMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\PlayerMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\PlaylistMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\QueueMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\SelectionSongsMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\SongMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\YouTubeAlbumMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\YouTubeArtistMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\YouTubePlaylistMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\menu\YouTubeSongMenu.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\player\MiniPlayer.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\player\Player.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\player\Queue.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\player\Thumbnail.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\player\ThumbnailPlaybackError.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\AccountScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\AlbumScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\artist\ArtistAlbumsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\artist\ArtistItemsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\artist\ArtistScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\artist\ArtistSongsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\BrowseScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\HistoryScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\HomeScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\library\FolderScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\library\LibraryAlbumsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\library\LibraryArtistsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\library\LibraryFolderScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\library\LibraryPlaylistsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\library\LibraryScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\library\LibrarySongsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\LoginScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\MoodAndGenresScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\PlayerScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\playlist\AutoPlaylistScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\playlist\LocalPlaylistScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\playlist\OnlinePlaylistScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\Screens.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\search\LocalSearchScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\search\OnlineSearchResult.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\search\OnlineSearchScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\search\SearchScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\AboutScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\AccountSyncSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\AppearanceSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\AttributionScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\BackupAndRestore.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\ExperimentalSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\AccountFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\AppearanceFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\InterfaceFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\LibraryFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\LocalMediaSettingsFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\LyricFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\PlayerFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\StorageFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\SyncFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\fragments\ThemeFrag.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\InterfaceSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\LibrariesScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\LibrarySettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\LocalPlayerSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\LyricsSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\PlayerSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\SettingsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\settings\StorageSettings.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\SetupWizard.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\StatsScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\WelcomeScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\screens\YouTubeBrowseScreen.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\theme\Theme.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\AppBar.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\FadingEdge.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\LazyGridSnapLayoutInfoProvider.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\LocalMediaUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\NavControllerUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\ScrollUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\ShapeUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\StringUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\ui\utils\YouTubeUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\ActivityLaunchHelper.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\CoilBitmapLoader.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\ComposeDebugUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\DataStore.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\dud\ffdecoderDud.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\dud\FFmpegScannerDud.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\NetworkConnectivityObserver.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\potoken\JavaScriptUtil.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\potoken\PoTokenException.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\potoken\PoTokenGenerator.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\potoken\PoTokenResult.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\potoken\PoTokenWebView.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\scanners\LocalMediaScanner.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\scanners\MediaStoreExtractor.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\scanners\MetadataScanner.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\scanners\TagLibScanner.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\scanners\UriFileUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\StringUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\SyncUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\Utils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\utils\YTPlayerUtils.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\AccountViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\AlbumViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\ArtistAlbumsViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\ArtistItemsViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\ArtistViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\AutoPlaylistViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\BackupRestoreViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\BrowseViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\HistoryViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\HomeViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\LibraryViewModels.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\LocalPlaylistViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\LocalSearchViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\LyricsMenuViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\MoodAndGenresViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\OnlinePlaylistViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\OnlineSearchSuggestionViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\OnlineSearchViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\StatsViewModel.kt, D:\Projects\MUZI\app\src\main\java\com\kannantech\muzi\viewmodels\YouTubeBrowseViewModel.kt, D:\Projects\MUZI\app\src\main\java\org\akanework\gramophone\logic\GramophoneExtensions.kt, D:\Projects\MUZI\app\src\main\java\org\akanework\gramophone\logic\utils\LrcUtils.kt, D:\Projects\MUZI\app\src\main\java\org\akanework\gramophone\logic\utils\SemanticLyrics.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\DatabaseDao_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_10_11_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_11_12_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_12_13_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_13_14_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_17_18_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_18_19_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_19_20_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_2_3_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_3_4_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_4_5_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_5_6_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_6_7_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_7_8_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_8_9_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_AutoMigration_9_10_Impl.kt, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\kotlin\com\kannantech\muzi\db\InternalDatabase_Impl.kt
+Java source files: D:\Projects\MUZI\app\src\main\java\androidx\documentfile\provider\DocumentsContractApi19Ot.java, D:\Projects\MUZI\app\src\main\java\androidx\documentfile\provider\TreeDocumentFileOt.java, D:\Projects\MUZI\app\build\generated\source\buildConfig\core\debug\com\kannantech\muzi\BuildConfig.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\App_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\di\AppModule_ProvideDatabaseFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\di\AppModule_ProvideDatabaseProviderFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\di\AppModule_ProvideDownloadCacheFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\di\AppModule_ProvidePlayerCacheFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\Hilt_MainActivity.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\lyrics\LyricsHelper_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\MainActivity_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\MainActivity_MembersInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\DownloadUtil_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\ExoDownloadService_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\ExoDownloadService_MembersInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\Hilt_ExoDownloadService.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\Hilt_MusicService.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\MediaLibrarySessionCallback_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\MusicService_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\playback\MusicService_MembersInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\utils\CoilBitmapLoader_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\utils\SyncUtils_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AccountViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AccountViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AccountViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AccountViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AccountViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AlbumViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AlbumViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AlbumViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AlbumViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AlbumViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistAlbumsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistAlbumsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistAlbumsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistAlbumsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistAlbumsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistItemsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistItemsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistItemsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistItemsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistItemsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistSongsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistSongsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistSongsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistSongsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistSongsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\ArtistViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AutoPlaylistViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AutoPlaylistViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AutoPlaylistViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AutoPlaylistViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\AutoPlaylistViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BackupRestoreViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BackupRestoreViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BackupRestoreViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BackupRestoreViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BackupRestoreViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BrowseViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BrowseViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BrowseViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BrowseViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\BrowseViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HistoryViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HistoryViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HistoryViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HistoryViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HistoryViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HomeViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HomeViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HomeViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HomeViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\HomeViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryAlbumsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryAlbumsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryAlbumsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryAlbumsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryAlbumsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryArtistsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryArtistsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryArtistsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryArtistsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryArtistsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryFoldersViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryFoldersViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryFoldersViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryFoldersViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryFoldersViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryPlaylistsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryPlaylistsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryPlaylistsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryPlaylistsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryPlaylistsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibrarySongsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibrarySongsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibrarySongsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibrarySongsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibrarySongsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LibraryViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalPlaylistViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalPlaylistViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalPlaylistViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalPlaylistViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalPlaylistViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalSearchViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalSearchViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalSearchViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalSearchViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LocalSearchViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LyricsMenuViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LyricsMenuViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LyricsMenuViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LyricsMenuViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\LyricsMenuViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\MoodAndGenresViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\MoodAndGenresViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\MoodAndGenresViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\MoodAndGenresViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\MoodAndGenresViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlinePlaylistViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlinePlaylistViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlinePlaylistViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlinePlaylistViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlinePlaylistViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchSuggestionViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchSuggestionViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchSuggestionViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchSuggestionViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchSuggestionViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\OnlineSearchViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\StatsViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\StatsViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\StatsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\StatsViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\StatsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\YouTubeBrowseViewModel_Factory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\YouTubeBrowseViewModel_HiltModules.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\YouTubeBrowseViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\YouTubeBrowseViewModel_HiltModules_KeyModule_ProvideFactory.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\com\kannantech\muzi\viewmodels\YouTubeBrowseViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\dagger\hilt\internal\aggregatedroot\codegen\_com_kannantech_muzi_App.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_App_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_di_AppModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_MainActivity_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_playback_ExoDownloadService_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_playback_MusicService_GeneratedInjector.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_AccountViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_AccountViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_AlbumViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_AlbumViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistAlbumsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistAlbumsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistItemsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistItemsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistSongsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistSongsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_ArtistViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_AutoPlaylistViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_AutoPlaylistViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_BackupRestoreViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_BackupRestoreViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_BrowseViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_BrowseViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_HistoryViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_HistoryViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_HomeViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_HomeViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryAlbumsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryAlbumsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryArtistsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryArtistsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryFoldersViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryFoldersViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryPlaylistsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryPlaylistsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibrarySongsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibrarySongsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LibraryViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LocalPlaylistViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LocalPlaylistViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LocalSearchViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LocalSearchViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LyricsMenuViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_LyricsMenuViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_MoodAndGenresViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_MoodAndGenresViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_OnlinePlaylistViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_OnlinePlaylistViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_OnlineSearchSuggestionViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_OnlineSearchSuggestionViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_OnlineSearchViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_OnlineSearchViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_StatsViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_StatsViewModel_HiltModules_KeyModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_YouTubeBrowseViewModel_HiltModules_BindsModule.java, D:\Projects\MUZI\app\build\generated\ksp\coreDebug\java\hilt_aggregated_deps\_com_kannantech_muzi_viewmodels_YouTubeBrowseViewModel_HiltModules_KeyModule.java
+Script source files: 
+Script file extensions: 
+Using Kotlin/JVM incremental compilation
+[KOTLIN] Kotlin compilation 'jdkHome' argument: D:\Apps\jdk-21lts
+i: Options for KOTLIN DAEMON: IncrementalCompilationOptions(super=CompilationOptions(compilerMode=INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=[], generateCompilerRefIndex=false), sourceChanges=org.jetbrains.kotlin.buildtools.api.SourcesChanges$Known@23401420, classpathChanges=NoChanges, workingDir=D:\Projects\MUZI\app\build\kotlin\compileCoreDebugKotlin\cacheable, multiModuleICSettings=null, icFeatures=IncrementalCompilationFeatures(usePreciseJavaTracking=true, withAbiSnapshot=false, preciseCompilationResultsBackup=true, keepIncrementalCompilationCachesInMemory=true, enableUnsafeIncrementalCompilationForMultiplatform=false, enableMonotonousIncrementalCompileSetExpansion=true), outputFiles=[D:\Projects\MUZI\app\build\intermediates\built_in_kotlinc\coreDebug\compileCoreDebugKotlin\classes, D:\Projects\MUZI\app\build\kotlin\compileCoreDebugKotlin\cacheable, D:\Projects\MUZI\app\build\kotlin\compileCoreDebugKotlin\local-state])
+e: file:///D:/Projects/MUZI/app/src/main/java/com/kannantech/muzi/ui/screens/LoginScreen.kt:58:82 Null cannot be a value of a non-null type 'String'.
+i: Finished executing kotlin compiler using DAEMON strategy
+Build 3add8df0-7af7-4960-8030-6e23110ce8fd is closed
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileCoreDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.btapi.BuildToolsApiCompilationWork
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 24s
+65 actionable tasks: 3 executed, 62 up-to-date
+Watched directory hierarchies: [D:\Projects\MUZI]
+Configuration cache entry reused.
