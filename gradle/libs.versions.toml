@@ -14,6 +14,7 @@ room = "2.8.4"
 hilt = "2.59.2"
 ktor = "3.4.1"
 ksp = "2.3.6"
+splashscreen = "1.0.1"
 
 [libraries]
 annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
@@ -77,6 +78,7 @@ ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlin
 # misc
 aboutlibraries-compose-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 brotli = { group = "org.brotli", name = "dec", version = "0.1.2" }
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version = "2.1.5" }
 

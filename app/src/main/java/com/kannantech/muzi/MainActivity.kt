@@ -98,6 +98,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.view.View
+import android.view.animation.AnticipateInterpolator
+import androidx.core.animation.doOnEnd
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavType
@@ -242,6 +248,29 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedBoxWithConstraintsScope")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+        splashScreen.setOnExitAnimationListener { splashScreenView ->
+            val iconView = try {
+                splashScreenView.iconView
+            } catch (e: Exception) {
+                null
+            }
+            if (iconView != null) {
+                val scaleX = ObjectAnimator.ofFloat(iconView, View.SCALE_X, 1f, 1.3f)
+                val scaleY = ObjectAnimator.ofFloat(iconView, View.SCALE_Y, 1f, 1.3f)
+                val alpha = ObjectAnimator.ofFloat(splashScreenView.view, View.ALPHA, 1f, 0f)
+
+                AnimatorSet().apply {
+                    interpolator = AnticipateInterpolator()
+                    duration = 400L
+                    playTogether(scaleX, scaleY, alpha)
+                    doOnEnd { splashScreenView.remove() }
+                    start()
+                }
+            } else {
+                splashScreenView.remove()
+            }
+        }
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(controllerViewModel)
         controllerViewModel.addControllerCallback(lifecycle) { controller, _ ->
