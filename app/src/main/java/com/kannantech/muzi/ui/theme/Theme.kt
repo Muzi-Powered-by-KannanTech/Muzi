@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2024 z-huang/InnerTune
- * Copyright (C) 2025 O﻿ute﻿rTu﻿ne Project
+ * Copyright (C) 2025 O&zwnj;u&zwnj;t&zwnj;e&zwnj;r&zwnj;T&zwnj;u&zwnj;n&zwnj;e Project
  *
  * SPDX-License-Identifier: GPL-3.0
  *
@@ -9,120 +9,106 @@
 package com.kannantech.muzi.ui.theme
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.SaverScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
-import androidx.compose.ui.graphics.toArgb
-import androidx.palette.graphics.Palette
-import coil3.imageLoader
-import coil3.request.ImageRequest
-import coil3.request.allowHardware
-import coil3.toBitmap
-import coil3.toUri
 import com.kannantech.muzi.playback.PlayerConnection
-import com.kannantech.muzi.utils.LocalArtworkPath
-import com.kannantech.muzi.utils.coilCoroutine
-import com.google.material.color.dynamiccolor.DynamicScheme
-import com.google.material.color.hct.Hct
-import com.google.material.color.scheme.SchemeTonalSpot
-import com.google.material.color.score.Score
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
-// TODO: support for custom accent
-val DefaultThemeColor = Color(0xFFED5564)
+private val LightPremiumColors = lightColorScheme(
+    primary = Color(0xFF4F46E5),        // Deep rich Indigo
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFFE0E7FF), // Soft Indigo card
+    onPrimaryContainer = Color(0xFF312E81), // Dark Indigo text
+    secondary = Color(0xFF059669),      // Emerald Emerald secondary
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFFD1FAE5),
+    onSecondaryContainer = Color(0xFF064E3B),
+    tertiary = Color(0xFFE11D48),       // Rose Red
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFFFFE4E6),
+    onTertiaryContainer = Color(0xFF881337),
+    background = Color(0xFFF9FAFB),     // Off-White background
+    onBackground = Color(0xFF111827),   // Deep Slate Black text
+    surface = Color(0xFFFFFFFF),        // White card background
+    onSurface = Color(0xFF111827),
+    surfaceVariant = Color(0xFFF3F4F6), // Frost Gray elevated background
+    onSurfaceVariant = Color(0xFF4B5563), // Medium gray for secondary text
+    outline = Color(0xFFD1D5DB),        // Light gray border
+    inverseOnSurface = Color(0xFFFFFFFF),
+    inverseSurface = Color(0xFF1F2937),
+    inversePrimary = Color(0xFFA5B4FC),
+    error = Color(0xFFDC2626),
+    onError = Color(0xFFFFFFFF),
+    errorContainer = Color(0xFFFEE2E2),
+    onErrorContainer = Color(0xFF991B1B),
+    surfaceTint = Color(0xFF4F46E5),
+)
+
+private val DarkPremiumColors = darkColorScheme(
+    primary = Color(0xFF6366F1),        // Electric Indigo 
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFF3730A3), // Deep Indigo
+    onPrimaryContainer = Color(0xFFE0E7FF), // Light Indigo Text
+    secondary = Color(0xFF10B981),      // Emerald Green
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFF065F46),
+    onSecondaryContainer = Color(0xFFD1FAE5),
+    tertiary = Color(0xFFF43F5E),       // Rose Red
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFF9F1239),
+    onTertiaryContainer = Color(0xFFFFE4E6),
+    background = Color(0xFF000000),     // Deep AMOLED Black base
+    onBackground = Color(0xFFF9FAFB),   // Crisp off-white text
+    surface = Color(0xFF0A0A0A),        // Obsidian slightly raised from black
+    onSurface = Color(0xFFF9FAFB),
+    surfaceVariant = Color(0xFF171717), // Charcoal elevated card background
+    onSurfaceVariant = Color(0xFFD1D5DB), // Soft gray for secondary text/icons
+    outline = Color(0xFF3F3F46),        // Subtle dark gray border
+    inverseOnSurface = Color(0xFF000000),
+    inverseSurface = Color(0xFFF3F4F6),
+    inversePrimary = Color(0xFF4338CA),
+    error = Color(0xFFEF4444),
+    onError = Color(0xFF000000),
+    errorContainer = Color(0xFF7F1D1D),
+    onErrorContainer = Color(0xFFFECACA),
+    surfaceTint = Color(0xFF6366F1),
+)
 
 @Composable
 fun MUZITheme(
     context: Context,
-    playerConnection: PlayerConnection?,
-    enableDynamicTheme: Boolean,
+    playerConnection: PlayerConnection?, // Kept for interface compatibility
+    enableDynamicTheme: Boolean,         // Kept for interface compatibility
     isSystemInDarkTheme: Boolean,
     darkTheme: Boolean = isSystemInDarkTheme(),
     pureBlack: Boolean = false,
     highContrastCompat: Boolean,
     content: @Composable () -> Unit,
 ) {
-    val coroutineScope = rememberCoroutineScope()
+    val colorScheme = remember(darkTheme, pureBlack, highContrastCompat) {
+        val baseScheme = if (darkTheme) DarkPremiumColors else LightPremiumColors
 
-    var themeColor by rememberSaveable(stateSaver = ColorSaver) {
-        mutableStateOf(DefaultThemeColor)
-    }
-
-    LaunchedEffect(playerConnection, enableDynamicTheme, isSystemInDarkTheme) {
-        val playerConnection = playerConnection
-        if (!enableDynamicTheme || playerConnection == null) {
-            themeColor = DefaultThemeColor
-            return@LaunchedEffect
-        }
-                playerConnection.service.currentMediaMetadata.collectLatest { song ->
-                    coroutineScope.launch(coilCoroutine) {
-                        var ret = DefaultThemeColor
-                        if (song != null) {
-                            val uri = (if (song.isLocal) song.localPath else song.thumbnailUrl)?.toUri()
-                            if (uri != null) {
-                                val model = if (uri.toString().startsWith("/storage/")) {
-                                    LocalArtworkPath(uri.toString(), 100, 100)
-                                } else {
-                                    uri
-                                }
-
-                                val result = context.imageLoader.execute(
-                                    ImageRequest.Builder(context)
-                                        .data(model)
-                                        .allowHardware(false)
-                                        .build()
-                                )
-
-                                ret = result.image?.toBitmap()?.extractThemeColor() ?: DefaultThemeColor
-                            }
-                        }
-                        themeColor = ret
-                    }
-                }
-    }
-
-
-    val colorScheme = remember(darkTheme, pureBlack, themeColor) {
-       if (themeColor == DefaultThemeColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val systemTheme = if (darkTheme) {
-                dynamicDarkColorScheme(context).pureBlack(pureBlack)
-            } else {
-                dynamicLightColorScheme(context)
-            }
-
-
-            // when high contrast mode Android collapses all accent colours into (more or less) one shade. We use
-            // secondaryContainer and onSecondaryContainer weirdly in several places in terms of theming so just replace
-            // those with shades that make sense
-            if (highContrastCompat) {
-                systemTheme.copy(
-                    secondaryContainer = systemTheme.surfaceContainerHigh,
-                    onSecondaryContainer = systemTheme.secondary,
-                )
-            } else {
-                systemTheme
-            }
+        val highContrastAdjusted = if (highContrastCompat) {
+            baseScheme.copy(
+                secondaryContainer = baseScheme.surface,
+                onSecondaryContainer = baseScheme.secondary,
+            )
         } else {
-            SchemeTonalSpot(Hct.fromInt(themeColor.toArgb()), darkTheme, 0.0)
-                .toColorScheme()
-                .pureBlack(darkTheme && pureBlack)
+            baseScheme
+        }
+
+        if (darkTheme && pureBlack) {
+            highContrastAdjusted.copy(
+                surface = Color.Black,
+                background = Color.Black
+            )
+        } else {
+            highContrastAdjusted
         }
     }
 
@@ -133,90 +119,8 @@ fun MUZITheme(
     )
 }
 
-fun Bitmap.extractThemeColor(): Color {
-    val colorsToPopulation = Palette.from(this)
-        .maximumColorCount(8)
-        .generate()
-        .swatches
-        .associate { it.rgb to it.population }
-    val rankedColors = Score.score(colorsToPopulation)
-    return Color(rankedColors.first())
-}
-
-fun Bitmap.extractGradientColors(): List<Color> {
-    val extractedColors = Palette.from(this)
-        .maximumColorCount(16)
-        .generate()
-        .swatches
-        .associate { it.rgb to it.population }
-
-    val orderedColors = Score.score(extractedColors, 2, 0xff4285f4.toInt(), true)
-        .sortedByDescending { Color(it).luminance() }
-
-    return if (orderedColors.size >= 2)
-        listOf(Color(orderedColors[0]), Color(orderedColors[1]))
-    else
-        listOf(Color(0xFF595959), Color(0xFF0D0D0D))
-}
-
-fun DynamicScheme.toColorScheme() = ColorScheme(
-    primary = Color(primary),
-    onPrimary = Color(onPrimary),
-    primaryContainer = Color(primaryContainer),
-    onPrimaryContainer = Color(onPrimaryContainer),
-    inversePrimary = Color(inversePrimary),
-    secondary = Color(secondary),
-    onSecondary = Color(onSecondary),
-    secondaryContainer = Color(secondaryContainer),
-    onSecondaryContainer = Color(onSecondaryContainer),
-    tertiary = Color(tertiary),
-    onTertiary = Color(onTertiary),
-    tertiaryContainer = Color(tertiaryContainer),
-    onTertiaryContainer = Color(onTertiaryContainer),
-    background = Color(background),
-    onBackground = Color(onBackground),
-    surface = Color(surface),
-    onSurface = Color(onSurface),
-    surfaceVariant = Color(surfaceVariant),
-    onSurfaceVariant = Color(onSurfaceVariant),
-    surfaceTint = Color(primary),
-    inverseSurface = Color(inverseSurface),
-    inverseOnSurface = Color(inverseOnSurface),
-    error = Color(error),
-    onError = Color(onError),
-    errorContainer = Color(errorContainer),
-    onErrorContainer = Color(onErrorContainer),
-    outline = Color(outline),
-    outlineVariant = Color(outlineVariant),
-    scrim = Color(scrim),
-    surfaceBright = Color(surfaceBright),
-    surfaceDim = Color(surfaceDim),
-    surfaceContainer = Color(surfaceContainer),
-    surfaceContainerHigh = Color(surfaceContainerHigh),
-    surfaceContainerHighest = Color(surfaceContainerHighest),
-    surfaceContainerLow = Color(surfaceContainerLow),
-    surfaceContainerLowest = Color(surfaceContainerLowest),
-    primaryFixed = Color(primaryFixed),
-    primaryFixedDim = Color(primaryFixedDim),
-    onPrimaryFixed = Color(onPrimaryFixed),
-    onPrimaryFixedVariant = Color(onPrimaryFixedVariant),
-    secondaryFixed = Color(secondaryFixed),
-    secondaryFixedDim = Color(secondaryFixedDim),
-    onSecondaryFixed = Color(onSecondaryFixed),
-    onSecondaryFixedVariant = Color(onSecondaryFixedVariant),
-    tertiaryFixed = Color(tertiaryFixed),
-    tertiaryFixedDim = Color(tertiaryFixedDim),
-    onTertiaryFixed = Color(onTertiaryFixed),
-    onTertiaryFixedVariant = Color(onTertiaryFixedVariant),
-)
-
 fun ColorScheme.pureBlack(apply: Boolean) =
     if (apply) copy(
         surface = Color.Black,
         background = Color.Black
     ) else this
-
-val ColorSaver = object : Saver<Color, Int> {
-    override fun restore(value: Int): Color = Color(value)
-    override fun SaverScope.save(value: Color): Int = value.toArgb()
-}
