@@ -144,7 +144,6 @@ import com.kannantech.muzi.ui.component.collapsedAnchor
 import com.kannantech.muzi.ui.component.dismissedAnchor
 import com.kannantech.muzi.ui.component.rememberBottomSheetState
 import com.kannantech.muzi.ui.menu.PlayerMenu
-import com.kannantech.muzi.ui.theme.extractGradientColors
 import com.kannantech.muzi.ui.utils.SnapLayoutInfoProvider
 import com.kannantech.muzi.utils.coilCoroutine
 import com.kannantech.muzi.utils.makeTimeString
@@ -1035,21 +1034,13 @@ fun PlayerBackground(
 
 
         // gradient colours
-        LaunchedEffect(mediaMetadata, playerBackground) {
+        LaunchedEffect(mediaMetadata, playerBackground, useDarkTheme) {
             if (playerBackground != PlayerBackgroundStyle.GRADIENT || context.isPowerSaver()) return@LaunchedEffect
 
-            withContext(coilCoroutine) {
-                val result = context.imageLoader.execute(
-                    ImageRequest.Builder(context)
-                        .data(mediaMetadata?.getThumbnailModel(100, 100))
-                        .allowHardware(false)
-                        .build()
-                )
-
-                val bitmap = result.image?.toBitmap()?.extractGradientColors()
-                bitmap?.let {
-                    gradientColors = it
-                }
+            gradientColors = if (useDarkTheme) {
+                listOf(Color(0xFF1E1B4B), Color(0xFF000000)) // Deep Indigo to Pure Black
+            } else {
+                listOf(Color(0xFFE0E7FF), Color(0xFFFFFFFF)) // Soft Indigo to Pure White
             }
         }
 
