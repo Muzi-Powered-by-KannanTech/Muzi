@@ -28,6 +28,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -81,6 +82,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -401,8 +403,11 @@ class MainActivity : ComponentActivity() {
                     Log.v(MAIN_TAG, "RC-2.2")
 
                     fun getNavPadding(): Dp {
-                        return if (!useNavRail) (if (slimNav) 52.dp else 68.dp) else MinMiniPlayerHeight
+                        // The space reserved for the navigation bar layout including margins.
+                        return if (!useNavRail) NavigationBarHeight else MinMiniPlayerHeight
                     }
+                    val navBarPillHeight = if (!useNavRail) (if (slimNav) 52.dp else 68.dp) else 0.dp
+                    val navMargin = if (!useNavRail) (NavigationBarHeight - navBarPillHeight) / 2 else 0.dp
 
                     val playerBottomSheetState = rememberBottomSheetState(
                         dismissedBound = 0.dp,
@@ -788,7 +793,6 @@ class MainActivity : ComponentActivity() {
                                 NavigationBar(
                                     modifier = Modifier
                                         .align(Alignment.BottomCenter)
-                                        .height(bottomInset + getNavPadding())
                                         .offset {
                                             if (navigationBarHeight == 0.dp) {
                                                 IntOffset(
@@ -808,16 +812,26 @@ class MainActivity : ComponentActivity() {
                                                     y = (slideOffset + hideOffset).roundToPx()
                                                 )
                                             }
-                                        },
-                                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp)
+                                        }
+                                        .padding(start = 24.dp, end = 24.dp, bottom = bottomInset + navMargin)
+                                        .height(navBarPillHeight)
+                                        .border(
+                                            width = 1.dp,
+                                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
+                                            shape = androidx.compose.foundation.shape.RoundedCornerShape(32.dp)
+                                        )
+                                        .clip(androidx.compose.foundation.shape.RoundedCornerShape(32.dp)),
+                                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                                    tonalElevation = 0.dp
                                 ) {
                                     navigationItems.fastForEach { screen ->
                                         // TODO: display selection when based on root page user entered
 //                                        val isSelected = navBackStackEntry?.destination?.hierarchy?.any {
 //                                            it.route?.substringBefore("?")?.substringBefore("/") == screen.route
 //                                        } == true
+                                        val isSelected = navBackStackEntry?.destination?.hierarchy?.any { it.route == screen.route } == true
                                         NavigationBarItem(
-                                            selected = navBackStackEntry?.destination?.hierarchy?.any { it.route == screen.route } == true,
+                                            selected = isSelected,
                                             icon = {
                                                 Icon(
                                                     screen.icon,
@@ -833,6 +847,12 @@ class MainActivity : ComponentActivity() {
                                                     )
                                                 }
                                             },
+                                            alwaysShowLabel = false,
+                                            colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
+                                                indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+                                                selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                                                selectedTextColor = MaterialTheme.colorScheme.primary
+                                            ),
                                             onClick = {
                                                 if (playerBottomSheetState.isExpanded) {
                                                     playerBottomSheetState.collapseSoft()
