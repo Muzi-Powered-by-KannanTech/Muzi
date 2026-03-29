@@ -5,6 +5,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GRADLE_USER_HOME: ${{ github.workspace }}/.gradle-user-home
+      ANDROID_USER_HOME: ${{ github.workspace }}/.android-user-home
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,13 +40,13 @@ jobs:
           echo "date_tag=$DATE_TAG" >> $GITHUB_ENV
 
       - name: Build core userdebug APK
-        run: ./gradlew assembleCoreUserdebug
+        run: ./gradlew assembleCoreUserdebug --stacktrace --console=plain -DskipFormatKtlint
 
       - name: Resolve ffmpeg libs
         run: git clone https://github.com/mikooomich/ffmpeg-android-maker-prebuilt/ -b audio ffMetadataEx/ffmpeg-android-maker
 
       - name: Build full userdebug APK
-        run: ./gradlew assembleFullUserdebug
+        run: ./gradlew assembleFullUserdebug --stacktrace --console=plain -DskipFormatKtlint
 
       - name: Create github userdebug draft
         uses: softprops/action-gh-release@v2
