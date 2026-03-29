@@ -20,15 +20,22 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -41,6 +48,7 @@ import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
@@ -84,6 +92,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -101,6 +110,7 @@ import androidx.compose.ui.util.fastForEach
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.datastore.preferences.core.edit
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
@@ -108,6 +118,7 @@ import android.view.animation.AnticipateInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -124,6 +135,7 @@ import com.kannantech.muzi.constants.DefaultOpenTabKey
 import com.kannantech.muzi.constants.DynamicThemeKey
 import com.kannantech.muzi.constants.EnabledTabsKey
 import com.kannantech.muzi.constants.HighContrastKey
+import com.kannantech.muzi.constants.InnerTubeCookieKey
 import com.kannantech.muzi.constants.LibraryFilterKey
 import com.kannantech.muzi.constants.MinMiniPlayerHeight
 import com.kannantech.muzi.constants.MiniPlayerHeight
@@ -149,6 +161,7 @@ import com.kannantech.muzi.ui.screens.AlbumScreen
 import com.kannantech.muzi.ui.screens.BrowseScreen
 import com.kannantech.muzi.ui.screens.HistoryScreen
 import com.kannantech.muzi.ui.screens.HomeScreen
+import com.kannantech.muzi.ui.screens.MoreScreen
 import com.kannantech.muzi.ui.screens.LoginScreen
 import com.kannantech.muzi.ui.screens.MoodAndGenresScreen
 import com.kannantech.muzi.ui.screens.PlayerScreen
@@ -192,12 +205,15 @@ import com.kannantech.muzi.ui.utils.appBarScrollBehavior
 import com.kannantech.muzi.utils.ActivityLauncherHelper
 import com.kannantech.muzi.utils.NetworkConnectivityObserver
 import com.kannantech.muzi.utils.SyncUtils
+import com.kannantech.muzi.utils.dataStore
 import com.kannantech.muzi.utils.lmScannerCoroutine
 import com.kannantech.muzi.utils.rememberEnumPreference
 import com.kannantech.muzi.utils.rememberPreference
 import com.valentinilk.shimmer.LocalShimmerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -253,7 +269,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         var isAppReady = false
-        window.decorView.postDelayed({ isAppReady = true }, 400)
+        window.decorView.postDelayed({ isAppReady = true }, 150)
         splashScreen.setKeepOnScreenCondition { !isAppReady }
 
         splashScreen.setOnExitAnimationListener { splashScreenView ->
@@ -271,7 +287,7 @@ class MainActivity : ComponentActivity() {
 
                 AnimatorSet().apply {
                     interpolator = android.view.animation.AccelerateInterpolator()
-                    duration = 500L
+                    duration = 220L
                     playTogether(scaleX, scaleY, alphaIcon, alphaView)
                     doOnEnd { splashScreenView.remove() }
                     start()
@@ -281,28 +297,20 @@ class MainActivity : ComponentActivity() {
             }
         }
         super.onCreate(savedInstanceState)
-        lifecycle.addObserver(controllerViewModel)
-        controllerViewModel.addControllerCallback(lifecycle) { controller, _ ->
-            playerConnection = PlayerConnection(controllerViewModel, database)
-        }
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         activityLauncher = ActivityLauncherHelper(this)
+        connectivityObserver = NetworkConnectivityObserver(this)
 
         setContent {
-            Log.v(MAIN_TAG, "RC-1")
+            val context = this@MainActivity
             val coroutineScope = rememberCoroutineScope()
             val haptic = LocalHapticFeedback.current
             val snackbarHostState = remember { SnackbarHostState() }
 
-            val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
-            val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
             val highContrastCompat by rememberPreference(HighContrastKey, defaultValue = false)
-            val pureBlack by rememberPreference(PureBlackKey, defaultValue = false)
-            val isSystemInDarkTheme = isSystemInDarkTheme()
-            val useDarkTheme = remember(darkTheme, isSystemInDarkTheme) {
-                if (darkTheme == DarkMode.AUTO) isSystemInDarkTheme else darkTheme == DarkMode.ON
-            }
+            val useDarkTheme = true // Hardcoded Obsidian Noir Permanent Dark
+            val isSystemInDarkTheme = true
 
             val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
             val tabMode = this@MainActivity.tabMode()
@@ -313,13 +321,20 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-
-            val (oobeStatus) = rememberPreference(OobeStatusKey, defaultValue = 0)
+            val onboardingState by remember(context) {
+                context.dataStore.data
+                    .map { preferences -> preferences[OobeStatusKey] to preferences[InnerTubeCookieKey] }
+                    .distinctUntilChanged()
+            }.collectAsState(initial = null)
+            val storedOobeStatus = onboardingState?.first
+            val storedInnerTubeCookie = onboardingState?.second
+            val hasCompletedOobe = storedOobeStatus?.let { it >= OOBE_VERSION }
+                ?: !storedInnerTubeCookie.isNullOrBlank()
 
             var filter by rememberEnumPreference(LibraryFilterKey, Screens.LibraryFilter.ALL)
             val (slimNav) = rememberPreference(SlimNavBarKey, defaultValue = false)
             val (enabledTabs) = rememberPreference(EnabledTabsKey, defaultValue = DEFAULT_ENABLED_TABS)
-            val navigationItems = remember {
+            val navigationItems = remember(enabledTabs) {
                 Screens.getScreens(enabledTabs)
             }
             val (defaultOpenTab, onDefaultOpenTabChange) = rememberPreference(
@@ -333,6 +348,7 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(Unit) {
                 // local media & download folders auto scan
                 coroutineScope.launch(lmScannerCoroutine) {
+                    kotlinx.coroutines.delay(12000)
                     scanInit(
                         this@MainActivity, database, downloadUtil, coroutineScope, playerConnection,
                         snackbarHostState
@@ -344,25 +360,12 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(useDarkTheme) {
                 setSystemBarAppearance(useDarkTheme)
             }
-            try {
-                connectivityObserver.unregister()
-            } catch (e: UninitializedPropertyAccessException) {
-                // lol
-            }
-            connectivityObserver = NetworkConnectivityObserver(this@MainActivity)
             val isNetworkConnected by connectivityObserver.networkStatus.collectAsState(true)
 
 
             MUZITheme(
-                context = this@MainActivity,
-                playerConnection = playerConnection,
-                enableDynamicTheme = enableDynamicTheme,
-                isSystemInDarkTheme = isSystemInDarkTheme,
-                darkTheme = useDarkTheme,
-                pureBlack = pureBlack,
                 highContrastCompat = highContrastCompat,
             ) {
-                Log.v(MAIN_TAG, "RC-2.1")
                 val density = LocalDensity.current
                 val windowsInsets = WindowInsets.systemBars
                 val bottomInset = with(density) { windowsInsets.getBottom(density).toDp() }
@@ -400,7 +403,6 @@ class MainActivity : ComponentActivity() {
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
                     val maxW = maxWidth
-                    Log.v(MAIN_TAG, "RC-2.2")
 
                     fun getNavPadding(): Dp {
                         // The space reserved for the navigation bar layout including margins.
@@ -485,10 +487,10 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxSize()
                         ) {
-                            Log.v(MAIN_TAG, "RC-3")
 
 
                             val navHost: @Composable() (() -> Unit) = @Composable {
+                                val premiumCurve = CubicBezierEasing(0.3f, 0.0f, 0.1f, 1.0f)
                                 NavHost(
                                     navController = navController,
                                     startDestination = (Screens.getAllScreens()
@@ -503,9 +505,9 @@ class MainActivity : ComponentActivity() {
                                         }
 
                                         if (currentRouteIndex == -1 || currentRouteIndex > previousRouteIndex)
-                                            slideInHorizontally { it / 8 } + fadeIn(tween(200))
+                                            slideInHorizontally(tween(400, easing = premiumCurve)) { it } + scaleIn(initialScale = 0.92f, animationSpec = tween(400, easing = premiumCurve)) + fadeIn(tween(400))
                                         else
-                                            slideInHorizontally { -it / 8 } + fadeIn(tween(200))
+                                            slideInHorizontally(tween(400, easing = premiumCurve)) { -it } + scaleIn(initialScale = 0.92f, animationSpec = tween(400, easing = premiumCurve)) + fadeIn(tween(400))
                                     },
                                     exitTransition = {
                                         val currentRouteIndex = navigationItems.indexOfFirst {
@@ -516,9 +518,9 @@ class MainActivity : ComponentActivity() {
                                         }
 
                                         if (targetRouteIndex == -1 || targetRouteIndex > currentRouteIndex)
-                                            slideOutHorizontally { -it / 8 } + fadeOut(tween(100))
+                                            slideOutHorizontally(tween(400, easing = premiumCurve)) { -it / 3 } + scaleOut(targetScale = 1.08f, animationSpec = tween(400, easing = premiumCurve)) + fadeOut(tween(300))
                                         else
-                                            slideOutHorizontally { it / 8 } + fadeOut(tween(100))
+                                            slideOutHorizontally(tween(400, easing = premiumCurve)) { it / 3 } + scaleOut(targetScale = 1.08f, animationSpec = tween(400, easing = premiumCurve)) + fadeOut(tween(300))
                                     },
                                     popEnterTransition = {
                                         val currentRouteIndex = navigationItems.indexOfFirst {
@@ -529,9 +531,9 @@ class MainActivity : ComponentActivity() {
                                         }
 
                                         if (previousRouteIndex != -1 && previousRouteIndex < currentRouteIndex)
-                                            slideInHorizontally { it / 8 } + fadeIn(tween(200))
+                                            slideInHorizontally(tween(400, easing = premiumCurve)) { it } + scaleIn(initialScale = 0.92f, animationSpec = tween(400, easing = premiumCurve)) + fadeIn(tween(400))
                                         else
-                                            slideInHorizontally { -it / 8 } + fadeIn(tween(200))
+                                            slideInHorizontally(tween(400, easing = premiumCurve)) { -it } + scaleIn(initialScale = 0.92f, animationSpec = tween(400, easing = premiumCurve)) + fadeIn(tween(400))
                                     },
                                     popExitTransition = {
                                         val currentRouteIndex = navigationItems.indexOfFirst {
@@ -542,9 +544,9 @@ class MainActivity : ComponentActivity() {
                                         }
 
                                         if (currentRouteIndex != -1 && currentRouteIndex < targetRouteIndex)
-                                            slideOutHorizontally { -it / 8 } + fadeOut(tween(100))
+                                            slideOutHorizontally(tween(400, easing = premiumCurve)) { -it / 3 } + scaleOut(targetScale = 1.08f, animationSpec = tween(400, easing = premiumCurve)) + fadeOut(tween(300))
                                         else
-                                            slideOutHorizontally { it / 8 } + fadeOut(tween(100))
+                                            slideOutHorizontally(tween(400, easing = premiumCurve)) { it / 3 } + scaleOut(targetScale = 1.08f, animationSpec = tween(400, easing = premiumCurve)) + fadeOut(tween(300))
                                     },
                                     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
                                 )
@@ -582,6 +584,9 @@ class MainActivity : ComponentActivity() {
                                     }
                                     composable(Screens.Player.route) {
                                         PlayerScreen(navController, bottomPadding = getNavPadding())
+                                    }
+                                    composable(Screens.More.route) {
+                                        MoreScreen(navController, scrollBehavior)
                                     }
                                     composable("history") {
                                         HistoryScreen(navController)
@@ -821,65 +826,81 @@ class MainActivity : ComponentActivity() {
                                             shape = androidx.compose.foundation.shape.RoundedCornerShape(32.dp)
                                         )
                                         .clip(androidx.compose.foundation.shape.RoundedCornerShape(32.dp)),
-                                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.8f),
                                     tonalElevation = 0.dp
                                 ) {
                                     navigationItems.fastForEach { screen ->
-                                        // TODO: display selection when based on root page user entered
-//                                        val isSelected = navBackStackEntry?.destination?.hierarchy?.any {
-//                                            it.route?.substringBefore("?")?.substringBefore("/") == screen.route
-//                                        } == true
                                         val isSelected = navBackStackEntry?.destination?.hierarchy?.any { it.route == screen.route } == true
-                                        NavigationBarItem(
-                                            selected = isSelected,
-                                            icon = {
+                                        val backgroundColor by animateColorAsState(
+                                            targetValue = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f) else Color.Transparent,
+                                            animationSpec = tween(300),
+                                            label = "nav_item_bg"
+                                        )
+                                        val contentColor by animateColorAsState(
+                                            targetValue = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                            animationSpec = tween(300),
+                                            label = "nav_item_content"
+                                        )
+                                        val highlightScale by animateFloatAsState(
+                                            targetValue = if (isSelected) 1f else 0.85f,
+                                            animationSpec = spring(dampingRatio = 0.7f, stiffness = 400f),
+                                            label = "nav_item_scale"
+                                        )
+
+                                        Box(
+                                            modifier = Modifier
+                                                .weight(1f)
+                                                .fillMaxHeight()
+                                                .padding(horizontal = 6.dp, vertical = 6.dp)
+                                                .graphicsLayer {
+                                                    scaleX = highlightScale
+                                                    scaleY = highlightScale
+                                                }
+                                                .clip(androidx.compose.foundation.shape.RoundedCornerShape(percent = 42))
+                                                .background(backgroundColor)
+                                                .clickable {
+                                                    if (playerBottomSheetState.isExpanded) {
+                                                        playerBottomSheetState.collapseSoft()
+                                                    }
+
+                                                    if (navBackStackEntry?.destination?.hierarchy?.any { it.route == screen.route } == true) {
+                                                        navBackStackEntry?.savedStateHandle?.set("scrollToTop", true)
+                                                    } else if (navigationItems.none { scr -> navBackStackEntry?.destination?.hierarchy?.any { it.route == scr.route } == true }) {
+                                                        navController.navigateUp()
+                                                    } else {
+                                                        navController.navigate(screen.route) {
+                                                            popUpTo(navController.graph.startDestinationId) {
+                                                                saveState = true
+                                                            }
+                                                            launchSingleTop = true
+                                                            restoreState = true
+                                                        }
+                                                    }
+                                                    haptic.performHapticFeedback(HapticFeedbackType.ContextClick)
+                                                },
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Column(
+                                                horizontalAlignment = Alignment.CenterHorizontally,
+                                                verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
+                                            ) {
                                                 Icon(
-                                                    screen.icon,
-                                                    contentDescription = null
+                                                    imageVector = screen.icon,
+                                                    contentDescription = null,
+                                                    tint = contentColor,
+                                                    modifier = Modifier.size(24.dp)
                                                 )
-                                            },
-                                            label = {
                                                 if (!slimNav) {
                                                     Text(
                                                         text = stringResource(screen.titleId),
+                                                        style = MaterialTheme.typography.labelSmall,
+                                                        color = contentColor,
                                                         maxLines = 1,
                                                         overflow = TextOverflow.Ellipsis
                                                     )
                                                 }
-                                            },
-                                            alwaysShowLabel = false,
-                                            colors = androidx.compose.material3.NavigationBarItemDefaults.colors(
-                                                indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-                                                selectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                                                selectedTextColor = MaterialTheme.colorScheme.primary
-                                            ),
-                                            onClick = {
-                                                if (playerBottomSheetState.isExpanded) {
-                                                    playerBottomSheetState.collapseSoft()
-                                                }
-
-                                                if (navBackStackEntry?.destination?.hierarchy?.any { it.route == screen.route } == true) {
-                                                    navBackStackEntry?.savedStateHandle?.set(
-                                                        "scrollToTop",
-                                                        true
-                                                    )
-                                                } else if (navigationItems.none { scr -> navBackStackEntry?.destination?.hierarchy?.any { it.route == scr.route } == true }) {
-                                                    // this eye bleach allows you to navigate back when you tap on the navbar on a non-root page
-                                                    // TODO: nav3 allows us to access back stack... maybe do indicators properly and remove this hack
-                                                    navController.navigateUp()
-                                                } else {
-                                                    navController.navigate(screen.route) {
-                                                        popUpTo(navController.graph.startDestinationId) {
-                                                            saveState = true
-                                                        }
-                                                        launchSingleTop = true
-                                                        restoreState = true
-                                                    }
-                                                }
-
-                                                haptic.performHapticFeedback(HapticFeedbackType.ContextClick)
                                             }
-                                        )
+                                        }
                                     }
                                 }
                             }
@@ -994,7 +1015,7 @@ class MainActivity : ComponentActivity() {
 
                                 SearchBarContainer(navController, scrollBehavior)
 
-                                if (oobeStatus >= OOBE_VERSION) {
+                                if (hasCompletedOobe) {
                                     if (!navigationItems.contains(Screens.Player)) {
                                         BottomSheetPlayer(
                                             state = playerBottomSheetState,
@@ -1029,7 +1050,7 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier
                                             .width(playerW.dp)
                                     ) {
-                                        if (oobeStatus >= OOBE_VERSION && !navigationItems.contains(Screens.Player)) {
+                                        if (hasCompletedOobe && !navigationItems.contains(Screens.Player)) {
                                             PlayerScreen(navController)
                                         }
                                     }
@@ -1042,7 +1063,7 @@ class MainActivity : ComponentActivity() {
 
                                         SearchBarContainer(navController, scrollBehavior)
 
-                                        if (oobeStatus >= OOBE_VERSION) {
+                                        if (hasCompletedOobe) {
                                             navbar()
                                         }
                                         bottomSheetMenu()
@@ -1059,8 +1080,19 @@ class MainActivity : ComponentActivity() {
                             }
 
                             // Setup wizard
-                            LaunchedEffect(Unit) {
-                                if (oobeStatus < OOBE_VERSION) {
+                            LaunchedEffect(onboardingState) {
+                                val state = onboardingState ?: return@LaunchedEffect
+                                val currentOobeStatus = state.first ?: 0
+                                val currentInnerTubeCookie = state.second
+
+                                if (!currentInnerTubeCookie.isNullOrBlank() && currentOobeStatus < OOBE_VERSION) {
+                                    context.dataStore.edit { settings ->
+                                        settings[OobeStatusKey] = OOBE_VERSION
+                                    }
+                                    return@LaunchedEffect
+                                }
+
+                                if (currentOobeStatus < OOBE_VERSION && currentInnerTubeCookie.isNullOrBlank()) {
                                     navController.navigate("welcome")
                                 }
                             }
@@ -1095,6 +1127,13 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 }
+            }
+        }
+
+        window.decorView.post {
+            lifecycle.addObserver(controllerViewModel)
+            controllerViewModel.addControllerCallback(lifecycle) { controller, _ ->
+                playerConnection = PlayerConnection(controllerViewModel, database)
             }
         }
     }

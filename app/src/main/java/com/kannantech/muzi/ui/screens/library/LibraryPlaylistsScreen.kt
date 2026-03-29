@@ -100,7 +100,6 @@ fun LibraryPlaylistsScreen(
     viewModel: LibraryPlaylistsViewModel = hiltViewModel(),
     libraryFilterContent: @Composable() (() -> Unit)? = null,
 ) {
-    Log.v("LibraryPlaylistsScreen", "LP_RC-1")
     val context = LocalContext.current
     val menuState = LocalMenuState.current
     val coroutineScope = rememberCoroutineScope()

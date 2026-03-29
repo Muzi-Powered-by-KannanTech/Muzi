@@ -82,7 +82,6 @@ import com.kannantech.muzi.playback.queues.YouTubeAlbumRadio
 import com.kannantech.muzi.playback.queues.YouTubeQueue
 import com.kannantech.muzi.ui.component.ChipsRow
 import com.kannantech.muzi.ui.component.HideOnScrollFAB
-import com.kannantech.muzi.ui.component.LazyColumnScrollbar
 import com.kannantech.muzi.ui.component.NavigationTile
 import com.kannantech.muzi.ui.component.NavigationTitle
 import com.kannantech.muzi.ui.component.ScrollToTopManager
@@ -372,50 +371,6 @@ fun HomeScreen(
             contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues()
         ) {
             item {
-                Row(
-                    modifier = Modifier
-                        .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
-                        .padding(horizontal = 12.dp, vertical = 6.dp)
-                        .fillMaxWidth()
-                        .animateItem()
-                ) {
-                    NavigationTile(
-                        title = stringResource(R.string.history),
-                        icon = Icons.Rounded.History,
-                        onClick = { navController.navigate("history") },
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    NavigationTile(
-                        title = stringResource(R.string.stats),
-                        icon = Icons.AutoMirrored.Rounded.TrendingUp,
-                        onClick = { navController.navigate("stats") },
-                        modifier = Modifier.weight(1f)
-                    )
-
-                    if (localLibEnable) {
-                        NavigationTile(
-                            title = stringResource(R.string.scanner_local_title),
-                            icon = Icons.Rounded.SdCard,
-                            onClick = {
-                                navController.navigate("settings/local")
-                            },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-
-                    NavigationTile(
-                        title = stringResource(R.string.account),
-                        icon = Icons.Rounded.Person,
-                        onClick = {
-                            navController.navigate("account")
-                        },
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-            }
-
-            item {
                 ChipsRow(
                     chips = homePage?.chips?.mapNotNull { it to it.title } ?: emptyList(),
                     currentValue = selectedChip,
@@ -431,7 +386,7 @@ fun HomeScreen(
                 item {
                     NavigationTitle(
                         title = stringResource(R.string.quick_picks),
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     )
                 }
 
@@ -440,13 +395,10 @@ fun HomeScreen(
                         state = quickPicksLazyGridState,
                         rows = GridCells.Fixed(4),
                         flingBehavior = rememberSnapFlingBehavior(quickPicksSnapLayoutInfoProvider),
-                        contentPadding = WindowInsets.systemBars
-                            .only(WindowInsetsSides.Horizontal)
-                            .asPaddingValues(),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(ListItemHeight * 4)
-                            .animateItem()
+                            .height(ListItemHeight * 4 + 16.dp) // Extra height for padding
                     ) {
                         items(
                             items = quickPicks,
@@ -481,7 +433,7 @@ fun HomeScreen(
                 item {
                     NavigationTitle(
                         title = stringResource(R.string.forgotten_favorites),
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     )
                 }
 
@@ -493,13 +445,10 @@ fun HomeScreen(
                         state = forgottenFavoritesLazyGridState,
                         rows = GridCells.Fixed(rows),
                         flingBehavior = rememberSnapFlingBehavior(forgottenFavoritesSnapLayoutInfoProvider),
-                        contentPadding = WindowInsets.systemBars
-                            .only(WindowInsetsSides.Horizontal)
-                            .asPaddingValues(),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(ListItemHeight * rows)
-                            .animateItem()
+                            .height(ListItemHeight * rows + 16.dp)
                     ) {
                         itemsIndexed(
                             items = forgottenFavorites,
@@ -537,7 +486,7 @@ fun HomeScreen(
                 item {
                     NavigationTitle(
                         title = stringResource(R.string.keep_listening),
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     )
                 }
 
@@ -552,7 +501,6 @@ fun HomeScreen(
                                 MaterialTheme.typography.bodyLarge.lineHeight.toDp() * 2 +
                                         MaterialTheme.typography.bodyMedium.lineHeight.toDp() * 2
                             }) * rows)
-                            .animateItem()
                     ) {
                         items(keepListening) {
                             localGridItem(it, stringResource(R.string.keep_listening))
@@ -568,16 +516,14 @@ fun HomeScreen(
                         onClick = {
                             navController.navigate("account")
                         },
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     )
                 }
 
                 item {
                     LazyRow(
-                        contentPadding = WindowInsets.systemBars
-                            .only(WindowInsetsSides.Horizontal)
-                            .asPaddingValues(),
-                        modifier = Modifier.animateItem()
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+                        modifier = Modifier
                     ) {
                         items(
                             items = accountPlaylists,
@@ -617,16 +563,14 @@ fun HomeScreen(
                                 is Playlist -> {}
                             }
                         },
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     )
                 }
 
                 item {
                     LazyRow(
-                        contentPadding = WindowInsets.systemBars
-                            .only(WindowInsetsSides.Horizontal)
-                            .asPaddingValues(),
-                        modifier = Modifier.animateItem()
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+                        modifier = Modifier
                     ) {
                         items(it.items) { item ->
                             ytGridItem(item)
@@ -663,7 +607,7 @@ fun HomeScreen(
                                     navController.navigate("browse/$browseId")
                             }
                         },
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     )
                 }
 
@@ -672,7 +616,7 @@ fun HomeScreen(
                         contentPadding = WindowInsets.systemBars
                             .only(WindowInsetsSides.Horizontal)
                             .asPaddingValues(),
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     ) {
                         items(it.items) { item ->
                             ytGridItem(item)
@@ -684,7 +628,7 @@ fun HomeScreen(
             if (homePage?.continuation != null && homePage?.sections?.isNotEmpty() == true) {
                 item {
                     ShimmerHost(
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     ) {
                         TextPlaceholder(
                             height = 36.dp,
@@ -708,7 +652,7 @@ fun HomeScreen(
                         onClick = {
                             navController.navigate("mood_and_genres")
                         },
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     )
                 }
                 item {
@@ -717,7 +661,6 @@ fun HomeScreen(
                         contentPadding = PaddingValues(6.dp),
                         modifier = Modifier
                             .height((MoodAndGenresButtonHeight + 12.dp) * 4 + 12.dp)
-                            .animateItem()
                     ) {
                         items(moodAndGenres) {
                             MoodAndGenresButton(
@@ -737,7 +680,7 @@ fun HomeScreen(
             if (isLoading) {
                 item {
                     ShimmerHost(
-                        modifier = Modifier.animateItem()
+                        modifier = Modifier
                     ) {
                         TextPlaceholder(
                             height = 36.dp,
@@ -754,10 +697,6 @@ fun HomeScreen(
                 }
             }
         }
-        LazyColumnScrollbar(
-            state = lazylistState,
-        )
-
         HideOnScrollFAB(
             visible = allLocalItems.isNotEmpty() || allYtItems.isNotEmpty(),
             lazyListState = lazylistState,

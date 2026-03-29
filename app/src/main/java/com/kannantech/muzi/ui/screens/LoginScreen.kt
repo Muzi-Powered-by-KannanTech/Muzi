@@ -34,6 +34,7 @@ import com.kannantech.muzi.constants.AccountChannelHandleKey
 import com.kannantech.muzi.constants.AccountEmailKey
 import com.kannantech.muzi.constants.AccountNameKey
 import com.kannantech.muzi.constants.DataSyncIdKey
+import com.kannantech.muzi.constants.DefaultOpenTabKey
 import com.kannantech.muzi.constants.InnerTubeCookieKey
 import com.kannantech.muzi.constants.OobeStatusKey
 import com.kannantech.muzi.constants.TopBarInsets
@@ -127,6 +128,7 @@ fun LoginScreen(
                                                     prefs[AccountNameKey] = accountInfo.name
                                                     prefs[AccountEmailKey] = accountInfo.email.orEmpty()
                                                     prefs[AccountChannelHandleKey] = accountInfo.channelHandle.orEmpty()
+                                                    prefs[DefaultOpenTabKey] = Screens.Home.route
                                                     prefs[OobeStatusKey] = OOBE_VERSION
                                                 }
 
@@ -140,6 +142,7 @@ fun LoginScreen(
                                             }.onFailure {
                                                 context.dataStore.edit { prefs ->
                                                     prefs[InnerTubeCookieKey] = cookie
+                                                    prefs[DefaultOpenTabKey] = Screens.Home.route
                                                     prefs[OobeStatusKey] = OOBE_VERSION
                                                 }
                                                 launch(Dispatchers.Main) {

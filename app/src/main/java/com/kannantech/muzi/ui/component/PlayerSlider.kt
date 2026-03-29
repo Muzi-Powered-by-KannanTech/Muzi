@@ -99,12 +99,21 @@ private fun DrawScope.drawTrack(
         center.y
     )
 
+    val activeBrush = androidx.compose.ui.graphics.Brush.linearGradient(
+        colors = listOf(
+            androidx.compose.ui.graphics.Color(0xFF7C3AED), // Electric Indigo
+            androidx.compose.ui.graphics.Color(0xFFA855F7)  // Vibrant Violet
+        ),
+        start = sliderValueStart,
+        end = sliderValueEnd
+    )
+
     drawLine(
-        activeTrackColor,
-        sliderValueStart,
-        sliderValueEnd,
-        trackStrokeWidth,
-        StrokeCap.Round
+        brush = activeBrush,
+        start = sliderValueStart,
+        end = sliderValueEnd,
+        strokeWidth = trackStrokeWidth,
+        cap = StrokeCap.Round
     )
 
     for (tick in tickFractions) {

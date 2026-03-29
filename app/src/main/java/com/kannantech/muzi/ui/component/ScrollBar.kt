@@ -34,11 +34,8 @@ fun LazyColumnScrollbar(
         LocalPlayerAwareWindowInsets.current.only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
     ),
     settings: ScrollbarSettings = DefaultScrollbar,
-) = InternalLazyColumnScrollbar(
-    state = state,
-    settings = settings,
-    modifier = modifier
-)
+) {
+}
 
 @Composable
 fun LazyVerticalGridScrollbar(
@@ -47,8 +44,5 @@ fun LazyVerticalGridScrollbar(
         LocalPlayerAwareWindowInsets.current.only(WindowInsetsSides.Top + WindowInsetsSides.Bottom)
     ),
     settings: ScrollbarSettings = DefaultScrollbar,
-) = InternalLazyVerticalGridScrollbar(
-    state = state,
-    settings = settings,
-    modifier = modifier
-)
+) {
+}

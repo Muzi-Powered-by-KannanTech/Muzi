@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------------------
+# EXPERIMENTAL BASELINE PROFILE PRE-COMPILATION RULES
+# -----------------------------------------------------------------------------------
+# This allows the Android system to Ahead-Of-Time (AOT) compile these classes
+# on the user's device instantly upon installation, drastically improving cold boots
+# and initial list scroll smoothness for Jetpack Compose!
+
+# Core Jetpack Compose UI Engine
+Landroidx/compose/foundation/**;
+Landroidx/compose/material/**;
+Landroidx/compose/material3/**;
+Landroidx/compose/runtime/**;
+Landroidx/compose/ui/**;
+Landroidx/compose/animation/**;
+
+# Your core application paths
+Lcom/kannantech/muzi/**;

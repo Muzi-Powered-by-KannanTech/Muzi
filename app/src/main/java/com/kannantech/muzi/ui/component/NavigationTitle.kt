@@ -44,16 +44,21 @@ fun NavigationTitle(
         ) {
             label?.let { label ->
                 Text(
-                    text = label,
-                    style = MaterialTheme.typography.labelLarge,
+                    text = label.uppercase(), // All caps for editorial feel
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Medium,
+                    letterSpacing = androidx.compose.ui.unit.TextUnit(0.1f, androidx.compose.ui.unit.TextUnitType.Em),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     overflow = TextOverflow.Ellipsis,
+                    modifier = androidx.compose.ui.Modifier.padding(bottom = 2.dp)
                 )
             }
 
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.headlineSmall, // Larger for magazine impact
+                fontWeight = FontWeight.SemiBold,
+                letterSpacing = androidx.compose.ui.unit.TextUnit(0.04f, androidx.compose.ui.unit.TextUnitType.Em),
                 color = MaterialTheme.colorScheme.primary,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
