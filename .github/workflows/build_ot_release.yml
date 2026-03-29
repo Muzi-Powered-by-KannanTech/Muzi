@@ -30,7 +30,10 @@ jobs:
       - name: Setup signing configs
         run: |
           echo "$KEYSTORE" | base64 --decode > test.jks
-          echo "$KEYSTORE_PROPERTIES" > keystore.properties
+          {
+            echo "$KEYSTORE_PROPERTIES" | grep -v '^storeFile='
+            echo "storeFile=test.jks"
+          } > keystore.properties
         env:
           KEYSTORE: ${{ secrets.KEYSTORE }}
           KEYSTORE_PROPERTIES: ${{ secrets.KEYSTORE_PROPERTIES }}

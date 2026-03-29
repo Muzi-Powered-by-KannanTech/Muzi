@@ -36,7 +36,12 @@ android {
     signingConfigs {
         if (!keystoreProperties.isEmpty) {
             create("ot_release") {
-                storeFile = file(keystoreProperties["storeFile"] as String)
+                val configuredStoreFile = (keystoreProperties["storeFile"] as? String)
+                    ?.let { rootProject.file(it).takeIf { file -> file.exists() } ?: file(it).takeIf { file -> file.exists() } }
+                val fallbackStoreFile = rootProject.file("test.jks").takeIf { it.exists() }
+                (configuredStoreFile ?: fallbackStoreFile)?.let {
+                    storeFile = it
+                }
                 (keystoreProperties["keyAlias"] as? String)?.let {
                     keyAlias = it
                 }
