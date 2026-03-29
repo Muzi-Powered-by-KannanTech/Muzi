@@ -74,7 +74,6 @@ fun PlayerScreen(
             showLyrics = showLyrics,
             useDarkTheme = useDarkTheme,
         )
-        Log.v(TAG, "PLR-3.0")
 
         val state = rememberBottomSheetState(
             dismissedBound = 0.dp,

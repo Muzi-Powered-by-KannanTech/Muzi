@@ -48,9 +48,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -85,6 +89,7 @@ fun MiniPlayer(
     val error by playerConnection.error.collectAsState()
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
     val canSkipNext by playerConnection.canSkipNext.collectAsState()
+    val haptic = LocalHapticFeedback.current
 
 
     var position by rememberSaveable(playbackState) {
@@ -111,7 +116,14 @@ fun MiniPlayer(
             .fillMaxWidth()
             .height(MiniPlayerHeight)
             .windowInsetsPadding(LocalPlayerAwareWindowInsets.current.only(WindowInsetsSides.Horizontal))
-//            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)) // Glass obsidian
+            .drawBehind {
+                // Top accent border for premium depth
+                drawRect(
+                    color = Color(0xFF7C3AED).copy(alpha = 0.15f),
+                    size = androidx.compose.ui.geometry.Size(size.width, 1.dp.toPx())
+                )
+            }
     ) {
         LinearProgressIndicator(
             progress = { (position.toFloat() / duration).coerceIn(0f, 1f) },
@@ -149,6 +161,7 @@ fun MiniPlayer(
                     } else {
                         playerConnection.player.togglePlayPause()
                     }
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 }
             ) {
                 Icon(
@@ -245,22 +258,24 @@ fun MiniMediaInfo(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = 6.dp)
+                .padding(horizontal = 8.dp)
         ) {
             Text(
                 text = mediaMetadata.title,
                 color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp, // Slightly smaller for better balance
+                fontWeight = FontWeight.SemiBold, // Rich weight
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
                 text = mediaMetadata.artists.joinToString { it.name },
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.alpha(0.8f) // Refined opacity
             )
         }
     }

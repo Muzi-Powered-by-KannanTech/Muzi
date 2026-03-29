@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
@@ -97,6 +98,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -163,7 +165,6 @@ fun BottomSheetPlayer(
     modifier: Modifier = Modifier,
 ) {
     val TAG = "BottomSheetPlayer"
-    Log.v(TAG, "PLR-1")
 
     val context = LocalContext.current
     val playerConnection = LocalPlayerConnection.current ?: return
@@ -185,9 +186,7 @@ fun BottomSheetPlayer(
     val qbInit by playerConnection.service.qbInit.collectAsState()
 
     LaunchedEffect(qbInit, queueBoard.masterQueues.toList()) {
-        Log.d(TAG, "Queues changed. qbInit = $qbInit")
         if (qbInit && !queueBoard.masterQueues.isEmpty() && state.isDismissed) {
-            Log.d(TAG, "Triggering sheet collapseSoft")
             state.collapseSoft()
         }
     }
@@ -212,8 +211,6 @@ fun BottomSheetPlayer(
             MiniPlayer()
         }
     ) {
-        Log.v(TAG, "PLR-3.0")
-
         if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE && !context.tabMode() && context.supportsWideScreen()) {
             LandscapePlayer(state, navController, queueBoard)
         } else {
@@ -231,8 +228,6 @@ fun PortraitPlayer(
     enableQueueSheet: Boolean = true,
 ) {
     val TAG = "BottomSheetPlayer"
-    Log.v(TAG, "PLR-3.1b")
-
     val playerConnection = LocalPlayerConnection.current ?: return
 
     val dismissedBound = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()
@@ -256,7 +251,6 @@ fun PortraitPlayer(
                 .weight(1f)
                 .nestedScroll(playerSheetState.preUpPostDownNestedScrollConnection)
         ) {
-            Log.v(TAG, "PLR-3.2b")
             val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
 
 
@@ -441,7 +435,6 @@ fun LandscapePlayer(
                 .weight(1f)
                 .nestedScroll(playerSheetState.preUpPostDownNestedScrollConnection)
         ) {
-            Log.v(TAG, "PLR-3.1a")
             if (!swipeToSkip) {
                 Thumbnail(
                     sliderPositionProvider = { sliderPosition },
@@ -548,8 +541,7 @@ fun ActionButtons(
     navController: NavController,
 ) {
     val TAG = "ActionButtons()"
-    Log.v(TAG, "PLR-AB-1")
-
+    val haptic = LocalHapticFeedback.current
     val playerConnection = LocalPlayerConnection.current ?: return
     val menuState = LocalMenuState.current
 
@@ -562,36 +554,43 @@ fun ActionButtons(
     Box(
         modifier = Modifier
             .offset(y = 5.dp)
-            .size(36.dp)
-            .clip(RoundedCornerShape(24.dp))
-            .background(MaterialTheme.colorScheme.primary)
+            .size(42.dp) // Premium larger size
+            .clip(androidx.compose.foundation.shape.CircleShape)
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+            .border(
+                width = 0.5.dp,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                shape = androidx.compose.foundation.shape.CircleShape
+            )
+            .clickable {
+                playerConnection.toggleLike()
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+            }
     ) {
-        ResizableIconButton(
-            icon = if (currentSong?.song?.liked == true) R.drawable.favorite else R.drawable.favorite_border,
-            color = MaterialTheme.colorScheme.onPrimary,
+        Icon(
+            painter = painterResource(if (currentSong?.song?.liked == true) R.drawable.favorite else R.drawable.favorite_border),
+            tint = if (currentSong?.song?.liked == true) MaterialTheme.colorScheme.primary else Color.White,
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(24.dp),
-            onClick = playerConnection::toggleLike
+                .size(22.dp),
+            contentDescription = null
         )
     }
 
-    Spacer(modifier = Modifier.width(7.dp))
+    Spacer(modifier = Modifier.width(12.dp))
 
     Box(
         modifier = Modifier
             .offset(y = 5.dp)
-            .size(36.dp)
-            .clip(RoundedCornerShape(24.dp))
-            .background(MaterialTheme.colorScheme.primary)
-    ) {
-        ResizableIconButton(
-            icon = Icons.Rounded.MoreVert,
-            color = MaterialTheme.colorScheme.onPrimary,
-            modifier = Modifier
-                .size(24.dp)
-                .align(Alignment.Center),
-            onClick = {
+            .size(42.dp)
+            .clip(androidx.compose.foundation.shape.CircleShape)
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+            .border(
+                width = 0.5.dp,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                shape = androidx.compose.foundation.shape.CircleShape
+            )
+            .clickable {
                 menuState.show {
                     PlayerMenu(
                         mediaMetadata = mediaMetadata,
@@ -600,7 +599,16 @@ fun ActionButtons(
                         onDismiss = menuState::dismiss
                     )
                 }
+                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
             }
+    ) {
+        Icon(
+            imageVector = Icons.Rounded.MoreVert,
+            tint = Color.White,
+            modifier = Modifier
+                .size(24.dp)
+                .align(Alignment.Center),
+            contentDescription = null
         )
     }
 }
@@ -616,8 +624,6 @@ fun ControlsContent(
     showQueueHint: Boolean = false,
 ) {
     val TAG = "ControlsContent()"
-    Log.v(TAG, "PLR-CC-1")
-
     val haptic = LocalHapticFeedback.current
     val playerConnection = LocalPlayerConnection.current ?: return
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
@@ -719,9 +725,10 @@ fun ControlsContent(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = mediaMetadata?.title ?: "",
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.headlineSmall, // Editorial magnitude
                             color = onBackgroundColor,
-                            fontWeight = FontWeight.Bold,
+                            fontWeight = FontWeight.SemiBold,
+                            letterSpacing = androidx.compose.ui.unit.TextUnit(0.04f, androidx.compose.ui.unit.TextUnitType.Em),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             modifier = Modifier
@@ -740,7 +747,8 @@ fun ControlsContent(
                                 Text(
                                     text = artist.name,
                                     style = MaterialTheme.typography.titleMedium,
-                                    color = onBackgroundColor,
+                                    color = onBackgroundColor.copy(alpha = 0.8f), // Premium hierarchy
+                                    fontWeight = FontWeight.Medium,
                                     maxLines = 1,
                                     modifier = Modifier
                                         .basicMarquee(
@@ -1017,8 +1025,6 @@ fun PlayerBackground(
     useDarkTheme: Boolean,
 ) {
     val TAG = "PlayerBackground"
-    Log.v(TAG, "PLR_BG-1")
-
     val context = LocalContext.current
 
     Box(
@@ -1052,7 +1058,6 @@ fun PlayerBackground(
             }
         ) { metadata ->
             if (playerBackground == PlayerBackgroundStyle.BLUR) {
-                Log.v(TAG, "PLR-2.2a")
                 AsyncImage(
                     model = metadata?.getThumbnailModel(100, 100),
                     contentDescription = null,
@@ -1072,7 +1077,6 @@ fun PlayerBackground(
             }
         ) { colors ->
             if (playerBackground == PlayerBackgroundStyle.GRADIENT && colors.size >= 2) {
-                Log.v(TAG, "PLR-2.2b")
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -1082,7 +1086,6 @@ fun PlayerBackground(
         }
 
         if (playerBackground != PlayerBackgroundStyle.FOLLOW_THEME && showLyrics) {
-            Log.v(TAG, "PLR-2.2c")
             Box(
                 modifier = Modifier
                     .fillMaxSize()

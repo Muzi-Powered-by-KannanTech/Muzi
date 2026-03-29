@@ -153,7 +153,6 @@ fun LocalPlaylistScreen(
     scrollBehavior: TopAppBarScrollBehavior,
     viewModel: LocalPlaylistViewModel = hiltViewModel(),
 ) {
-    Log.v("LocalPlaylistScreen", "P_RC-1")
     val context = LocalContext.current
     val density = LocalDensity.current
     val menuState = LocalMenuState.current
@@ -433,14 +432,12 @@ fun LocalPlaylistScreen(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Log.v("LocalPlaylistScreen", "P_RC-2.1")
         ScrollToTopManager(navController, lazyListState)
         LazyColumn(
             state = lazyListState,
             contentPadding = LocalPlayerAwareWindowInsets.current.union(WindowInsets.ime).asPaddingValues(),
             modifier = Modifier.padding(bottom = if (inSelectMode) 64.dp else 0.dp)
         ) {
-            Log.v("LocalPlaylistScreen", "P_RC-2.2")
             playlistWithSongs.first?.let { playlist ->
                 if (playlist.songCount == 0) {
                     item {
@@ -672,7 +669,6 @@ fun LocalPlaylistHeader(
     snackbarHostState: SnackbarHostState,
     modifier: Modifier,
 ) {
-    Log.v("LocalPlaylistScreen", "P_H_RC-1")
     val playerConnection = LocalPlayerConnection.current ?: return
     val context = LocalContext.current
     val database = LocalDatabase.current

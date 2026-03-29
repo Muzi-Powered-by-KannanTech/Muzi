@@ -135,7 +135,6 @@ fun FolderScreen(
     isRoot: Boolean = false,
     libraryFilterContent: @Composable (() -> Unit)? = null
 ) {
-    Log.v("FolderScreen", "F_RC-1")
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current

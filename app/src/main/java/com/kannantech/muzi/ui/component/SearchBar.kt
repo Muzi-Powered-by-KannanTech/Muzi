@@ -13,8 +13,10 @@ package com.kannantech.muzi.ui.component
 
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -64,8 +66,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.takeOrElse
@@ -197,9 +201,27 @@ fun SearchBar(
             endPadding = lerp((SearchBarHorizontalPadding + endInset).roundToPx().toFloat(), 0f, animationProgress).toDp()
         }
 
+        // Premium border: Indigo glow pulses when active
+        val borderColor by animateColorAsState(
+            targetValue = if (active)
+                MaterialTheme.colorScheme.primary
+            else
+                MaterialTheme.colorScheme.outline.copy(alpha = 0.25f),
+            animationSpec = tween(350),
+            label = "search_border"
+        )
+        val borderWidth by animateFloatAsState(
+            targetValue = if (active) 1.5f else 0.75f,
+            animationSpec = spring(stiffness = 300f),
+            label = "search_border_width"
+        )
+
         Surface(
             shape = animatedShape,
-            color = if (animationProgress > 0) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp),
+            color = if (animationProgress > 0)
+                MaterialTheme.colorScheme.surface
+            else
+                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.85f),
             contentColor = contentColorFor(colors.containerColor),
             tonalElevation = tonalElevation,
             modifier = Modifier
@@ -209,6 +231,24 @@ fun SearchBar(
                     end = endPadding
                 )
                 .size(width = width, height = height)
+                .then(
+                    if (animationProgress < 1f)
+                        Modifier.drawBehind {
+                            val strokePx = borderWidth.dp.toPx()
+                            val cornerPx = SearchBarCornerRadius.toPx() * (1 - animationProgress)
+                            drawRoundRect(
+                                color = borderColor,
+                                topLeft = androidx.compose.ui.geometry.Offset(strokePx / 2, strokePx / 2),
+                                size = androidx.compose.ui.geometry.Size(
+                                    size.width - strokePx,
+                                    size.height - strokePx
+                                ),
+                                cornerRadius = androidx.compose.ui.geometry.CornerRadius(cornerPx, cornerPx),
+                                style = androidx.compose.ui.graphics.drawscope.Stroke(width = strokePx)
+                            )
+                        }
+                    else Modifier
+                )
         ) {
             Column {
                 SearchBarInputField(
@@ -335,7 +375,7 @@ private fun SearchBarInputField(
 }
 
 // Measurement specs
-val InputFieldHeight = 48.dp
+val InputFieldHeight = 56.dp          // Increased from 48dp for a premium feel
 private val SearchBarCornerRadius: Dp = InputFieldHeight / 2
 internal val SearchBarMinWidth: Dp = 360.dp
 private val SearchBarMaxWidth: Dp = 720.dp

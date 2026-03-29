@@ -57,7 +57,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.StrokeJoin
@@ -125,24 +127,33 @@ inline fun ListItem(
     isActive: Boolean = false,
     isAvailable: Boolean = true,
 ) {
+    val activeBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = if (isActive) {
-            modifier // playing highlight
+            modifier
                 .height(ListItemHeight)
                 .padding(horizontal = 8.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .clip(RoundedCornerShape(12.dp))
                 .background(
-                    color = // selected active
-                        if (isSelected == true) MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
-                        else MaterialTheme.colorScheme.secondaryContainer
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
                 )
+                .drawBehind {
+                    val strokeWidth = 1.dp.toPx()
+                    val cornerRadius = 12.dp.toPx()
+                    drawRoundRect(
+                        color = activeBorderColor,
+                        style = Stroke(width = strokeWidth),
+                        cornerRadius = androidx.compose.ui.geometry.CornerRadius(cornerRadius, cornerRadius)
+                    )
+                }
         } else if (isSelected == true) {
-            modifier // inactive selected
+            modifier // inactive selected: Subtle Obsidian Onyx
                 .height(ListItemHeight)
                 .padding(horizontal = 8.dp)
-                .clip(RoundedCornerShape(8.dp))
-                .background(color = MaterialTheme.colorScheme.inversePrimary.copy(alpha = 0.4f))
+                .clip(RoundedCornerShape(12.dp))
+                .background(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
         } else {
             modifier // default
                 .height(ListItemHeight)
@@ -179,18 +190,22 @@ inline fun ListItem(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = 6.dp)
+                .padding(horizontal = 12.dp) // Increased for premium feel
         ) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.SemiBold, // Rich bolder weight
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
             )
 
             if (subtitle != null) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.alpha(0.7f) // Subdued secondary text
+                ) {
                     subtitle()
                 }
             }
@@ -292,11 +307,12 @@ fun GridItem(
         Text(
             text = title,
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.SemiBold, // Premium weight
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Start,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            letterSpacing = androidx.compose.ui.unit.TextUnit.Unspecified
         )
     },
     subtitle = {
@@ -492,11 +508,12 @@ fun YouTubeGridItem(
         Text(
             text = item.title,
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.SemiBold, // Premium weight
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
             textAlign = if (item is ArtistItem) TextAlign.Center else TextAlign.Start,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            color = if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
         )
     },
     subtitle = {
@@ -579,16 +596,28 @@ fun YouTubeCardItem(
 ) {
     val configuration = LocalConfiguration.current
     val screenWidthDp = configuration.screenWidthDp
+    val activeBorderColor = Color(0xFF7C3AED).copy(alpha = 0.4f)
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .height(60.dp)
+            .height(64.dp) // Standardizing to premium 64dp
             .width((screenWidthDp.dp - 12.dp) / 2)
             .padding(6.dp)
-            .clip(RoundedCornerShape(6.dp))
-            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp))
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)) // Glass Obsidian
             .clickable(onClick = onClick)
+            .drawBehind {
+                if (isActive) {
+                    val strokeWidth = 1.dp.toPx()
+                    val cornerRadius = 12.dp.toPx()
+                    drawRoundRect(
+                        color = activeBorderColor,
+                        style = Stroke(width = strokeWidth),
+                        cornerRadius = androidx.compose.ui.geometry.CornerRadius(cornerRadius, cornerRadius)
+                    )
+                }
+            }
     ) {
         Box(
             contentAlignment = Alignment.Center

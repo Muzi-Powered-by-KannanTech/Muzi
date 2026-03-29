@@ -56,6 +56,7 @@ import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -72,14 +73,7 @@ class App : Application(), SingletonImageLoader.Factory {
     override fun onCreate() {
         super.onCreate()
 
-        if (BuildConfig.DEBUG) {
-            System.setProperty("kotlinx.coroutines.debug", "on")
-        }
-
         instance = this
-
-        // Pre-warm NetworkBoost Ultra Engine
-        NetworkBoost.getClient(this)
 
         val locale = Locale.getDefault()
         val languageTag = locale.toLanguageTag().replace("-Hant", "")
@@ -96,20 +90,49 @@ class App : Application(), SingletonImageLoader.Factory {
             KuGou.useTraditionalChinese = true
         }
 
-        if (dataStore[ProxyEnabledKey] == true) {
-            try {
-                YouTube.proxy = Proxy(
-                    dataStore[ProxyTypeKey].toEnum(defaultValue = Proxy.Type.HTTP),
-                    dataStore[ProxyUrlKey]!!.toInetSocketAddress()
-                )
-            } catch (e: Exception) {
-                Toast.makeText(this, "Failed to parse proxy url.", LENGTH_SHORT).show()
-                reportException(e)
-            }
-        }
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStore.data
+                .map { preferences ->
+                    Triple(
+                        YouTubeLocale(
+                            gl = preferences[ContentCountryKey]?.takeIf { it != SYSTEM_DEFAULT }
+                                ?: locale.country.takeIf { it in CountryCodeToName }
+                                ?: "US",
+                            hl = preferences[ContentLanguageKey]?.takeIf { it != SYSTEM_DEFAULT }
+                                ?: locale.language.takeIf { it in LanguageCodeToName }
+                                ?: languageTag.takeIf { it in LanguageCodeToName }
+                                ?: "en"
+                        ),
+                        preferences[UseLoginForBrowse] != false,
+                        preferences[ProxyEnabledKey] == true
+                    ) to Pair(preferences[ProxyTypeKey], preferences[ProxyUrlKey])
+                }
+                .distinctUntilChanged()
+                .collect { (config, proxyInfo) ->
+                    val (ytLocale, useLoginForBrowse, proxyEnabled) = config
+                    val (proxyType, proxyUrl) = proxyInfo
 
-        if (dataStore[UseLoginForBrowse] != false) {
-            YouTube.useLoginForBrowse = true
+                    YouTube.locale = ytLocale
+                    KuGou.useTraditionalChinese = ytLocale.hl == "zh-TW"
+                    YouTube.useLoginForBrowse = useLoginForBrowse
+
+                    YouTube.proxy = if (proxyEnabled && !proxyUrl.isNullOrBlank()) {
+                        try {
+                            Proxy(
+                                proxyType.toEnum(defaultValue = Proxy.Type.HTTP),
+                                proxyUrl.toInetSocketAddress()
+                            )
+                        } catch (e: Exception) {
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(this@App, "Failed to parse proxy url.", LENGTH_SHORT).show()
+                            }
+                            reportException(e)
+                            null
+                        }
+                    } else {
+                        null
+                    }
+                }
         }
 
         GlobalScope.launch {
@@ -119,7 +142,10 @@ class App : Application(), SingletonImageLoader.Factory {
                 .collect { visitorData ->
                     YouTube.visitorData = visitorData
                         ?.takeIf { it != "null" }
-                        ?: YouTube.visitorData().onFailure {
+                        ?: run {
+                            delay(3000)
+                            YouTube.visitorData()
+                        }.onFailure {
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(this@App, "Failed to get visitorData.", LENGTH_SHORT).show()
                             }
@@ -167,7 +193,7 @@ class App : Application(), SingletonImageLoader.Factory {
                 add(LocalArtworkPathKeyer())
                 add(OkHttpNetworkFetcherFactory(NetworkBoost.getClient(context)))
             }
-            .crossfade(true)
+            .crossfade(false)
             .allowHardware(false)
             .memoryCache {
                 MemoryCache.Builder()

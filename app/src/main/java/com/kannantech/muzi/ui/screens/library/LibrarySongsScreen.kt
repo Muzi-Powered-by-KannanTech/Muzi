@@ -97,7 +97,6 @@ fun LibrarySongsScreen(
     viewModel: LibrarySongsViewModel = hiltViewModel(),
     libraryFilterContent: @Composable (() -> Unit)? = null
 ) {
-    Log.v("LibrarySongsScreen", "S_RC-1")
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current

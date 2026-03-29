@@ -62,6 +62,8 @@ desktop.ini
 
 # VSCode
 .vscode/
+.android-user-home/
+.gradle-user-home/
 
 # Log files
 *.log

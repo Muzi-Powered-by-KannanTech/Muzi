@@ -167,7 +167,6 @@ fun QueueSheet(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    Log.v("QueueSheet", "Q-1")
     val haptic = LocalHapticFeedback.current
     BottomSheet(
         state = state,
@@ -180,7 +179,6 @@ fun QueueSheet(
         },
         modifier = modifier,
         collapsedContent = {
-            Log.v("QueueSheet", "Q-2")
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Top,
@@ -244,7 +242,6 @@ fun BoxScope.QueueContent(
     onTerminate: () -> Unit,
     navController: NavController,
 ) {
-    Log.v("QueueContent", "QC-1")
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current
@@ -466,7 +463,6 @@ fun BoxScope.QueueContent(
         combine(snapshotFlow { qb.masterQueues.toList() }, playerConnection.service.qbInit) { updatedList, init ->
             updatedList to init
         }.collect { (updatedList, init) ->
-            Log.d("Queue.kt", "Trigger loading queue. init = $init")
             if (init) {
                 mutableQueues.clear()
                 mutableQueues.addAll(qb.getAllQueues())
@@ -476,8 +472,6 @@ fun BoxScope.QueueContent(
     }
 
     val queueHeader: @Composable ColumnScope.(Modifier) -> Unit = { modifier ->
-        Log.v("QueueContent", "QC-mq_a")
-
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -519,7 +513,6 @@ fun BoxScope.QueueContent(
     }
 
     val queueList: @Composable ColumnScope.(PaddingValues) -> Unit = { contentPadding ->
-        Log.v("QueueContent", "QC-mq_b")
         LaunchedEffect(mqExpand) { // scroll to queue
             if (mqExpand && playingQueue >= 0) {
                 lazyQueuesListState.animateScrollToItem(playingQueue)
@@ -633,7 +626,6 @@ fun BoxScope.QueueContent(
     }
 
     val songHeader: @Composable ColumnScope.(Modifier) -> Unit = { modifier ->
-        Log.v("QueueContent", "QC-s_a")
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -677,7 +669,6 @@ fun BoxScope.QueueContent(
     }
 
     val songList: @Composable ColumnScope.(PaddingValues) -> Unit = { contentPadding ->
-        Log.v("QueueContent", "QC-s_b")
         LazyColumn(
             state = lazySongsListState,
             contentPadding = contentPadding,
@@ -842,7 +833,6 @@ fun BoxScope.QueueContent(
     }
 
     val searchBar: @Composable ColumnScope.() -> Unit = {
-        Log.v("QueueContent", "QC-searchbar")
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -890,8 +880,6 @@ fun BoxScope.QueueContent(
 
 // queue info + player controls
     val bottomNav: @Composable ColumnScope.() -> Unit = {
-        Log.v("QueueContent", "QC-nav")
-
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.secondaryContainer)
@@ -1189,24 +1177,20 @@ fun BoxScope.QueueContent(
             }
         }
     } else {
-        Log.v("QueueContent", "QC-2.1")
         // queue contents
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxSize()
         ) {
-            Log.v("QueueContent", "QC-2.2")
             Column(
                 modifier = Modifier.weight(1f, false)
             ) {
-                Log.v("QueueContent", "QC-2.3")
                 // multiqueue list
                 AnimatedVisibility(
                     visible = isSearching,
                     modifier = Modifier
                         .windowInsetsPadding(InsetsSafeT)
                 ) {
-                    Log.v("QueueContent", "QC-2.4a")
                     Spacer(Modifier.windowInsetsPadding(InsetsSafeT))
                     searchBar()
                     if (inSelectMode) {
@@ -1230,7 +1214,6 @@ fun BoxScope.QueueContent(
                 }
 
                 AnimatedVisibility(mqExpand && !isSearching) {
-                    Log.v("QueueContent", "QC-2.4b")
                     // why cant i just put everything in one column???
                     Column {
                         Column(
