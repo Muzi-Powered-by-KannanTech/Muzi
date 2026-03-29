@@ -1,9 +1,9 @@
 [submodule "ffMetadataEx"]
 	path = ffMetadataEx
-	url = https://github.com/vkannantech/MUZI-ffMetadataEx.git
+	url = https://github.com/Muzi-Powered-by-KannanTech/MUZI-ffMetadataEx.git
 [submodule "media"]
 	path = media
-	url = https://github.com/vkannantech/MUZI-media.git
+	url = https://github.com/Muzi-Powered-by-KannanTech/MUZI-media.git
 [submodule "taglib"]
 	path = taglib
-	url = https://github.com/vkannantech/MUZI-taglib.git
+	url = https://github.com/Muzi-Powered-by-KannanTech/MUZI-taglib.git
