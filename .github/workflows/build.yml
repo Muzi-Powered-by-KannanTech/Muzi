@@ -37,7 +37,7 @@ jobs:
           KEYSTORE_PROPERTIES: ${{ secrets.KEYSTORE_PROPERTIES }}
 
       - name: Build core release APK and run checks
-        run: ./gradlew assembleCoreRelease lintCoreRelease testCoreReleaseUnitTest --stacktrace --console=plain -DskipFormatKtlint
+        run: ./gradlew assembleCoreRelease lintCoreRelease testCoreDebugUnitTest --stacktrace --console=plain -DskipFormatKtlint
 
       - name: Resolve ffmpeg libs
         run: git clone https://github.com/mikooomich/ffmpeg-android-maker-prebuilt/ -b audio ffMetadataEx/ffmpeg-android-maker
