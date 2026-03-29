@@ -1,12 +1,9 @@
-name: Build debug APK
+name: Build release APK
 on:
   workflow_dispatch:
   push:
     branches:
-      - canary
-  pull_request:
-    branches:
-      - '**'
+      - dev
 
 jobs:
   build:
@@ -28,11 +25,19 @@ jobs:
       - name: Accept SDK licenses
         run: yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
 
-      - name: Build debug APK and run jvm tests
-        run: ./gradlew assembleCoreDebug lintCoreDebug testCoreDebugUnitTest --stacktrace -DskipFormatKtlint
+      - name: Setup signing configs
+        run: |
+          echo "$KEYSTORE" | base64 --decode > test.jks
+          echo "$KEYSTORE_PROPERTIES" > keystore.properties
+        env:
+          KEYSTORE: ${{ secrets.KEYSTORE }}
+          KEYSTORE_PROPERTIES: ${{ secrets.KEYSTORE_PROPERTIES }}
+
+      - name: Build core release APK and run checks
+        run: ./gradlew assembleCoreRelease lintCoreRelease testCoreReleaseUnitTest --stacktrace -DskipFormatKtlint
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app
-          path: app/build/outputs/apk/core/debug/*.apk
+          name: app-core-release
+          path: app/build/outputs/apk/core/release/*.apk
