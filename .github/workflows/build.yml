@@ -1,4 +1,4 @@
-name: Build release APK
+name: Build core and full release APKs
 on:
   workflow_dispatch:
   push:
@@ -36,8 +36,20 @@ jobs:
       - name: Build core release APK and run checks
         run: ./gradlew assembleCoreRelease lintCoreRelease testCoreReleaseUnitTest --stacktrace -DskipFormatKtlint
 
-      - name: Upload APK
+      - name: Resolve ffmpeg libs
+        run: git clone https://github.com/mikooomich/ffmpeg-android-maker-prebuilt/ -b audio ffMetadataEx/ffmpeg-android-maker
+
+      - name: Build full release APK
+        run: ./gradlew assembleFullRelease --stacktrace -DskipFormatKtlint
+
+      - name: Upload core release APK
         uses: actions/upload-artifact@v4
         with:
           name: app-core-release
           path: app/build/outputs/apk/core/release/*.apk
+
+      - name: Upload full release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-full-release
+          path: app/build/outputs/apk/full/release/*.apk
