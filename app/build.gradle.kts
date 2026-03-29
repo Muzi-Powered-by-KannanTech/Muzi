@@ -34,7 +34,11 @@ android {
     }
 
     signingConfigs {
-        if (!keystoreProperties.isEmpty) {
+        val storePasswordValue = keystoreProperties["storePassword"] as? String
+        val keyAliasValue = keystoreProperties["keyAlias"] as? String
+        val keyPasswordValue = keystoreProperties["keyPassword"] as? String
+
+        if (storePasswordValue != null && keyAliasValue != null && keyPasswordValue != null) {
             create("ot_release") {
                 val configuredStoreFile = (keystoreProperties["storeFile"] as? String)
                     ?.let { rootProject.file(it).takeIf { file -> file.exists() } ?: file(it).takeIf { file -> file.exists() } }
@@ -42,18 +46,10 @@ android {
                 (configuredStoreFile ?: fallbackStoreFile)?.let {
                     storeFile = it
                 }
-                (keystoreProperties["keyAlias"] as? String)?.let {
-                    keyAlias = it
-                }
-                (keystoreProperties["keyPassword"] as? String)?.let {
-                    keyPassword = it
-                }
-                (keystoreProperties["storePassword"] as? String)?.let {
-                    storePassword = it
-                }
+                keyAlias = keyAliasValue
+                keyPassword = keyPasswordValue
+                storePassword = storePasswordValue
             }
-        } else {
-            create("ot_release") { }
         }
     }
 
@@ -63,7 +59,9 @@ android {
             isShrinkResources = true
             isCrunchPngs = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("ot_release")
+            signingConfigs.findByName("ot_release")?.let {
+                signingConfig = it
+            }
         }
         debug {
             applicationIdSuffix = ".debug"
@@ -84,17 +82,6 @@ android {
         compose = true
         buildConfig = true
     }
-
-// build variants and stuff
-//    splits {
-//        abi {
-//            isEnable = true
-//            reset()
-//
-//            include("arm64-v8a")
-//            isUniversalApk = false
-//        }
-//    }
 
     flavorDimensions.add("abi")
 

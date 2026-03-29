@@ -31,12 +31,16 @@ jobs:
         run: |
           echo "$KEYSTORE" | base64 --decode > test.jks
           {
-            echo "$KEYSTORE_PROPERTIES" | grep -v '^storeFile='
+            echo "storePassword=$STOREPASSWORD"
+            echo "keyAlias=$KEYALIAS"
+            echo "keyPassword=$KEYPASSWORD"
             echo "storeFile=test.jks"
           } > keystore.properties
         env:
           KEYSTORE: ${{ secrets.KEYSTORE }}
-          KEYSTORE_PROPERTIES: ${{ secrets.KEYSTORE_PROPERTIES }}
+          STOREPASSWORD: ${{ secrets.STOREPASSWORD }}
+          KEYALIAS: ${{ secrets.KEYALIAS }}
+          KEYPASSWORD: ${{ secrets.KEYPASSWORD }}
 
       - name: Get date-time string
         id: datetime
