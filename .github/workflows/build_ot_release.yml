@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,24 +37,35 @@ jobs:
         run: |
           DATE_TAG=$(date +'%Y-%m-%d_%H-%M-%S')
           echo "date_tag=$DATE_TAG" >> $GITHUB_ENV
+          echo "tag_name=release-${DATE_TAG}" >> $GITHUB_ENV
 
       - name: Build core release APK
-        run: ./gradlew assembleCoreRelease
+        run: ./gradlew assembleCoreRelease lintCoreRelease testCoreReleaseUnitTest --stacktrace -DskipFormatKtlint
 
       - name: Resolve ffmpeg libs
         run: git clone https://github.com/mikooomich/ffmpeg-android-maker-prebuilt/ -b audio ffMetadataEx/ffmpeg-android-maker
 
       - name: Build full release APK
-        run: ./gradlew assembleFullRelease
+        run: ./gradlew assembleFullRelease --stacktrace -DskipFormatKtlint
 
-      - name: Create github release draft
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: muzi-release-apks
+          path: |
+            app/build/outputs/apk/core/release/*.apk
+            app/build/outputs/apk/full/release/*.apk
+
+      - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: build-${{ env.date_tag }}
-          name: "Build ${{ env.date_tag }}"
-          draft: true
+          tag_name: ${{ env.tag_name }}
+          name: "MUZI Release ${{ env.date_tag }}"
+          draft: false
+          prerelease: false
+          generate_release_notes: true
           files: |
             app/build/outputs/apk/core/release/*.apk
             app/build/outputs/apk/full/release/*.apk
         env:
-          GITHUB_TOKEN: ${{ secrets.REL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
