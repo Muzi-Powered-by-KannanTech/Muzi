@@ -604,17 +604,14 @@ fun ActionButtons(
     val currentSong by playerConnection.currentSong.collectAsState(initial = null)
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
 
-    Spacer(modifier = Modifier.width(10.dp))
-
     Box(
         modifier = Modifier
-            .offset(y = 5.dp)
-            .size(42.dp) // Premium larger size
+            .size(46.dp)
             .clip(androidx.compose.foundation.shape.CircleShape)
-            .background(playerArtTheme.panel)
+            .background(playerArtTheme.panel.copy(alpha = 0.38f))
             .border(
-                width = 0.5.dp,
-                color = playerArtTheme.panelBorder,
+                width = 1.dp,
+                color = playerArtTheme.panelBorder.copy(alpha = 0.55f),
                 shape = androidx.compose.foundation.shape.CircleShape
             )
             .clickable {
@@ -627,22 +624,20 @@ fun ActionButtons(
             tint = if (currentSong?.song?.liked == true) playerArtTheme.accent else playerArtTheme.icon,
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(22.dp),
+                .size(21.dp),
             contentDescription = null
         )
     }
 
-    Spacer(modifier = Modifier.width(12.dp))
-
     Box(
         modifier = Modifier
-            .offset(y = 5.dp)
-            .size(42.dp)
+            .padding(start = 10.dp)
+            .size(46.dp)
             .clip(androidx.compose.foundation.shape.CircleShape)
-            .background(playerArtTheme.panel)
+            .background(playerArtTheme.panel.copy(alpha = 0.38f))
             .border(
-                width = 0.5.dp,
-                color = playerArtTheme.panelBorder,
+                width = 1.dp,
+                color = playerArtTheme.panelBorder.copy(alpha = 0.55f),
                 shape = androidx.compose.foundation.shape.CircleShape
             )
             .clickable {
@@ -661,7 +656,7 @@ fun ActionButtons(
             imageVector = Icons.Rounded.MoreVert,
             tint = playerArtTheme.icon,
             modifier = Modifier
-                .size(24.dp)
+                .size(22.dp)
                 .align(Alignment.Center),
             contentDescription = null
         )
@@ -731,93 +726,82 @@ fun ControlsContent(
 
     BoxWithConstraints() {
         val maxW = maxWidth
-        val compactWidth = maxW < 400.dp
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            // action buttons for landscape (above title)
-            if (compactWidth) {
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = PlayerHorizontalPadding, end = PlayerHorizontalPadding, bottom = 16.dp)
-                ) {
-                    ActionButtons(playerSheetState, navController)
-                }
-            }
-
             Row(
-                horizontalArrangement = Arrangement.Start,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = PlayerHorizontalPadding)
-                    .clip(RoundedCornerShape(30.dp))
-                    .background(playerArtTheme.panel)
-                    .border(1.dp, playerArtTheme.panelBorder, RoundedCornerShape(30.dp))
-                    .padding(horizontal = 20.dp, vertical = 18.dp)
+                    .padding(horizontal = PlayerHorizontalPadding + 8.dp)
+                    .padding(top = 10.dp, bottom = 14.dp)
             ) {
-                Row {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = mediaMetadata?.title ?: "",
-                            style = MaterialTheme.typography.headlineSmall, // Editorial magnitude
-                            color = playerArtTheme.title,
-                            fontWeight = FontWeight.SemiBold,
-                            letterSpacing = androidx.compose.ui.unit.TextUnit(0.04f, androidx.compose.ui.unit.TextUnitType.Em),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier
-                                .basicMarquee(
-                                    iterations = 1,
-                                    initialDelayMillis = 3000
-                                )
-                                .clickable(enabled = mediaMetadata?.album != null) {
-                                    navController.navigate("album/${mediaMetadata?.album!!.id}")
-                                    playerSheetState.collapseSoft()
-                                }
-                        )
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = mediaMetadata?.title ?: "",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = playerArtTheme.title,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .basicMarquee(
+                                iterations = 1,
+                                initialDelayMillis = 2500
+                            )
+                            .clickable(enabled = mediaMetadata?.album != null) {
+                                navController.navigate("album/${mediaMetadata?.album!!.id}")
+                                playerSheetState.collapseSoft()
+                            }
+                    )
 
-                        Row {
-                            mediaMetadata?.artists?.fastForEachIndexed { index, artist ->
-                                Text(
-                                    text = artist.name,
-                                    style = MaterialTheme.typography.titleMedium,
-                                    color = playerArtTheme.subtitle,
-                                    fontWeight = FontWeight.Medium,
-                                    maxLines = 1,
-                                    modifier = Modifier
-                                        .basicMarquee(
-                                            iterations = 1,
-                                            initialDelayMillis = 5000
-                                        )
-                                        .clickable(enabled = artist.id != null) {
-                                            navController.navigate("artist/${artist.id}")
-                                            playerSheetState.collapseSoft()
-                                        }
-                                )
-
-                                if (index != mediaMetadata?.artists?.lastIndex) {
-                                    Text(
-                                        text = ", ",
-                                        style = MaterialTheme.typography.titleMedium,
-                                        color = playerArtTheme.subtitle
-                                    )
-                                }
-                            } ?: Text(
-                                text = "",
+                    Row(
+                        horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier.padding(top = 4.dp)
+                    ) {
+                        mediaMetadata?.artists?.fastForEachIndexed { index, artist ->
+                            Text(
+                                text = artist.name,
                                 style = MaterialTheme.typography.titleMedium,
                                 color = playerArtTheme.subtitle,
+                                fontWeight = FontWeight.Medium,
                                 maxLines = 1,
+                                modifier = Modifier
+                                    .basicMarquee(
+                                        iterations = 1,
+                                        initialDelayMillis = 5000
+                                    )
+                                    .clickable(enabled = artist.id != null) {
+                                        navController.navigate("artist/${artist.id}")
+                                        playerSheetState.collapseSoft()
+                                    }
                             )
-                        }
-                    }
 
-                    // action buttons for portrait (inline with title)
-                    if (!compactWidth) {
-                        ActionButtons(playerSheetState, navController)
+                            if (index != mediaMetadata?.artists?.lastIndex) {
+                                Text(
+                                    text = ", ",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = playerArtTheme.subtitle
+                                )
+                            }
+                        } ?: Text(
+                            text = "",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = playerArtTheme.subtitle,
+                            maxLines = 1,
+                        )
                     }
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 12.dp, top = 2.dp)
+                ) {
+                    ActionButtons(playerSheetState, navController)
                 }
             }
 
@@ -851,7 +835,7 @@ fun ControlsContent(
                 },
                 modifier = Modifier
                     .padding(horizontal = PlayerHorizontalPadding)
-                    .padding(top = 14.dp)
+                    .padding(top = 8.dp)
             )
 
             Row(
@@ -882,14 +866,11 @@ fun ControlsContent(
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = PlayerHorizontalPadding)
-                    .padding(top = 10.dp, bottom = 12.dp)
-                    .clip(RoundedCornerShape(36.dp))
-                    .background(playerArtTheme.panel)
-                    .border(1.dp, playerArtTheme.panelBorder, RoundedCornerShape(36.dp))
-                    .padding(horizontal = 10.dp, vertical = 12.dp)
+                    .padding(top = 20.dp, bottom = 8.dp)
             ) {
                 val shuffleModeEnabled by playerConnection.shuffleModeEnabled.collectAsState()
 
@@ -949,9 +930,16 @@ fun ControlsContent(
                     modifier = Modifier
                         .size(if (maxW >= 320.dp) if (showLyrics) 56.dp else 72.dp else 42.dp)
                         .animateContentSize()
-                        .clip(RoundedCornerShape(playPauseRoundness))
-                        .background(playerArtTheme.accent)
-                        .border(1.dp, playerArtTheme.panelBorder.copy(alpha = 0.35f), RoundedCornerShape(playPauseRoundness))
+                        .clip(androidx.compose.foundation.shape.CircleShape)
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(
+                                    playerArtTheme.accent.lighten(0.12f),
+                                    playerArtTheme.accent,
+                                )
+                            )
+                        )
+                        .border(1.dp, playerArtTheme.panelBorder.copy(alpha = 0.45f), androidx.compose.foundation.shape.CircleShape)
                         .clickable {
                             if (playerConnection.player.currentMediaItem == null) {
                                 queueBoard.setCurrQueue()
@@ -1037,7 +1025,7 @@ fun ControlsContent(
 
             // queue hint for landscape
             if (showQueueHint) {
-                Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(16.dp))
                 Row(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,

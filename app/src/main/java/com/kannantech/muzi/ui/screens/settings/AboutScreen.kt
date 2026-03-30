@@ -95,7 +95,6 @@ fun AboutScreen(
         Image(
             painter = painterResource(R.drawable.ic_muzi_logo_raster),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground, BlendMode.SrcIn),
             modifier = Modifier
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation))
@@ -169,14 +168,14 @@ fun AboutScreen(
             IconLabelButton(
                 text = "GitHub",
                 painter = painterResource(R.drawable.github),
-                onClick = { uriHandler.openUri("https://github.com/MUZI/MUZI") },
+                onClick = { uriHandler.openUri("https://github.com/Muzi-Powered-by-KannanTech/Muzi") },
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
 
             IconLabelButton(
                 text = stringResource(R.string.wiki),
                 icon = Icons.Outlined.Info,
-                onClick = { uriHandler.openUri("https://github.com/MUZI/MUZI/wiki") },
+                onClick = { uriHandler.openUri("https://github.com/Muzi-Powered-by-KannanTech/Muzi/wiki") },
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
         }
@@ -210,13 +209,13 @@ fun AboutScreen(
                 PreferenceEntry(
                     title = { Text(stringResource(R.string.help_bug_report_action)) },
                     onClick = {
-                        uriHandler.openUri("https://github.com/MUZI/MUZI/issues")
+                        uriHandler.openUri("https://github.com/Muzi-Powered-by-KannanTech/Muzi/issues")
                     }
                 )
                 PreferenceEntry(
                     title = { Text(stringResource(R.string.help_support_forum)) },
                     onClick = {
-                        uriHandler.openUri("https://github.com/MUZI/MUZI/discussions")
+                        uriHandler.openUri("https://github.com/orgs/Muzi-Powered-by-KannanTech/discussions")
                     }
                 )
                 PreferenceEntry(
@@ -303,7 +302,7 @@ fun AboutScreen(
                         name = "FFmpeg",
                         description = stringResource(R.string.ffmpeg_lgpl),
                         type = listOf(CUSTOM),
-                        url = "https://github.com/MUZI/ffMetadataEx/blob/main/Modules.md"
+                        url = "https://github.com/Muzi-Powered-by-KannanTech/ffMetadataEx/blob/main/Modules.md"
                     )
                 )
             }

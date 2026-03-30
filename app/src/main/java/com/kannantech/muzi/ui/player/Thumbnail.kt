@@ -14,6 +14,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,9 +23,12 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -37,6 +42,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.kannantech.muzi.LocalPlayerConnection
 import com.kannantech.muzi.constants.PlayerHorizontalPadding
@@ -93,21 +99,36 @@ fun Thumbnail(
                     modifier = Modifier
                         .weight(1f, false)
                 ) {
-                    AsyncImage(
-                        model = mediaMetadata?.getThumbnailModel(),
-                        contentDescription = null,
+                    Box(
                         modifier = Modifier
+                            .fillMaxWidth()
+                            .sizeIn(maxWidth = 404.dp)
                             .aspectRatio(1f)
-                            .clip(RoundedCornerShape(ThumbnailCornerRadius * 2))
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = null,
-                                enabled = showLyricsOnClick,
-                            ) {
-                                showLyrics = !showLyrics
-                                haptic.performHapticFeedback(HapticFeedbackType.Confirm)
-                            }
-                    )
+                            .clip(RoundedCornerShape(ThumbnailCornerRadius * 2.4f))
+                            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.1f))
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
+                                shape = RoundedCornerShape(ThumbnailCornerRadius * 2.4f)
+                            )
+                            .padding(5.dp)
+                    ) {
+                        AsyncImage(
+                            model = mediaMetadata?.getThumbnailModel(),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(ThumbnailCornerRadius * 2.05f))
+                                .clickable(
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = null,
+                                    enabled = showLyricsOnClick,
+                                ) {
+                                    showLyrics = !showLyrics
+                                    haptic.performHapticFeedback(HapticFeedbackType.Confirm)
+                                }
+                        )
+                    }
                 }
             }
         }
