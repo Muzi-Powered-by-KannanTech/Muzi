@@ -1,12 +1,12 @@
 # MUZI
 
-<img src="./assets/MUZI.webp" height="88" alt="MUZI app icon">
+<img src="./assets/muzi.webp" height="88" alt="MUZI app icon">
 
 A Material 3 YouTube Music client & local music player for Android
 
-[![Latest release](https://img.shields.io/github/v/release/MUZI/MUZI?include_prereleases)](https://github.com/Muzi-Powered-by-KannanTech/MUZI/releases)
-[![License](https://img.shields.io/github/license/MUZI/MUZI)](https://www.gnu.org/licenses/gpl-3.0)
-[![Downloads](https://img.shields.io/github/downloads/MUZI/MUZI/total)](https://github.com/Muzi-Powered-by-KannanTech/MUZI/releases)
+[![Latest release](https://img.shields.io/github/v/release/Muzi-Powered-by-KannanTech/Muzi?include_prereleases)](https://github.com/Muzi-Powered-by-KannanTech/Muzi/releases)
+[![License](https://img.shields.io/github/license/Muzi-Powered-by-KannanTech/Muzi)](https://www.gnu.org/licenses/gpl-3.0)
+[![Downloads](https://img.shields.io/github/downloads/Muzi-Powered-by-KannanTech/Muzi/total)](https://github.com/Muzi-Powered-by-KannanTech/Muzi/releases)
 
 
 <!-- use  "⠀⠀" for spacing -->
