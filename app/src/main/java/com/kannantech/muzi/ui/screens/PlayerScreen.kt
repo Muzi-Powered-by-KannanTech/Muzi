@@ -30,6 +30,7 @@ import com.kannantech.muzi.extensions.tabMode
 import com.kannantech.muzi.ui.component.expandedAnchor
 import com.kannantech.muzi.ui.component.rememberBottomSheetState
 import com.kannantech.muzi.ui.player.LandscapePlayer
+import com.kannantech.muzi.ui.player.ProvidePlayerArtTheme
 import com.kannantech.muzi.ui.player.PlayerBackground
 import com.kannantech.muzi.ui.player.PortraitPlayer
 import com.kannantech.muzi.utils.rememberEnumPreference
@@ -68,25 +69,30 @@ fun PlayerScreen(
             .padding(bottom = bottomPadding)
 //            .background(MaterialTheme.colorScheme.surface)
     ) {
-        PlayerBackground(
+        ProvidePlayerArtTheme(
             playerConnection = playerConnection,
-            playerBackground = playerBackground,
-            showLyrics = showLyrics,
             useDarkTheme = useDarkTheme,
-        )
+        ) {
+            PlayerBackground(
+                playerConnection = playerConnection,
+                playerBackground = playerBackground,
+                showLyrics = showLyrics,
+                useDarkTheme = useDarkTheme,
+            )
 
-        val state = rememberBottomSheetState(
-            dismissedBound = 0.dp,
-            expandedBound = maxHeight,
-            collapsedBound = MiniPlayerHeight,
-            initialAnchor = expandedAnchor,
-        )
+            val state = rememberBottomSheetState(
+                dismissedBound = 0.dp,
+                expandedBound = maxHeight,
+                collapsedBound = MiniPlayerHeight,
+                initialAnchor = expandedAnchor,
+            )
 
-        val tabMode = context.tabMode()
-        if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE && !tabMode && context.supportsWideScreen()) {
-            LandscapePlayer(state, navController, queueBoard)
-        } else {
-            PortraitPlayer(state, navController, queueBoard)
+            val tabMode = context.tabMode()
+            if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE && !tabMode && context.supportsWideScreen()) {
+                LandscapePlayer(state, navController, queueBoard)
+            } else {
+                PortraitPlayer(state, navController, queueBoard)
+            }
         }
     }
 }

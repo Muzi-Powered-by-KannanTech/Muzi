@@ -101,8 +101,8 @@ private fun DrawScope.drawTrack(
 
     val activeBrush = androidx.compose.ui.graphics.Brush.linearGradient(
         colors = listOf(
-            androidx.compose.ui.graphics.Color(0xFF7C3AED), // Electric Indigo
-            androidx.compose.ui.graphics.Color(0xFFA855F7)  // Vibrant Violet
+            activeTrackColor.copy(alpha = 0.72f),
+            activeTrackColor
         ),
         start = sliderValueStart,
         end = sliderValueEnd

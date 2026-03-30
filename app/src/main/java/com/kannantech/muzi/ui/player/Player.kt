@@ -76,6 +76,7 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
@@ -83,6 +84,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -91,6 +93,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
@@ -103,6 +107,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
+import androidx.palette.graphics.Palette
 import androidx.media3.common.C
 import androidx.media3.common.Player.REPEAT_MODE_ALL
 import androidx.media3.common.Player.REPEAT_MODE_OFF
@@ -156,6 +161,50 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 import kotlin.math.max
 
+private data class PlayerArtTheme(
+    val gradientTop: Color,
+    val gradientBottom: Color,
+    val heroOverlay: Color,
+    val panel: Color,
+    val panelBorder: Color,
+    val title: Color,
+    val subtitle: Color,
+    val icon: Color,
+    val accent: Color,
+    val onAccent: Color,
+    val sliderInactive: Color,
+)
+
+private val DarkPlayerArtTheme = PlayerArtTheme(
+    gradientTop = Color(0xFF1C1917),
+    gradientBottom = Color(0xFF09090B),
+    heroOverlay = Color(0xCC0F172A),
+    panel = Color(0x8A111827),
+    panelBorder = Color(0x33F8FAFC),
+    title = Color(0xFFF8FAFC),
+    subtitle = Color(0xBFE2E8F0),
+    icon = Color(0xFFF8FAFC),
+    accent = Color(0xFFF59E0B),
+    onAccent = Color(0xFF111827),
+    sliderInactive = Color(0x4DF8FAFC),
+)
+
+private val LightPlayerArtTheme = PlayerArtTheme(
+    gradientTop = Color(0xFFF5E7D8),
+    gradientBottom = Color(0xFFF7F3EE),
+    heroOverlay = Color(0x80FFF8F1),
+    panel = Color(0xB3FFFDFC),
+    panelBorder = Color(0x1A0F172A),
+    title = Color(0xFF0F172A),
+    subtitle = Color(0xB31E293B),
+    icon = Color(0xFF0F172A),
+    accent = Color(0xFF7C3AED),
+    onAccent = Color.White,
+    sliderInactive = Color(0x33233445),
+)
+
+private val LocalPlayerArtTheme = staticCompositionLocalOf { DarkPlayerArtTheme }
+
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -192,29 +241,34 @@ fun BottomSheetPlayer(
     }
 
 
-    BottomSheet(
-        state = state,
-        modifier = modifier,
-        background = {
-            PlayerBackground(
-                playerConnection = playerConnection,
-                playerBackground = playerBackground,
-                showLyrics = showLyrics,
-                useDarkTheme = useDarkTheme,
-            )
-        },
-        collapsedBackgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp),
-        onDismiss = {
-            playerConnection.softKillPlayer()
-        },
-        collapsedContent = {
-            MiniPlayer()
-        }
+    ProvidePlayerArtTheme(
+        playerConnection = playerConnection,
+        useDarkTheme = useDarkTheme,
     ) {
-        if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE && !context.tabMode() && context.supportsWideScreen()) {
-            LandscapePlayer(state, navController, queueBoard)
-        } else {
-            PortraitPlayer(state, navController, queueBoard)
+        BottomSheet(
+            state = state,
+            modifier = modifier,
+            background = {
+                PlayerBackground(
+                    playerConnection = playerConnection,
+                    playerBackground = playerBackground,
+                    showLyrics = showLyrics,
+                    useDarkTheme = useDarkTheme,
+                )
+            },
+            collapsedBackgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(6.dp),
+            onDismiss = {
+                playerConnection.softKillPlayer()
+            },
+            collapsedContent = {
+                MiniPlayer()
+            }
+        ) {
+            if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE && !context.tabMode() && context.supportsWideScreen()) {
+                LandscapePlayer(state, navController, queueBoard)
+            } else {
+                PortraitPlayer(state, navController, queueBoard)
+            }
         }
     }
 }
@@ -544,6 +598,7 @@ fun ActionButtons(
     val haptic = LocalHapticFeedback.current
     val playerConnection = LocalPlayerConnection.current ?: return
     val menuState = LocalMenuState.current
+    val playerArtTheme = LocalPlayerArtTheme.current
 
 
     val currentSong by playerConnection.currentSong.collectAsState(initial = null)
@@ -556,10 +611,10 @@ fun ActionButtons(
             .offset(y = 5.dp)
             .size(42.dp) // Premium larger size
             .clip(androidx.compose.foundation.shape.CircleShape)
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+            .background(playerArtTheme.panel)
             .border(
                 width = 0.5.dp,
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                color = playerArtTheme.panelBorder,
                 shape = androidx.compose.foundation.shape.CircleShape
             )
             .clickable {
@@ -569,7 +624,7 @@ fun ActionButtons(
     ) {
         Icon(
             painter = painterResource(if (currentSong?.song?.liked == true) R.drawable.favorite else R.drawable.favorite_border),
-            tint = if (currentSong?.song?.liked == true) MaterialTheme.colorScheme.primary else Color.White,
+            tint = if (currentSong?.song?.liked == true) playerArtTheme.accent else playerArtTheme.icon,
             modifier = Modifier
                 .align(Alignment.Center)
                 .size(22.dp),
@@ -584,10 +639,10 @@ fun ActionButtons(
             .offset(y = 5.dp)
             .size(42.dp)
             .clip(androidx.compose.foundation.shape.CircleShape)
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+            .background(playerArtTheme.panel)
             .border(
                 width = 0.5.dp,
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                color = playerArtTheme.panelBorder,
                 shape = androidx.compose.foundation.shape.CircleShape
             )
             .clickable {
@@ -604,7 +659,7 @@ fun ActionButtons(
     ) {
         Icon(
             imageVector = Icons.Rounded.MoreVert,
-            tint = Color.White,
+            tint = playerArtTheme.icon,
             modifier = Modifier
                 .size(24.dp)
                 .align(Alignment.Center),
@@ -627,6 +682,7 @@ fun ControlsContent(
     val haptic = LocalHapticFeedback.current
     val playerConnection = LocalPlayerConnection.current ?: return
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
+    val playerArtTheme = LocalPlayerArtTheme.current
 
 
     val isPlaying by playerConnection.isPlaying.collectAsState()
@@ -647,29 +703,6 @@ fun ControlsContent(
     )
 
     val showLyrics by rememberPreference(ShowLyricsKey, defaultValue = false)
-
-    val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.AUTO)
-    val isSystemInDarkTheme = isSystemInDarkTheme()
-    val useDarkTheme = remember(darkTheme, isSystemInDarkTheme) {
-        if (darkTheme == DarkMode.AUTO) isSystemInDarkTheme else darkTheme == DarkMode.ON
-    }
-
-    val playerBackground by rememberEnumPreference(
-        key = PlayerBackgroundStyleKey,
-        defaultValue = DEFAULT_PLAYER_BACKGROUND
-    )
-
-
-    val onBackgroundColor = when (playerBackground) {
-        PlayerBackgroundStyle.FOLLOW_THEME -> MaterialTheme.colorScheme.secondary
-        else ->
-            if (useDarkTheme)
-                MaterialTheme.colorScheme.onSurface
-            else {
-                val c = MaterialTheme.colorScheme.secondary
-                c.copy(alpha = 1f, red = c.red - 0.2f, green = c.green - 0.2f, blue = c.blue - 0.2f)
-            }
-    }
 
 
     val playbackState by playerConnection.playbackState.collectAsState()
@@ -720,13 +753,17 @@ fun ControlsContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = PlayerHorizontalPadding)
+                    .clip(RoundedCornerShape(30.dp))
+                    .background(playerArtTheme.panel)
+                    .border(1.dp, playerArtTheme.panelBorder, RoundedCornerShape(30.dp))
+                    .padding(horizontal = 20.dp, vertical = 18.dp)
             ) {
                 Row {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = mediaMetadata?.title ?: "",
                             style = MaterialTheme.typography.headlineSmall, // Editorial magnitude
-                            color = onBackgroundColor,
+                            color = playerArtTheme.title,
                             fontWeight = FontWeight.SemiBold,
                             letterSpacing = androidx.compose.ui.unit.TextUnit(0.04f, androidx.compose.ui.unit.TextUnitType.Em),
                             maxLines = 1,
@@ -747,7 +784,7 @@ fun ControlsContent(
                                 Text(
                                     text = artist.name,
                                     style = MaterialTheme.typography.titleMedium,
-                                    color = onBackgroundColor.copy(alpha = 0.8f), // Premium hierarchy
+                                    color = playerArtTheme.subtitle,
                                     fontWeight = FontWeight.Medium,
                                     maxLines = 1,
                                     modifier = Modifier
@@ -765,13 +802,13 @@ fun ControlsContent(
                                     Text(
                                         text = ", ",
                                         style = MaterialTheme.typography.titleMedium,
-                                        color = onBackgroundColor
+                                        color = playerArtTheme.subtitle
                                     )
                                 }
                             } ?: Text(
                                 text = "",
                                 style = MaterialTheme.typography.titleMedium,
-                                color = onBackgroundColor,
+                                color = playerArtTheme.subtitle,
                                 maxLines = 1,
                             )
                         }
@@ -804,10 +841,17 @@ fun ControlsContent(
                 track = { sliderState ->
                     PlayerSliderTrack(
                         sliderState = sliderState,
-                        colors = SliderDefaults.colors()
+                        colors = SliderDefaults.colors(
+                            activeTrackColor = playerArtTheme.accent,
+                            inactiveTrackColor = playerArtTheme.sliderInactive,
+                            activeTickColor = playerArtTheme.accent.copy(alpha = 0.85f),
+                            inactiveTickColor = playerArtTheme.sliderInactive,
+                        )
                     )
                 },
-                modifier = Modifier.padding(horizontal = PlayerHorizontalPadding)
+                modifier = Modifier
+                    .padding(horizontal = PlayerHorizontalPadding)
+                    .padding(top = 14.dp)
             )
 
             Row(
@@ -820,7 +864,7 @@ fun ControlsContent(
                 Text(
                     text = makeTimeString(sliderPosition ?: position),
                     style = MaterialTheme.typography.labelMedium,
-                    color = onBackgroundColor,
+                    color = playerArtTheme.subtitle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -828,7 +872,7 @@ fun ControlsContent(
                 Text(
                     text = if (duration != C.TIME_UNSET) makeTimeString(duration) else "",
                     style = MaterialTheme.typography.labelMedium,
-                    color = onBackgroundColor,
+                    color = playerArtTheme.subtitle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -841,6 +885,11 @@ fun ControlsContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = PlayerHorizontalPadding)
+                    .padding(top = 10.dp, bottom = 12.dp)
+                    .clip(RoundedCornerShape(36.dp))
+                    .background(playerArtTheme.panel)
+                    .border(1.dp, playerArtTheme.panelBorder, RoundedCornerShape(36.dp))
+                    .padding(horizontal = 10.dp, vertical = 12.dp)
             ) {
                 val shuffleModeEnabled by playerConnection.shuffleModeEnabled.collectAsState()
 
@@ -851,7 +900,7 @@ fun ControlsContent(
                             .size(32.dp)
                             .padding(4.dp)
                             .align(Alignment.Center),
-                        color = onBackgroundColor,
+                        color = playerArtTheme.icon,
                         enabled = playerConnection.player.currentMediaItem != null,
                         onClick = {
                             playerConnection.triggerShuffle()
@@ -867,7 +916,7 @@ fun ControlsContent(
                         modifier = Modifier
                             .size(32.dp)
                             .align(Alignment.Center),
-                        color = onBackgroundColor,
+                        color = playerArtTheme.icon,
                         onClick = {
                             if (playerConnection.player.currentMediaItem == null) {
                                 queueBoard.setCurrQueue()
@@ -885,7 +934,7 @@ fun ControlsContent(
                             modifier = Modifier
                                 .size(32.dp)
                                 .align(Alignment.Center),
-                            color = onBackgroundColor,
+                            color = playerArtTheme.icon,
                             enabled = playerConnection.player.currentMediaItem != null,
                             onClick = {
                                 playerConnection.player.seekTo(playerConnection.player.currentPosition - seekIncrement.millisec)
@@ -901,7 +950,8 @@ fun ControlsContent(
                         .size(if (maxW >= 320.dp) if (showLyrics) 56.dp else 72.dp else 42.dp)
                         .animateContentSize()
                         .clip(RoundedCornerShape(playPauseRoundness))
-                        .background(MaterialTheme.colorScheme.primary)
+                        .background(playerArtTheme.accent)
+                        .border(1.dp, playerArtTheme.panelBorder.copy(alpha = 0.35f), RoundedCornerShape(playPauseRoundness))
                         .clickable {
                             if (playerConnection.player.currentMediaItem == null) {
                                 queueBoard.setCurrQueue()
@@ -919,7 +969,7 @@ fun ControlsContent(
                     Image(
                         imageVector = if (playbackState == STATE_ENDED) Icons.Rounded.Replay else if (isPlaying) Icons.Rounded.Pause else Icons.Rounded.PlayArrow,
                         contentDescription = null,
-                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimary),
+                        colorFilter = ColorFilter.tint(playerArtTheme.onAccent),
                         modifier = Modifier
                             .align(Alignment.Center)
                             .size(36.dp)
@@ -935,7 +985,7 @@ fun ControlsContent(
                             modifier = Modifier
                                 .size(32.dp)
                                 .align(Alignment.Center),
-                            color = onBackgroundColor,
+                            color = playerArtTheme.icon,
                             enabled = playerConnection.player.currentMediaItem != null,
                             onClick = {
                                 //ExoPlayer seek increment can only be set in builder
@@ -955,7 +1005,7 @@ fun ControlsContent(
                         modifier = Modifier
                             .size(32.dp)
                             .align(Alignment.Center),
-                        color = onBackgroundColor,
+                        color = playerArtTheme.icon,
                         onClick = {
                             playerConnection.player.seekToNext()
                             haptic.performHapticFeedback(HapticFeedbackType.SegmentFrequentTick)
@@ -975,7 +1025,7 @@ fun ControlsContent(
                             .size(32.dp)
                             .padding(4.dp)
                             .align(Alignment.Center),
-                        color = onBackgroundColor,
+                        color = playerArtTheme.icon,
                         enabled = playerConnection.player.currentMediaItem != null,
                         onClick = {
                             playerConnection.player.toggleRepeatMode()
@@ -1007,7 +1057,7 @@ fun ControlsContent(
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.ExpandLess,
-                            tint = MaterialTheme.colorScheme.onSurface,
+                            tint = playerArtTheme.icon,
                             contentDescription = null,
                         )
                     }
@@ -1026,30 +1076,14 @@ fun PlayerBackground(
 ) {
     val TAG = "PlayerBackground"
     val context = LocalContext.current
+    val playerArtTheme = LocalPlayerArtTheme.current
 
     Box(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation))
+            .background(playerArtTheme.gradientBottom)
             .fillMaxSize()
     ) {
-
         val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
-        var gradientColors by remember {
-            mutableStateOf<List<Color>>(emptyList())
-        }
-
-
-        // gradient colours
-        LaunchedEffect(mediaMetadata, playerBackground, useDarkTheme) {
-            if (playerBackground != PlayerBackgroundStyle.GRADIENT || context.isPowerSaver()) return@LaunchedEffect
-
-            gradientColors = if (useDarkTheme) {
-                listOf(Color(0xFF1E1B4B), Color(0xFF000000)) // Deep Indigo to Pure Black
-            } else {
-                listOf(Color(0xFFE0E7FF), Color(0xFFFFFFFF)) // Soft Indigo to Pure White
-            }
-        }
-
 
         AnimatedContent(
             targetState = mediaMetadata,
@@ -1065,32 +1099,149 @@ fun PlayerBackground(
                     modifier = Modifier
                         .fillMaxSize()
                         .blur(100.dp)
-                        .alpha(0.5f)
+                        .alpha(0.24f)
                 )
             }
         }
 
-        AnimatedContent(
-            targetState = gradientColors,
-            transitionSpec = {
-                fadeIn(tween(1000)).togetherWith(fadeOut(tween(1000)))
-            }
-        ) { colors ->
-            if (playerBackground == PlayerBackgroundStyle.GRADIENT && colors.size >= 2) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Brush.verticalGradient(colors), alpha = 0.4f)
-                )
-            }
+        if (playerBackground != PlayerBackgroundStyle.FOLLOW_THEME) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(
+                                playerArtTheme.gradientTop,
+                                playerArtTheme.gradientBottom,
+                            )
+                        )
+                    )
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(
+                                playerArtTheme.heroOverlay,
+                                Color.Transparent,
+                                playerArtTheme.gradientBottom.copy(alpha = 0.76f),
+                            )
+                        )
+                    )
+            )
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation))
+            )
         }
 
         if (playerBackground != PlayerBackgroundStyle.FOLLOW_THEME && showLyrics) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(if (useDarkTheme) Color.Black.copy(alpha = 0.3f) else Color.White.copy(alpha = 0.5f))
+                    .background(if (useDarkTheme) Color.Black.copy(alpha = 0.24f) else Color.White.copy(alpha = 0.18f))
             )
         }
     }
+}
+
+@Composable
+fun ProvidePlayerArtTheme(
+    playerConnection: PlayerConnection,
+    useDarkTheme: Boolean,
+    content: @Composable () -> Unit,
+) {
+    val context = LocalContext.current
+    val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
+    var playerArtTheme by remember(useDarkTheme) {
+        mutableStateOf(if (useDarkTheme) DarkPlayerArtTheme else LightPlayerArtTheme)
+    }
+
+    LaunchedEffect(mediaMetadata?.id, mediaMetadata?.thumbnailUrl, useDarkTheme) {
+        val metadata = mediaMetadata ?: run {
+            playerArtTheme = if (useDarkTheme) DarkPlayerArtTheme else LightPlayerArtTheme
+            return@LaunchedEffect
+        }
+
+        val bitmap = withContext(coilCoroutine) {
+            val request = ImageRequest.Builder(context)
+                .data(metadata.getThumbnailModel(256, 256))
+                .allowHardware(false)
+                .build()
+            context.imageLoader.execute(request).image?.toBitmap()
+        } ?: run {
+            playerArtTheme = if (useDarkTheme) DarkPlayerArtTheme else LightPlayerArtTheme
+            return@LaunchedEffect
+        }
+
+        val palette = Palette.Builder(bitmap)
+            .clearFilters()
+            .maximumColorCount(18)
+            .generate()
+
+        val seedColor = listOfNotNull(
+            palette.vibrantSwatch?.rgb,
+            palette.mutedSwatch?.rgb,
+            palette.dominantSwatch?.rgb,
+            palette.darkVibrantSwatch?.rgb,
+            palette.lightVibrantSwatch?.rgb,
+        ).firstOrNull()?.let(::Color) ?: if (useDarkTheme) DarkPlayerArtTheme.accent else LightPlayerArtTheme.accent
+
+        val baseColor = listOfNotNull(
+            palette.darkMutedSwatch?.rgb,
+            palette.mutedSwatch?.rgb,
+            palette.dominantSwatch?.rgb,
+            palette.lightMutedSwatch?.rgb,
+        ).firstOrNull()?.let(::Color) ?: if (useDarkTheme) DarkPlayerArtTheme.gradientTop else LightPlayerArtTheme.gradientTop
+
+        val accent = if (useDarkTheme) seedColor.lighten(0.1f) else seedColor.darken(0.05f)
+        val gradientTop = if (useDarkTheme) baseColor.darken(0.46f) else baseColor.lighten(0.2f)
+        val gradientBottom = if (useDarkTheme) baseColor.darken(0.78f) else baseColor.lighten(0.42f)
+        val panel = if (useDarkTheme) Color.Black.copy(alpha = 0.36f).compositeOver(gradientTop) else Color.White.copy(alpha = 0.68f).compositeOver(gradientBottom)
+        val title = panel.bestContentColor()
+        val subtitle = title.copy(alpha = if (useDarkTheme) 0.78f else 0.72f)
+
+        playerArtTheme = PlayerArtTheme(
+            gradientTop = gradientTop,
+            gradientBottom = gradientBottom,
+            heroOverlay = if (useDarkTheme) Color.Black.copy(alpha = 0.34f) else Color.White.copy(alpha = 0.12f),
+            panel = panel.copy(alpha = if (useDarkTheme) 0.84f else 0.9f),
+            panelBorder = title.copy(alpha = if (useDarkTheme) 0.14f else 0.1f),
+            title = title,
+            subtitle = subtitle,
+            icon = title,
+            accent = accent,
+            onAccent = accent.bestContentColor(),
+            sliderInactive = title.copy(alpha = if (useDarkTheme) 0.28f else 0.2f),
+        )
+    }
+
+    CompositionLocalProvider(LocalPlayerArtTheme provides playerArtTheme) {
+        content()
+    }
+}
+
+private fun Color.bestContentColor(): Color = if (luminance() > 0.42f) Color(0xFF0F172A) else Color(0xFFF8FAFC)
+
+private fun Color.lighten(amount: Float): Color {
+    val factor = amount.coerceIn(0f, 1f)
+    return Color(
+        red = red + (1f - red) * factor,
+        green = green + (1f - green) * factor,
+        blue = blue + (1f - blue) * factor,
+        alpha = alpha
+    )
+}
+
+private fun Color.darken(amount: Float): Color {
+    val factor = 1f - amount.coerceIn(0f, 1f)
+    return Color(
+        red = red * factor,
+        green = green * factor,
+        blue = blue * factor,
+        alpha = alpha
+    )
 }
