@@ -20,7 +20,7 @@ A Material 3 YouTube Music client & local music player for Android
 > MUZI is only available on the platforms listed here. This app is not listed on the Play Store or any other fake website that claim to be us. We recommend you to immediately delete any fake versions or clones for your safety.
 
 > [!NOTE]
-> We are looking for maintainers! For more information and the state of MUZI: https://github.com/Muzi-Powered-by-KannanTech/MUZI/discussions/1116
+> We are looking for maintainers! For more information and the state of MUZI: https://github.com/Muzi-Powered-by-KannanTech/MUZI/discussions
 
 ## Features
 
@@ -68,43 +68,18 @@ MUZI is a supercharged fork of [InnerTune](https://github.com/z-huang/InnerTune)
 We are looking for contributors, translators, and maintainers! If you would like to help out, or just wish to build the
 app yourself, please see the [building and contribution notes](./CONTRIBUTING.md).
 
-### Submitting Translations
-
-We use Weblate to translate MUZI. For more details or to submit translations, visit our [Weblate page](https://hosted.weblate.org/projects/MUZI/).
-
-<a href="https://hosted.weblate.org/projects/MUZI/">
-<img src="https://hosted.weblate.org/widget/MUZI/multi-auto.svg" alt="Translation status" />
-</a>
-
-Thank you very much for helping to make MUZI accessible to many people worldwide.
 
 ## Support us
 
-If you like MUZI, you're welcome to send a donation. Donations will support the development,
-including bug fixes and new features.
-
-[<img src="./assets/badge_donate.png" alt="Donate" height="40" >](https://www.kannantech.com/donate)
+[<img src="./assets/badge_donate.png" alt="Donate" height="120" >](https://www.kannantech.com/donate)
 
 ## Help & Support
 Contact us through GitHub
-- For bug reports and/or feature requests, please create a [GitHub issue](https://github.com/Muzi-Powered-by-KannanTech/MUZI/issues).
-- If you have want help with the app, check out the [Discussion Forum](https://github.com/Muzi-Powered-by-KannanTech/MUZI/discussions).
+- [GitHub issue](https://github.com/Muzi-Powered-by-KannanTech/MUZI/issues).
+- [Discussion Forum](https://github.com/Muzi-Powered-by-KannanTech/MUZI/discussions).
 
-For all other inquiries NOT related to the app, you can contact us at MUZI@protonmail.com. **This is NOT a support email!**
+For all other inquiries NOT related to the app, you can contact us at vkannantech@gmail.com. **This is NOT a support email!**
 
-## Attribution
-
-Thanks to all our contributors! Check them out [here](https://github.com/Muzi-Powered-by-KannanTech/MUZI/graphs/contributors)
-
-[z-huang/InnerTune](https://github.com/z-huang/InnerTune) for providing an awesome base for this fork, none of this
-would have been possible without it.
-
-[Musicolet](https://play.google.com/store/apps/details?id=in.krosbits.musicolet) for inspiration of a local music player
-experience done right.
-
-[Gramophone](https://github.com/FoedusProgramme/Gramophone) for emotional support, and a legendary lyrics parser
-
-[![Star History Chart](https://api.star-history.com/svg?repos=MUZI/MUZI&type=Date)](https://www.star-history.com/#MUZI/MUZI&Date)
 
 ## Disclaimer
 
