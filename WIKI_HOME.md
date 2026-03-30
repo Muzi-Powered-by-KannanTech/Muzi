@@ -1,6 +1,6 @@
 # Welcome to the MUZI Wiki
 
-<img src="./assets/MUZI.webp" height="128" alt="MUZI logo">
+<img src="./assets/muzi.webp" height="128" alt="MUZI logo">
 
 MUZI is a premium YouTube Music client and local music player for Android, powered by **KannanTech**.
 
