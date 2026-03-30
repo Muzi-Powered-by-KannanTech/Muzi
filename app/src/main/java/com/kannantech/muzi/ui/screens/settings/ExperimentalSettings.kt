@@ -205,7 +205,7 @@ fun ExperimentalSettings(
             PreferenceEntry(
                 title = { Text("Important: About audio offload compatibility and issues") },
                 onClick = {
-                    uriHandler.openUri("https://github.com/MUZI/MUZI/wiki/Audio-offload")
+                    uriHandler.openUri("https://github.com/Muzi-Powered-by-KannanTech/Muzi/wiki/Audio-offload")
                 }
             )
 

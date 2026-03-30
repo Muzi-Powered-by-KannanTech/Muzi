@@ -79,7 +79,7 @@ fun AttributionScreen(
                 contributor = ContributorInfo (
                     name = stringResource(R.string.all_contributors),
                     type = listOf(CUSTOM),
-                    url = "https://github.com/MUZI/MUZI/graphs/contributors"
+                    url = "https://github.com/Muzi-Powered-by-KannanTech/Muzi/graphs/contributors"
                 )
             )
         }
@@ -104,6 +104,12 @@ fun AttributionScreen(
 }
 
 val maintainers = mutableListOf(
+    ContributorInfo(
+        name = "Kannan V",
+        alias = "vkannantech",
+        type = listOf(LEAD_DEVELOPER, MAINTAINER),
+        url = "https://github.com/vkannantech"
+    ),
     ContributorInfo(
         name = "Davide Garberi",
         alias = "DD3Boh",
