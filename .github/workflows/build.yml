@@ -30,7 +30,18 @@ jobs:
 
       - name: Setup signing configs
         run: |
-          printf '%s' "$KEYSTORE" | tr -d '\r\n\t ' | base64 --decode --ignore-garbage > test.jks
+          python - <<'PY'
+          import base64
+          import os
+          from pathlib import Path
+
+          raw = os.environ["KEYSTORE"].strip()
+          if "=" in raw and not raw.startswith("MII"):
+              raw = raw.split("=", 1)[1].strip()
+          raw = "".join(raw.split())
+          raw += "=" * (-len(raw) % 4)
+          Path("test.jks").write_bytes(base64.b64decode(raw))
+          PY
           KEY_PASSWORD_VALUE="${KEYPASSWORD:-$STOREPASSWORD}"
           {
             echo "storePassword=$STOREPASSWORD"
