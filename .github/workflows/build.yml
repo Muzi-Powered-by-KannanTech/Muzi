@@ -74,3 +74,21 @@ jobs:
         with:
           name: app-full-release
           path: app/build/outputs/apk/full/release/*.apk
+
+      - name: Extract version name
+        id: get_version
+        run: |
+          VERSION=$(grep "versionName =" app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v1
+        if: github.ref == 'refs/heads/dev'
+        with:
+          tag_name: "v${{ steps.get_version.outputs.VERSION }}"
+          name: "MUZI Release v${{ steps.get_version.outputs.VERSION }}"
+          files: |
+            app/build/outputs/apk/core/release/*.apk
+            app/build/outputs/apk/full/release/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
