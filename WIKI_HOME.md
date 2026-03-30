@@ -4,7 +4,7 @@
 
 MUZI is a premium YouTube Music client and local music player for Android, powered by **KannanTech**.
 
-## Project Leadership
+## Core Development
 - **Kannan V**: Lead Developer & Project Maintainer
 
 ## Getting Started
@@ -16,10 +16,10 @@ MUZI is a premium YouTube Music client and local music player for Android, power
 MUZI is free and open-source. If you find value in this project, consider supporting its development.
 - [Donate to KannanTech](https://www.kannantech.com/donate)
 
-## Links
+## Official Channels
 - [GitHub Repository](https://github.com/Muzi-Powered-by-KannanTech/Muzi)
 - [Discussion Forum](https://github.com/orgs/Muzi-Powered-by-KannanTech/discussions)
 - [Issue Tracker](https://github.com/Muzi-Powered-by-KannanTech/Muzi/issues)
 
 ---
-*Maintained by [Kannan V](https://github.com/vkannantech)*
+*Maintained by the [KannanTech Core Team](https://github.com/vkannantech)*
