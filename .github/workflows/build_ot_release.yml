@@ -29,11 +29,12 @@ jobs:
 
       - name: Setup signing configs
         run: |
-          echo "$KEYSTORE" | base64 --decode > test.jks
+          printf '%s' "$KEYSTORE" | tr -d '\r\n\t ' | base64 --decode --ignore-garbage > test.jks
+          KEY_PASSWORD_VALUE="${KEYPASSWORD:-$STOREPASSWORD}"
           {
             echo "storePassword=$STOREPASSWORD"
             echo "keyAlias=$KEYALIAS"
-            echo "keyPassword=$KEYPASSWORD"
+            echo "keyPassword=$KEY_PASSWORD_VALUE"
             echo "storeFile=test.jks"
           } > keystore.properties
         env:
