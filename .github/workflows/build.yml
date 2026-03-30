@@ -5,6 +5,9 @@ on:
     branches:
       - dev
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -81,14 +84,39 @@ jobs:
           VERSION=$(grep "versionName =" app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
+      - name: Rename APKs for release
+        run: |
+          cp app/build/outputs/apk/core/release/*.apk muzi-core-v${{ steps.get_version.outputs.VERSION }}.apk
+          cp app/build/outputs/apk/full/release/*.apk muzi-full-v${{ steps.get_version.outputs.VERSION }}.apk
+
       - name: Upload APK to Release
         uses: softprops/action-gh-release@v1
         if: github.ref == 'refs/heads/dev'
         with:
           tag_name: "v${{ steps.get_version.outputs.VERSION }}"
-          name: "MUZI Release v${{ steps.get_version.outputs.VERSION }}"
+          name: "🚀 MUZI Release v${{ steps.get_version.outputs.VERSION }}"
+          body: |
+            ## 🎧 MUZI Music Player
+
+            🚀 Version: v${{ steps.get_version.outputs.VERSION }}
+
+            ### ✨ Features
+            - Dynamic UI with palette theming
+            - BottomSheet Player (Spotify-style)
+            - Highly optimized Core & Full variants
+
+            ### 🔧 Improvements
+            - Professional project-first presentation
+            - Synchronized repository history
+            - Automated CI/CD release pipeline
+
+            📦 Download the APKs below and install on your device.
+
+            ⭐ Support the project if you like it!
+          draft: false
+          prerelease: false
           files: |
-            app/build/outputs/apk/core/release/*.apk
-            app/build/outputs/apk/full/release/*.apk
+            muzi-core-v*.apk
+            muzi-full-v*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
