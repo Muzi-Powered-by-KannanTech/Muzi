@@ -1,4 +1,4 @@
-# v0.10.2-b1 - KannanTech Migration
+# v2026.B03.A.05 - KannanTech Migration
 
 We are excited to announce the official migration of **MUZI** to the new **Muzi-Powered-by-KannanTech** organization!
 
