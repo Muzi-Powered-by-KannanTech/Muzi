@@ -151,6 +151,10 @@ suspend fun scanInit(
     val strictFilePaths = context.dataStore.get(ScannerStrictFilePathsKey, defaultValue = false)
     val autoScan = context.dataStore.get(AutomaticScannerKey, defaultValue = true)
     val lastLocalScan = context.dataStore.get(LastLocalScanKey, 0L)
+    Log.i(
+        MAIN_TAG,
+        "scanInit called. forceScan=$forceScan, localLibEnable=$localLibEnable, scannerImpl=$scannerImpl, autoScan=$autoScan"
+    )
 
     // updater
     val updateAvailable = context.dataStore.get(
@@ -216,6 +220,7 @@ suspend fun scanInit(
                     val uris = scanner.scanLocal(scanPaths, excludedScanPaths)
                     scanner.quickSync(database, uris, scannerSensitivity, strictExtensions, strictFilePaths)
                 }
+                Log.i(MAIN_TAG, "Local scan finished. Local DB count=${database.allLocalSongs().size}")
             } catch (e: Exception) {
                 coroutineScope.launch {
                     snackbarHostState?.showSnackbar(

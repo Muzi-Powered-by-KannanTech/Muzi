@@ -180,6 +180,13 @@ fun AboutScreen(
             )
         }
 
+        Text(
+            text = "Local library system-source integration in MUZI is inspired by Auxio.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.secondary,
+            modifier = Modifier.padding(horizontal = 24.dp)
+        )
+
         Spacer(Modifier.height(96.dp))
 
         Column(

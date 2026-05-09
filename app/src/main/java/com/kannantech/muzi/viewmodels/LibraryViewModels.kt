@@ -55,6 +55,7 @@ import com.kannantech.muzi.ui.utils.cacheDirectoryTree
 import com.kannantech.muzi.ui.utils.getDirectoryTree
 import com.kannantech.muzi.utils.SyncUtils
 import com.kannantech.muzi.utils.dataStore
+import com.kannantech.muzi.utils.ensureLocalLibraryReady
 import com.kannantech.muzi.utils.reportException
 import com.kannantech.muzi.utils.scanners.LocalMediaScanner.Companion.refreshLocal
 import com.kannantech.innertube.YouTube
@@ -85,6 +86,12 @@ class LibrarySongsViewModel @Inject constructor(
     val allSongs = getSyncedSongs(context, database)
     val isSyncingRemoteLikedSongs = syncUtils.isSyncingRemoteLikedSongs
     val isSyncingRemoteSongs = syncUtils.isSyncingRemoteSongs
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            ensureLocalLibraryReady(context, database)
+        }
+    }
 
     fun syncLibrarySongs(bypassCd: Boolean = false) {
         viewModelScope.launch(Dispatchers.IO) { syncUtils.syncRemoteSongs(bypassCd) }
@@ -135,9 +142,14 @@ class LibraryFoldersViewModel @Inject constructor(
      * Trigger a scan of local directory
      */
     suspend fun getLocalSongs(dir: String? = null) {
+        ensureLocalLibraryReady(context, database)
         Log.d(TAG, "Loading folders page: ${dir ?: path}")
         val dt = refreshLocal(database, dir ?: path)
         dt.isSkeleton = false
+        Log.i(
+            TAG,
+            "Folder tree rebuilt for ${dir ?: path}. directFiles=${dt.files.size}, subdirs=${dt.subdirs.size}, recursiveSongs=${dt.toList().size}"
+        )
         cacheDirectoryTree(dt)
         localSongDirectoryTree.value = dt
     }
@@ -146,8 +158,10 @@ class LibraryFoldersViewModel @Inject constructor(
      * Get total number of songs in directory
      */
     suspend fun getSongCount(dir: String? = null) {
+        ensureLocalLibraryReady(context, database)
         Log.d(TAG, "Loading folder song count: ${dir ?: path}")
         localSongDtSongCount.value = database.localSongCountInPath(dir ?: path).first()
+        Log.i(TAG, "Folder song count for ${dir ?: path}: ${localSongDtSongCount.value}")
     }
 
     /**
@@ -171,6 +185,11 @@ class LibraryArtistsViewModel @Inject constructor(
     private val syncUtils: SyncUtils,
 ) : ViewModel() {
     val isSyncingRemoteArtists = syncUtils.isSyncingRemoteArtists
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            ensureLocalLibraryReady(context, database)
+        }
+    }
 
     val allArtists = context.dataStore.data
         .map {
@@ -220,6 +239,11 @@ class LibraryAlbumsViewModel @Inject constructor(
     private val syncUtils: SyncUtils,
 ) : ViewModel() {
     val isSyncingRemoteAlbums = syncUtils.isSyncingRemoteAlbums
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            ensureLocalLibraryReady(context, database)
+        }
+    }
 
     val allAlbums = context.dataStore.data
         .map {

@@ -132,6 +132,13 @@ val contributors = mutableListOf(
         description = "InnerTune creator",
         url = "https://github.com/z-huang"
     ),
+    ContributorInfo(
+        name = "Alexander Capehart",
+        alias = "OxygenCobalt",
+        type = listOf(CUSTOM),
+        description = "Auxio creator. MUZI local library system-source integration is adapted from Auxio concepts and behavior.",
+        url = "https://github.com/OxygenCobalt/Auxio"
+    ),
 )
 
 //val translators = mutableListOf(

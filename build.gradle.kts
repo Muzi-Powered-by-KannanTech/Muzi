@@ -24,9 +24,13 @@ subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         compilerOptions {
             if (project.findProperty("enableComposeCompilerReports") == "true") {
+                val composeMetricsDir = project.layout.buildDirectory.dir("compose_metrics").get().asFile.apply {
+                    mkdirs()
+                }
+                val composeMetricsPath = composeMetricsDir.absolutePath.replace("\\", "/")
                 arrayOf("reports", "metrics").forEach {
                     freeCompilerArgs.add("-P")
-                    freeCompilerArgs.add("plugin:androidx.compose.compiler.plugins.kotlin:${it}Destination=${project.layout.buildDirectory}/compose_metrics")
+                    freeCompilerArgs.add("plugin:androidx.compose.compiler.plugins.kotlin:${it}Destination=$composeMetricsPath")
                 }
             }
         }

@@ -710,8 +710,8 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
         val contentResolver: ContentResolver = context.contentResolver
         val selectionBuilder = StringBuilder("${MediaStore.Audio.Media.IS_MUSIC} != 0")
         val selectionArgs = mutableListOf<String>()
-        scanPaths.forEachIndexed { index, path ->
-            val convertedPath = absoluteFilePathFromUri(context, path)
+        val resolvedScanRoots = scanPaths.mapNotNull { absoluteFilePathFromUri(context, it) }
+        resolvedScanRoots.forEachIndexed { index, convertedPath ->
             if (index == 0) {
                 selectionBuilder.append(" AND (")
             } else {
@@ -720,8 +720,14 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
             selectionBuilder.append("${MediaStore.Audio.Media.DATA} LIKE ?")
             selectionArgs.add("$convertedPath%")
         }
-        selectionBuilder.append(")")
+        if (resolvedScanRoots.isNotEmpty()) {
+            selectionBuilder.append(")")
+        }
         val selection = selectionBuilder.toString()
+        Log.i(
+            TAG,
+            "MediaStore query starting. scanRoots=${resolvedScanRoots.size}, excludedRoots=${excludedScanPaths.size}, selection=$selection"
+        )
 
         // Query for audio files
         val cursor = contentResolver.query(
@@ -731,6 +737,9 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
             selectionArgs.toTypedArray(),
             null
         )
+        if (cursor == null) {
+            Log.w(TAG, "MediaStore query returned a null cursor")
+        }
         cursor?.use { cursor ->
             // Columns indices
             val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
@@ -761,15 +770,15 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
 
             while (cursor.moveToNext()) {
                 val id = SongEntity.generateSongId()
-                val name = cursor.getString(nameColumn) // file name
-                var title = cursor.getString(titleColumn) // song title
+                val name = cursor.getString(nameColumn) ?: continue // file name
+                var title = cursor.getString(titleColumn) ?: name // song title
                 val duration = cursor.getInt(durationColumn) / 1000
                 val artist = cursor.getString(artistColumn)
                 val album = cursor.getString(albumColumn)
                 val rawYear = cursor.getString(yearColumn)
                 val rawDateModified = cursor.getString(dateModifiedColumn)
-                val path = cursor.getString(pathColumn)
-                val mime = cursor.getString(mimeColumn)
+                val path = cursor.getString(pathColumn) ?: continue
+                val mime = cursor.getString(mimeColumn) ?: "audio/*"
                 if (excludedScanPaths.any { path.startsWith(it.path ?: "") }) continue
 
                 // extra stream info
@@ -810,7 +819,7 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
                 val genresList = ArrayList<GenreEntity>()
 
 
-                artist.split(ARTIST_SEPARATORS).forEach { artistVal ->
+                (artist ?: "Unknown Artist").split(ARTIST_SEPARATORS).forEach { artistVal ->
                     artistList.add(ArtistEntity(ArtistEntity.generateArtistId(), artistVal, isLocal = true))
                 }
 
@@ -864,6 +873,7 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
                 )
             }
         }
+        Log.i(TAG, "MediaStore query completed. Raw songs discovered: ${mediaStoreSongs.size}")
 
         // TODO: duplicate songs with different paths will cycle through paths, causing it to be synced instead of ignored...
         val finalSongs = if (!refreshExisting) {
@@ -872,6 +882,10 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
         } else {
             mediaStoreSongs
         }
+        Log.i(
+            TAG,
+            "MediaStore sync candidates: raw=${mediaStoreSongs.size}, final=${finalSongs.size}, refreshExisting=$refreshExisting"
+        )
 
         scannerProgressCurrent.value = finalSongs.size
         if (finalSongs.isNotEmpty()) {
@@ -891,6 +905,7 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
         scannerState.value = 3
         disableSongsByPath(mediaStoreSongs.mapNotNull { it.song.song.localPath }, database)
         finalize(database)
+        Log.i(TAG, "MediaStore sync post-finalize local DB count: ${database.allLocalSongs().size}")
         scannerState.value = 0
 
 
