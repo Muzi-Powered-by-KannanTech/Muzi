@@ -12,6 +12,7 @@ package com.kannantech.muzi
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -117,6 +118,7 @@ import android.view.View
 import android.view.animation.AnticipateInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -233,18 +235,57 @@ class MainActivity : ComponentActivity() {
     lateinit var connectivityObserver: NetworkConnectivityObserver
 
     private var playerConnection by mutableStateOf<PlayerConnection?>(null)
+    var mediaPermissionGranted by mutableStateOf(false)
+        private set
+
+    private var startupSnackbarHostState: SnackbarHostState? = null
 
     val controllerViewModel: MediaControllerViewModel by viewModels()
 
     // storage permission helpers
     val permissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            mediaPermissionGranted = isGranted
             if (isGranted) {
-//                Toast.makeText(this, "Granted", Toast.LENGTH_SHORT).show()
+                triggerStartupScan(forceScan = true)
             } else {
                 Toast.makeText(this, getString(R.string.scanner_missing_storage_perm), Toast.LENGTH_SHORT).show()
             }
         }
+
+    private fun hasMediaPermission(): Boolean {
+        return checkSelfPermission(MEDIA_PERMISSION_LEVEL) == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun requestMediaPermissionIfRequired(): Boolean {
+        val granted = hasMediaPermission()
+        mediaPermissionGranted = granted
+        if (!granted) {
+            permissionLauncher.launch(MEDIA_PERMISSION_LEVEL)
+        }
+        return granted
+    }
+
+    private fun triggerStartupScan(
+        delayMs: Long = 0L,
+        forceScan: Boolean = false,
+    ) {
+        lifecycleScope.launch(lmScannerCoroutine) {
+            if (delayMs > 0L) {
+                kotlinx.coroutines.delay(delayMs)
+            }
+            scanInit(
+                context = this@MainActivity,
+                database = database,
+                downloadUtil = downloadUtil,
+                coroutineScope = this,
+                playerConnection = playerConnection,
+                snackbarHostState = startupSnackbarHostState,
+                forceScan = forceScan,
+                requestPermissionIfMissing = false,
+            )
+        }
+    }
 
     override fun onDestroy() {
         Log.i(MAIN_TAG, "onDestroy() called. isFinishing = $isFinishing")
@@ -298,6 +339,7 @@ class MainActivity : ComponentActivity() {
         }
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        mediaPermissionGranted = hasMediaPermission()
 
         activityLauncher = ActivityLauncherHelper(this)
         connectivityObserver = NetworkConnectivityObserver(this)
@@ -307,6 +349,7 @@ class MainActivity : ComponentActivity() {
             val coroutineScope = rememberCoroutineScope()
             val haptic = LocalHapticFeedback.current
             val snackbarHostState = remember { SnackbarHostState() }
+            startupSnackbarHostState = snackbarHostState
 
             val highContrastCompat by rememberPreference(HighContrastKey, defaultValue = false)
             val useDarkTheme = true // Hardcoded Obsidian Noir Permanent Dark
@@ -346,13 +389,8 @@ class MainActivity : ComponentActivity() {
 
 
             LaunchedEffect(Unit) {
-                // local media & download folders auto scan
-                coroutineScope.launch(lmScannerCoroutine) {
-                    kotlinx.coroutines.delay(12000)
-                    scanInit(
-                        this@MainActivity, database, downloadUtil, coroutineScope, playerConnection,
-                        snackbarHostState
-                    )
+                if (requestMediaPermissionIfRequired()) {
+                    triggerStartupScan(delayMs = 1500L)
                 }
             }
 

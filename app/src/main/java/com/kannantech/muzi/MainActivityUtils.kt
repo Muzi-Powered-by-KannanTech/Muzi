@@ -125,7 +125,9 @@ suspend fun scanInit(
     downloadUtil: DownloadUtil,
     coroutineScope: CoroutineScope,
     playerConnection: PlayerConnection?,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState?,
+    forceScan: Boolean = false,
+    requestPermissionIfMissing: Boolean = true,
 ) {
     val MAIN_TAG = "MainOtActivity"
     val oobeStatus = context.dataStore.get(OobeStatusKey, defaultValue = 0)
@@ -141,7 +143,7 @@ suspend fun scanInit(
     val scannerImpl by enumPreference(
         context = context,
         key = ScannerImplKey,
-        defaultValue = ScannerImpl.TAGLIB
+        defaultValue = ScannerImpl.MEDIASTORE
     )
     val scanPaths = context.dataStore.get(ScanPathsKey, defaultValue = "")
     val excludedScanPaths = context.dataStore.get(ExcludedScanPathsKey, defaultValue = "")
@@ -162,7 +164,7 @@ suspend fun scanInit(
         return
     }
     val timeNow = LocalDateTime.now().toInstant(ZoneOffset.UTC).toEpochMilli()
-    if (lastLocalScan + AUTO_SCAN_COOLDOWN > timeNow) {
+    if (!forceScan && lastLocalScan + AUTO_SCAN_COOLDOWN > timeNow) {
         Log.i(MAIN_TAG, "Aborting automatic scan. Not enough time has passed since the last scan")
         downloadUtil.resumeDownloadsOnStart()
         return
@@ -172,13 +174,7 @@ suspend fun scanInit(
         settings[LastLocalScanKey] =
             timeNow - AUTO_SCAN_COOLDOWN + AUTO_SCAN_SOFT_COOLDOWN // min cooldown to avoid crash loops
     }
-    coroutineScope.launch {
-        snackbarHostState.showSnackbar(
-            message = context.getString(R.string.scanner_auto_start),
-            withDismissAction = true,
-            duration = SnackbarDuration.Short
-        )
-    }
+
 
 
     // scan download folders
@@ -206,11 +202,23 @@ suspend fun scanInit(
                 val scanner = LocalMediaScanner.getScanner(
                     context, scannerImpl, SCANNER_OWNER_LM
                 )
-                val uris = scanner.scanLocal(scanPaths, excludedScanPaths)
-                scanner.quickSync(database, uris, scannerSensitivity, strictExtensions, strictFilePaths)
+                if (scannerImpl == ScannerImpl.MEDIASTORE) {
+                    scanner.fullMediaStoreSync(
+                        database = database,
+                        scanPaths = com.kannantech.muzi.utils.scanners.uriListFromString(scanPaths),
+                        excludedScanPaths = com.kannantech.muzi.utils.scanners.uriListFromString(excludedScanPaths),
+                        matchCriteria = scannerSensitivity,
+                        strictFileNames = strictExtensions,
+                        strictFilePaths = strictFilePaths,
+                        refreshExisting = false,
+                    )
+                } else {
+                    val uris = scanner.scanLocal(scanPaths, excludedScanPaths)
+                    scanner.quickSync(database, uris, scannerSensitivity, strictExtensions, strictFilePaths)
+                }
             } catch (e: Exception) {
                 coroutineScope.launch {
-                    snackbarHostState.showSnackbar(
+                    snackbarHostState?.showSnackbar(
                         message = "${context.getString(R.string.scanner_scan_fail)}: ${e.message}",
                         withDismissAction = true,
                         duration = SnackbarDuration.Short
@@ -228,22 +236,17 @@ suspend fun scanInit(
             }
             playerConnection?.service?.initQueue()
             Log.i(MAIN_TAG, "Local media and downloads scan completed")
-        } else if (perms == PackageManager.PERMISSION_DENIED) {
-            // Request the permission using the permission launcher
+        } else if (perms == PackageManager.PERMISSION_DENIED && requestPermissionIfMissing) {
             (context as MainActivity).permissionLauncher.launch(MEDIA_PERMISSION_LEVEL)
             Log.w(MAIN_TAG, "Not enough permission to perform local media scan")
+        } else if (perms == PackageManager.PERMISSION_DENIED) {
+            Log.w(MAIN_TAG, "Skipping local media scan because storage permission is missing")
         }
     } else if (localLibEnable) {
         Log.w(MAIN_TAG, "Cannot perform local media scan, scanner is in use")
     }
 
     Log.i(MAIN_TAG, "Local media and downloads auto scan complete")
-    coroutineScope.launch {
-        snackbarHostState.showSnackbar(
-            message = context.getString(R.string.scanner_auto_end),
-            withDismissAction = true,
-            duration = SnackbarDuration.Short
-        )
-    }
+
 
 }

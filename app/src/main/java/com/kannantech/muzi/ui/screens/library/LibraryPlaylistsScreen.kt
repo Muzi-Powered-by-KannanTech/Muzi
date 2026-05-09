@@ -138,16 +138,13 @@ fun LibraryPlaylistsScreen(
     }
 
     val filterContent = @Composable {
-        var showStoragePerm by remember {
-            mutableStateOf(context.checkSelfPermission(MEDIA_PERMISSION_LEVEL) != PackageManager.PERMISSION_GRANTED)
-        }
+        val showStoragePerm = !((context as? MainActivity)?.mediaPermissionGranted
+            ?: (context.checkSelfPermission(MEDIA_PERMISSION_LEVEL) == PackageManager.PERMISSION_GRANTED))
         Column {
             if (localLibEnable && showStoragePerm) {
                 TextButton(
                     onClick = {
-                        showStoragePerm =
-                            false // allow user to hide error when clicked. This also makes the code a lot nicer too...
-                        (context as MainActivity).permissionLauncher.launch(MEDIA_PERMISSION_LEVEL)
+                        (context as MainActivity).requestMediaPermissionIfRequired()
                     },
                     modifier = Modifier
                         .fillMaxWidth()

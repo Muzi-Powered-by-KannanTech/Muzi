@@ -140,7 +140,7 @@ fun ColumnScope.LocalScannerFrag() {
     )
     val scannerImpl by rememberEnumPreference(
         key = ScannerImplKey,
-        defaultValue = ScannerImpl.TAGLIB
+        defaultValue = ScannerImpl.MEDIASTORE
     )
     val strictExtensions by rememberPreference(ScannerStrictExtKey, defaultValue = false)
     val strictFilePaths by rememberPreference(ScannerStrictFilePathsKey, defaultValue = false)
@@ -153,9 +153,11 @@ fun ColumnScope.LocalScannerFrag() {
 
     val (lastLocalScan, onLastLocalScanChange) = rememberPreference(LastLocalScanKey, 0L)
 
-    LaunchedEffect(scanPaths) {
-        if (scanPaths.isBlank()) {
+    LaunchedEffect(scanPaths, scannerImpl) {
+        if (scannerImpl != ScannerImpl.MEDIASTORE && scanPaths.isBlank()) {
             showAddFolderDialog = true
+        } else if (scannerImpl == ScannerImpl.MEDIASTORE && showAddFolderDialog == true) {
+            showAddFolderDialog = null
         }
     }
 
@@ -564,7 +566,7 @@ fun ColumnScope.LocalScannerExtraFrag() {
     )
     val (scannerImpl, onScannerImplChange) = rememberEnumPreference(
         key = ScannerImplKey,
-        defaultValue = ScannerImpl.TAGLIB
+        defaultValue = ScannerImpl.MEDIASTORE
     )
     val (strictExtensions, onStrictExtensionsChange) = rememberPreference(ScannerStrictExtKey, defaultValue = false)
     val (strictFilePaths, onStrictFilePathsChange) = rememberPreference(ScannerStrictFilePathsKey, defaultValue = false)

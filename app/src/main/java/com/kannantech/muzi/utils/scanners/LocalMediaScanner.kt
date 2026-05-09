@@ -89,7 +89,11 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
     suspend fun advancedScan(
         uri: Uri,
     ): SongTempData {
-        val file = fileFromUri(context, uri) ?: throw IOException("Could not access file")
+        val file = if (uri.scheme == "file") {
+            uri.path?.let { File(it) }
+        } else {
+            fileFromUri(context, uri)
+        } ?: throw IOException("Could not access file: $uri")
         return advancedScan(file)
     }
 
@@ -432,7 +436,7 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
         // get list of all songs in db, then get songs unknown to the database
         // TODO: duplicate songs with different paths will cycle through paths, causing it to be synced instead of ignored...
         val allSongs = database.allLocalSongs().fastMapNotNull { it.song.localPath }.toSet()
-        val converted = newSongs.fastMapNotNull { fileFromUri(context, it)?.absolutePath }
+        val converted = newSongs.fastMapNotNull { if (it.scheme == "file") it.path else fileFromUri(context, it)?.absolutePath }
         val delta = converted.minus(allSongs)
         Log.d(TAG, "Songs found: ${delta.size}")
         val mod = if (newSongs.size < 20) {
@@ -1141,6 +1145,61 @@ class LocalMediaScanner(val context: Context, scannerImpl: ScannerImpl) {
          */
         fun getScanFiles(scanPaths: List<Uri>, excludedScanPaths: List<Uri>, context: Context): List<Uri> {
             val allSongs = ArrayList<Uri>()
+            
+            if (scanPaths.isEmpty()) {
+                try {
+                    val contentResolver = context.contentResolver
+                    val projection = arrayOf(
+                        MediaStore.Audio.Media.DATA,
+                        MediaStore.Audio.Media.DURATION,
+                        MediaStore.Audio.Media.SIZE
+                    )
+                    
+                    // Industry-ready advanced filtering: only actual music, filter out short clips, ringtones, etc.
+                    val selection = """
+                        ${MediaStore.Audio.Media.IS_MUSIC} != 0 
+                        AND ${MediaStore.Audio.Media.IS_ALARM} == 0 
+                        AND ${MediaStore.Audio.Media.IS_NOTIFICATION} == 0 
+                        AND ${MediaStore.Audio.Media.IS_PODCAST} == 0 
+                        AND ${MediaStore.Audio.Media.IS_RINGTONE} == 0
+                    """.trimIndent()
+                    
+                    // Sort by newest files first for a better UX
+                    val sortOrder = "${MediaStore.Audio.Media.DATE_ADDED} DESC"
+
+                    val cursor = contentResolver.query(
+                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                        projection,
+                        selection,
+                        null,
+                        sortOrder
+                    )
+                    
+                    cursor?.use {
+                        val dataCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
+                        val durationCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
+                        val sizeCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)
+                        
+                        while (it.moveToNext()) {
+                            val path = it.getString(dataCol)
+                            val durationMs = it.getLong(durationCol)
+                            val sizeBytes = it.getLong(sizeCol)
+                            
+                            // Advanced filtering: minimum 15 seconds duration and 50KB size to avoid false positives/junk
+                            if (path != null && durationMs > 15000 && sizeBytes > 50000) {
+                                val uri = Uri.fromFile(File(path))
+                                if (!excludedScanPaths.any { excl -> uri.path?.startsWith(excl.path.toString()) == true }) {
+                                    allSongs.add(uri)
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    reportException(e)
+                }
+                return allSongs
+            }
+
             val resultingPaths =
                 scanPaths.filterNot { incl ->
                     excludedScanPaths.any { excl -> incl.path?.startsWith(excl.path.toString()) == true }
