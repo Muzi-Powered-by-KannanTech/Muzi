@@ -28,8 +28,8 @@ android {
         applicationId = "com.kannantech.muzi"
         minSdk = 24
         targetSdk = 35
-        versionCode = 71
-        versionName = "2026.B03.A.05"
+        versionCode = 73
+        versionName = "2026.BL05.B.10"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
